@@ -1,0 +1,14 @@
+import { Component ,Input} from '@angular/core';
+
+@Component({
+  selector: 'app-home-page',
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.css']
+})
+export class HomePageComponent {
+   searchItem:string="";
+  searcher()
+  {
+    console.log(this.searchItem);
+  }
+}

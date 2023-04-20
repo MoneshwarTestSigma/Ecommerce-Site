@@ -1,0 +1,54 @@
+<html>
+<head></head>
+<body>
+        <nav class="navbar navbar-light fixed-top bg-dark ">
+        
+            <a class="navbar-brand text-light">Ecommerce Site</a>
+            <form class="form-inline" (ngSubmit)="searcher()">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style=" width: 425.6px;" [(ngModel)]="searchItem" [ngModelOptions]="{standalone: true}">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+            </form>
+        <div>
+            <button type="button" class="btn btn-success" style="margin-right: 10px;" [routerLink]="['/login']">Login</button>
+            <button type="button" class="btn btn-primary" [routerLink]="['/signup']">Sign up</button>
+        </div>
+        </nav>
+ 
+   
+   
+    <div class="card-group justify-content-between" style="margin-top: 60px; width: 100%;background-color:blueviolet;"  >
+        <a href="#mobile">
+    <div class="card col-lg-3 col-md-4 col-sm-6 text-center" style="max-width: 10rem; margin-left: 50px; border-radius: 15%;">
+        <img  class="card-img-top " src="..\assets\images\mobile.webp" class="card-img-top" alt="mobile" style="height: 100px;width: 100px; margin-left: 10px;">
+        <div>
+          <p class="text-center">Mobile Phones</p>
+        </div>
+      </div>
+    </a>
+    <a href="#laptop">
+      <div class="card  col-lg-3 col-md-4 col-sm-6" style="max-width: 10rem; border-radius: 15%;">
+        <img src="..\assets\images\laptop.jpeg" class="card-img-top " alt="laptop" style="height: 100px;width: 100px; margin-left: 10px;">
+        <div>
+          <p class="text-center">Laptops</p>
+        </div>
+      </div>
+    </a>
+    <a href="#bags">
+      <div class="card  col-lg-3 col-md-4 col-sm-6" style="max-width: 10rem; border-radius: 15%;">
+        <img src="..\assets\images\bags.webp" class="card-img-top" alt="bags" style="height: 100px;width: 100px; margin-left: 10px;">
+        <div>
+          <p class="text-center">Bags</p>
+        </div>
+      </div>
+    </a>
+    <a href="#card">
+      <div class="card  col-lg-3 col-md-4 col-sm-6" style="max-width: 10rem;border-radius: 15%; margin-right: 50px;">
+        <img src="..\assets\images\decorators.jpeg" class="card-img-top" alt="mobile" style="height: 100px;width: 100px;margin-left: 10px;">
+        <div>
+          <p class="text-center">Decorators</p>
+        </div>
+      </div>
+    </a>
+   </div>
+</body>
+</html>
