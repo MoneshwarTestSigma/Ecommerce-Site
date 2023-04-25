@@ -1,6 +1,10 @@
 <html>
-<head></head>
+<head>
+  
+    
+</head>
 <body>
+  
         <nav class="navbar navbar-light fixed-top bg-dark ">
         
             <a class="navbar-brand text-light">Ecommerce Site</a>
@@ -8,47 +12,147 @@
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style=" width: 425.6px;" [(ngModel)]="searchItem" [ngModelOptions]="{standalone: true}">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
             </form>
-        <div>
+        <div *ngIf="!isLoggedIn">
             <button type="button" class="btn btn-success" style="margin-right: 10px;" [routerLink]="['/login']">Login</button>
             <button type="button" class="btn btn-primary" [routerLink]="['/signup']">Sign up</button>
         </div>
+        <div *ngIf="isLoggedIn" style="color:whitesmoke;font-size: larger;">
+          Welcome Moneshwar
+          <a [routerLink]="['/cart']">
+            <img  src="..\assets\images\cart.png" alt="cart-image" style="width: 40px;height: 40px;margin-right: 70px;margin-left: 30px;">
+          </a>
+          <button type="button" (click)="logout()" class="btn btn-outline-danger">⬅️ Log out</button>
+          
+        </div>
+        
         </nav>
+        
  
    
    
-    <div class="card-group justify-content-between" style="margin-top: 60px; width: 100%;background-color:blueviolet;"  >
+    <div class="card-group " style="margin-top: 60px;padding-bottom: 10px; width: 100%;background-color:#F1F6F9;"  >
+      <div class=" col-lg-3 col-md-4 col-sm-6">
+        <h1 style="padding-top: 30px;">Top Catagories</h1>
+      </div>
+      <div class="row " style="display: flex;">
         <a href="#mobile">
-    <div class="card col-lg-3 col-md-4 col-sm-6 text-center" style="max-width: 10rem; margin-left: 50px; border-radius: 15%;">
-        <img  class="card-img-top " src="..\assets\images\mobile.webp" class="card-img-top" alt="mobile" style="height: 100px;width: 100px; margin-left: 10px;">
-        <div>
-          <p class="text-center">Mobile Phones</p>
-        </div>
+          <div class="nav-card card col-lg-3 col-md-4 col-sm-6 text-center" >
+              <img  class="card-img-top " src="..\assets\images\mobile.webp" class="card-img-top" alt="mobile" style="height: 60px;width: 60px; margin-left: 10px;">
+              <div>
+                <p class="text-center">Mobile</p>
+              </div>
+            </div>
+          </a>
+          <a href="#laptop">
+            <div class="nav-card card  col-lg-3 col-md-4 col-sm-6" style="max-width: 7rem;max-height: 7rem; border-radius: 15%;">
+              <img src="..\assets\images\laptop.jpeg" class="card-img-top " alt="laptop" style="height: 60px;width: 60px; margin-left: 10px;">
+              <div>
+                <p class="text-center">Laptops</p>
+              </div>
+            </div>
+          </a>
+          <a href="#bags">
+            <div class="nav-card card  col-lg-3 col-md-4 col-sm-6" style="max-width: 7rem;max-height: 7rem; border-radius: 15%;">
+              <img src="..\assets\images\bags.webp" class="card-img-top" alt="bags" style="height: 60px;width: 60px; margin-left: 10px;">
+              <div>
+                <p class="text-center">Bags</p>
+              </div>
+            </div>
+          </a>
+          <a href="#decorators">
+            <div class="nav-card card  col-lg-3 col-md-4 col-sm-6" style="max-width: 7rem;max-height: 7rem;border-radius: 15%;">
+              <img src="..\assets\images\decorators.jpeg" class="card-img-top" alt="mobile" style="height: 60px;width: 60px;margin-left: 10px;">
+              <div>
+                <p class="text-center">Decorators</p>
+              </div>
+            </div>
+          </a>
       </div>
-    </a>
-    <a href="#laptop">
-      <div class="card  col-lg-3 col-md-4 col-sm-6" style="max-width: 10rem; border-radius: 15%;">
-        <img src="..\assets\images\laptop.jpeg" class="card-img-top " alt="laptop" style="height: 100px;width: 100px; margin-left: 10px;">
-        <div>
-          <p class="text-center">Laptops</p>
-        </div>
-      </div>
-    </a>
-    <a href="#bags">
-      <div class="card  col-lg-3 col-md-4 col-sm-6" style="max-width: 10rem; border-radius: 15%;">
-        <img src="..\assets\images\bags.webp" class="card-img-top" alt="bags" style="height: 100px;width: 100px; margin-left: 10px;">
-        <div>
-          <p class="text-center">Bags</p>
-        </div>
-      </div>
-    </a>
-    <a href="#card">
-      <div class="card  col-lg-3 col-md-4 col-sm-6" style="max-width: 10rem;border-radius: 15%; margin-right: 50px;">
-        <img src="..\assets\images\decorators.jpeg" class="card-img-top" alt="mobile" style="height: 100px;width: 100px;margin-left: 10px;">
-        <div>
-          <p class="text-center">Decorators</p>
-        </div>
-      </div>
-    </a>
+        
    </div>
+   <div class="text-center top-heading"><h1>Mobile Phones</h1></div>
+   <div class="row" id="mobile" style="margin-left: 30px;margin-right: 30px;">
+     
+     <div *ngFor="let n of [0,1,2,3,4,5,6,7,8,9,10,11]" class="card col-lg-3 col-md-6 col-sm-12 " style="width: 18rem; margin-top: 30px;  ">
+      <img src="..\assets\images\mobile.webp" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Price:</li>
+        <li class="list-group-item">Quantity Left:</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="buy-button">⚡Buy now</a>
+        <a href="#" class="add-cart-button">
+      🛒 Add to cart</a>
+      </div>
+    </div>
+   </div>
+   <div class="text-center top-heading"><h1>Laptops</h1></div>
+   <div class="row" id="laptop" style="margin-left: 30px;margin-right: 30px;">
+     
+     <div *ngFor="let n of [0,1,2,3,4,5,6,7,8,9,10,11]" class="card col-lg-3 col-md-6 col-sm-12 " style="width: 18rem; margin-top: 30px;  ">
+      <img src="..\assets\images\laptop.jpeg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Price:</li>
+        <li class="list-group-item">Quantity Left:</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="buy-button">⚡Buy now</a>
+        <a href="#" class="add-cart-button">
+      🛒 Add to cart</a>
+      </div>
+    </div>
+   </div>
+   <div class="text-center top-heading"><h1>Bags</h1></div>
+   <div class="row" id="bags" style="margin-left: 30px;margin-right: 30px;">
+     
+     <div *ngFor="let n of [0,1,2,3,4,5,6,7,8,9,10,11]" class="card col-lg-3 col-md-6 col-sm-12 " style="width: 18rem; margin-top: 30px;  ">
+      <img src="..\assets\images\bags.webp" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Price:</li>
+        <li class="list-group-item">Quantity Left:</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="buy-button">⚡Buy now</a>
+        <a href="#" class="add-cart-button">
+      🛒 Add to cart</a>
+      </div>
+    </div>
+   </div>
+   <div class="text-center top-heading"><h1>Decorators</h1></div>
+   <div class="row" id="decorators" style="margin-left: 30px;margin-right: 30px;">
+     
+     <div *ngFor="let n of [0,1,2,3,4,5,6,7,8,9,10,11]" class="card col-lg-3 col-md-6 col-sm-12 " style="width: 18rem; margin-top: 30px;  ">
+      <img src="..\assets\images\decorators.jpeg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Price:</li>
+        <li class="list-group-item">Quantity Left:</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="buy-button">⚡Buy now</a>
+        <a href="#" class="add-cart-button">
+      🛒 Add to cart</a>
+      </div>
+    </div>
+   </div>
+
+  
+ 
+   
 </body>
 </html>

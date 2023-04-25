@@ -13,6 +13,7 @@ import { BagsComponent } from './Webcomponent/product-components/bags/bags.compo
 import { DecoratorsComponent } from './Webcomponent/product-components/decorators/decorators.component';
 import { OwnerLoginComponent } from './Webcomponent/owner-login/owner-login.component';
 import { OwnerSignupComponent } from './Webcomponent/owner-signup/owner-signup.component';
+import { ProductUploadComponent } from './Webcomponent/product-upload/product-upload.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { OwnerSignupComponent } from './Webcomponent/owner-signup/owner-signup.c
     BagsComponent,
     DecoratorsComponent,
     OwnerLoginComponent,
-    OwnerSignupComponent
+    OwnerSignupComponent,
+    ProductUploadComponent
   ],
   imports: [
     BrowserModule,

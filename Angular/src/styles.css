@@ -1,7 +1,5 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
-body{
-  background-color: #1c90de;
-}
+
 .auth-card{
   background: #61cb15;  
   background: -webkit-linear-gradient(to right, #1c90de, #d012c3);  /* Chrome 10-25, Safari 5.1-6 */

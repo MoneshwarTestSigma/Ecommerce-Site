@@ -6,9 +6,15 @@ import { Component ,Input} from '@angular/core';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
-   searchItem:string="";
+  isLoggedIn:boolean=false;
+  @Input() searchItem:string="";
   searcher()
   {
+    this.isLoggedIn=true;
     console.log(this.searchItem);
+  }
+  logout()
+  {
+    this.isLoggedIn=false;
   }
 }
