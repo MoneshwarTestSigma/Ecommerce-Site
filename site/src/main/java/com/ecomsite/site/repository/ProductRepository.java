@@ -1,6 +1,8 @@
 package com.ecomsite.site.repository;
 
+import com.ecomsite.site.dto.ProductDTO;
 import com.ecomsite.site.modal.Product;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +16,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByPriceAfter(Long price);
     Optional<Product> findById(Long id);
 
+    List<Product> findAll(Specification spec);
 }

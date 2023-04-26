@@ -1,5 +1,7 @@
 package com.ecomsite.site.controller;
 
+import com.ecomsite.site.criteria.Criteria;
+import com.ecomsite.site.criteria.CriteriaBuilder;
 import com.ecomsite.site.dto.ProductDTO;
 import com.ecomsite.site.modal.Product;
 import com.ecomsite.site.mapper.ProductMapper;
@@ -16,6 +18,8 @@ import java.util.List;
 @CrossOrigin
 public class ProductController {
     @Autowired
+    CriteriaBuilder criteriaBuilder;
+    @Autowired
     ProductService productService;
     @Autowired
     ProductMapper productMapper;
@@ -24,7 +28,7 @@ public class ProductController {
         System.out.println("Came here at product");
         return this.productService.productAdd(this.productMapper.productRequestToProduct(productRequest));
     }
-    @GetMapping()
+    @GetMapping("/all")
     List<ProductDTO> sendListOfProducts(){
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(Product product : this.productService.findAll()){
@@ -32,5 +36,14 @@ public class ProductController {
         }
 
     return productDTOS;
+    }
+    @GetMapping()
+    List<ProductDTO> searchProducts(@RequestParam("query") String data){
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        List<Criteria> criteriaList = criteriaBuilder.builder(data);
+         for(Product product: productService.searchProducts(criteriaList)){
+             productDTOList.add(this.productMapper.productToProductDTO(product));
+         }
+         return productDTOList;
     }
 }
