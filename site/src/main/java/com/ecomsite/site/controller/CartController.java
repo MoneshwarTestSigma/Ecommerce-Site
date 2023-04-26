@@ -39,10 +39,15 @@ public class CartController {
         for(Cart cart : carts){
             cartDTO = this.cartMapper.productToCartDTO(this.productService.productByid(cart.getProductid()).get());
             cartDTO.setQuantity(cart.getQuantity());
+            cartDTO.setId(cart.getId());
             cartDTO.setProductid(this.productService.productByid(cart.getProductid()).get().getId());
             cartDTOS.add(cartDTO);
 //         productDTOS.add(this.productMapper.productToProductDTO(this.productService.productByid(cart.getProductid()).get()));
         }
         return cartDTOS;
+    }
+    @DeleteMapping("/delete/{id}")
+    void cartDelete(@PathVariable("id") Long id){
+        this.cartService.deleteCart(id);
     }
 }

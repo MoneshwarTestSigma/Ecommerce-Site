@@ -8,6 +8,7 @@ public class CartDTO {
     private String name;
     private String price;
     private Long productid;
+    private Long id;
     private ProductCategory category;
     private Long quantity;
 
