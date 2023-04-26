@@ -15,6 +15,7 @@ export class ProductModel{
     public count!:string;
     @serializable
     public image!:File;
+    public id!:Number;
     public serialize():JSON
     {
         return serialize(this);

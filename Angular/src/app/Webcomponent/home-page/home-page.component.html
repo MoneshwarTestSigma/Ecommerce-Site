@@ -17,7 +17,7 @@
             <button type="button" class="btn btn-primary" [routerLink]="['/signup']">Sign up</button>
         </div>
         <div *ngIf="isLoggedIn" style="color:whitesmoke;font-size: larger;">
-          Welcome Moneshwar
+          Welcome Moneshwar 
           <a [routerLink]="['/cart']">
             <img  src="..\assets\images\cart.png" alt="cart-image" style="width: 40px;height: 40px;margin-right: 70px;margin-left: 30px;">
           </a>
@@ -85,7 +85,7 @@
       </ul>
       <div class="card-body">
         <a href="#" class="buy-button">⚡Buy now</a>
-        <a href="#" class="add-cart-button">
+        <a href="#" (click)="addToCart(n)"  class="add-cart-button">
       🛒 Add to cart</a>
       </div>
     </div>

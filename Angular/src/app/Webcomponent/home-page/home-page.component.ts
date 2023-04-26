@@ -1,6 +1,8 @@
 import { Component ,Input, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
+import { CartModelAdd } from 'src/app/models/CartModelAdd';
 import { ProductModel } from 'src/app/models/ProductModel';
+import { CartService } from 'src/app/service/CartService/cart.service';
 import { ProductService } from 'src/app/service/productService/product.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { ProductService } from 'src/app/service/productService/product.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private productService:ProductService){}
+  constructor(private productService:ProductService,private cartSevice:CartService){}
   laptop: ProductModel[] = []; 
   bag: ProductModel[] = []; 
   mobile: ProductModel[] = []; 
@@ -71,6 +73,14 @@ export class HomePageComponent implements OnInit {
     {
       this.decorators.pop();
     }
+  }
+  addToCart(productModel:ProductModel)
+  {
+    let cartModelAdd= new CartModelAdd();
+    cartModelAdd.productid=productModel.id;
+    cartModelAdd.quantity=1;
+    cartModelAdd.userid=7;
+      this.cartSevice.addCartItem(cartModelAdd);
   }
 
 fillArray(resu:ProductModel[])
