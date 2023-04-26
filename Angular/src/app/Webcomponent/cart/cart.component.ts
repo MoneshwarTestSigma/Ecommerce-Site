@@ -45,7 +45,7 @@ export class CartComponent implements OnInit{
      cartModelAdd.productid=cartModel.productid;
      cartModelAdd.quantity=Number(cartModel.quantity);
      cartModelAdd.userid=7;
-     this.cartService.addCartItem(cartModelAdd).subscribe(req=>{
+     this.cartService.addCartItem(cartModelAdd).subscribe((req:any)=>{
       console.log(req);
       
      })
@@ -57,7 +57,7 @@ export class CartComponent implements OnInit{
   }
   deteleCartItem(id:number)
   {
-      this.cartService.deleteCartItem(id).subscribe(res=>{
+      this.cartService.deleteCartItem(id).subscribe((res:any)=>{
       })
   }
 }

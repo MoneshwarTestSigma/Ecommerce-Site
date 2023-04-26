@@ -16,5 +16,9 @@ export class CartService {
   {
       return this.http.post<any>(`http://localhost:8080/cart`,cartItem.serialize());
   }
+  deleteCartItem(id: number)
+  {
+    return this.http.delete<any>(`http://localhost:8080/cart/${id}`);
+  }
 
 }
