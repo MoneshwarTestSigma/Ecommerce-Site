@@ -55,4 +55,9 @@ export class CartComponent implements OnInit{
     console.log("clicked");
     
   }
+  deteleCartItem(id:number)
+  {
+      this.cartService.deleteCartItem(id).subscribe(res=>{
+      })
+  }
 }

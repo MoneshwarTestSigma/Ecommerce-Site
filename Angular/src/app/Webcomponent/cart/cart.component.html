@@ -59,6 +59,9 @@
                   <td class="align-middle">
                     <p class="mb-0" style="font-weight: 500;">{{i.price}}</p>
                   </td>
+                  <td>
+                    <button type="button" (click)="deteleCartItem(i.cartid)" class="btn btn-outline-danger">Delete</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
