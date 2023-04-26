@@ -77,10 +77,15 @@ export class HomePageComponent implements OnInit {
   addToCart(productModel:ProductModel)
   {
     let cartModelAdd= new CartModelAdd();
+    console.log("product id:"+productModel.id);
+    
     cartModelAdd.productid=productModel.id;
     cartModelAdd.quantity=1;
     cartModelAdd.userid=7;
-      this.cartSevice.addCartItem(cartModelAdd);
+      this.cartSevice.addCartItem(cartModelAdd).subscribe(res=>{
+        console.log(res);
+        
+      });
   }
 
 fillArray(resu:ProductModel[])

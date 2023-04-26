@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartModel } from 'src/app/models/CartModel';
+import { CartModelAdd } from 'src/app/models/CartModelAdd';
 import { CartService } from 'src/app/service/CartService/cart.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { CartService } from 'src/app/service/CartService/cart.service';
 export class CartComponent implements OnInit{
   constructor(private cartService:CartService){}
   total=0;
+  temp=0;
   ngOnInit(): void {
       this.first();
   }
@@ -32,7 +34,25 @@ export class CartComponent implements OnInit{
   clearArray() {
     while(this.cartItems.length)
     {
-      this.cartItems.pop();    }
+      this.cartItems.pop();    
+    }
   }
-  
+  changeCart(cartModel:CartModel)
+  {
+    console.log("Clicke on button");
+    
+     let cartModelAdd=new CartModelAdd();
+     cartModelAdd.productid=cartModel.productid;
+     cartModelAdd.quantity=Number(cartModel.quantity);
+     cartModelAdd.userid=7;
+     this.cartService.addCartItem(cartModelAdd).subscribe(req=>{
+      console.log(req);
+      
+     })
+  }
+  changer()
+  {
+    console.log("clicked");
+    
+  }
 }
