@@ -13,8 +13,7 @@ export class ProductModel{
     public price!:string;
     @serializable
     public count!:string;
-    @serializable
-    public image!:File;
+    public imageURL!:string;
     public id!:Number;
     public serialize():JSON
     {

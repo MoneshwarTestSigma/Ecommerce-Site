@@ -16,4 +16,8 @@ export class ProductService {
   {
     return this.http.get<any>(`http://localhost:8080/product?query=name:${searchItem}`);
   }
+  addProduct(product: ProductModel)
+  {
+    return this.http.post<any>(`http://localhost:8080/product`,product);
+  }
 }

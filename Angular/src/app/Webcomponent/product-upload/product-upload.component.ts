@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductModel } from 'src/app/models/ProductModel';
 import { ImageService } from 'src/app/service/imageService/image.service';
+import { ProductService } from 'src/app/service/productService/product.service';
 
 @Component({
   selector: 'app-product-upload',
@@ -8,14 +9,16 @@ import { ImageService } from 'src/app/service/imageService/image.service';
   styleUrls: ['./product-upload.component.css']
 })
 export class ProductUploadComponent {
-  constructor(private imageService: ImageService) { }
+  constructor(private imageService: ImageService,private productService:ProductService) { }
 
   product=new ProductModel();
   addProduct()
   {
-   this.performUpload();
-
-    console.log(this.product);
+      this.productService.addProduct(this.product).subscribe((res:ProductModel)=>{
+       console.log(res.id);
+       
+        this.performUpload(res.id);     
+      })
   }
   public formData = new FormData();
   public selectedFile!: File ;
@@ -27,9 +30,9 @@ export class ProductUploadComponent {
       this.selectedFile = event.target.files[event.target.files.length - 1] as File;
   }
 
-  performUpload() {
+  performUpload(id:Number) {
       this.formData.set('file', this.selectedFile, this.selectedFile.name);
-      this.imageService.uploadImage(this.formData).subscribe(
+      this.imageService.uploadImage(this.formData,id).subscribe(
         (res: any) => {
     }
   );

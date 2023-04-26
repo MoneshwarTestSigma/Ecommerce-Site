@@ -18,6 +18,8 @@ import java.util.List;
 @CrossOrigin
 public class ProductController {
     @Autowired
+    ImageController imageController;
+    @Autowired
     CriteriaBuilder criteriaBuilder;
     @Autowired
     ProductService productService;
@@ -30,9 +32,14 @@ public class ProductController {
     }
     @GetMapping("/all")
     List<ProductDTO> sendListOfProducts(){
+//        System.out.println("Entered here");
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(Product product : this.productService.findAll()){
-         productDTOS.add(this.productMapper.productToProductDTO(product));
+            ProductDTO productDTO=this.productMapper.productToProductDTO(product);
+//            System.out.println("before:"+ productDTO);
+            productDTO.setImageURL(imageController.getUrlFormId(product.getId()));
+//            System.out.println("after:"+ productDTO);
+         productDTOS.add(productDTO);
         }
 
     return productDTOS;

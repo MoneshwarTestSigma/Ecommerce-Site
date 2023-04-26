@@ -11,5 +11,5 @@ public class ProductDTO {
     private String description;
     private Long count;
     private Long id;
-
+    private String imageURL;
 }
