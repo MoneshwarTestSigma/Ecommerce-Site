@@ -2,8 +2,7 @@ package com.ecomsite.site.service;
 
 import com.ecomsite.site.builder.ProductSpecificationBuilder;
 import com.ecomsite.site.criteria.Criteria;
-import com.ecomsite.site.dto.ProductDTO;
-import com.ecomsite.site.modal.Product;
+import com.ecomsite.site.model.Product;
 import com.ecomsite.site.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;

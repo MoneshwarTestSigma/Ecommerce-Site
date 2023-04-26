@@ -2,7 +2,7 @@ package com.ecomsite.site.controller;
 
 
 import com.ecomsite.site.dto.UserDTO;
-import com.ecomsite.site.modal.User;
+import com.ecomsite.site.model.User;
 import com.ecomsite.site.enums.Role;
 import com.ecomsite.site.mapper.UserMapper;
 import com.ecomsite.site.request.LoginRequest;
@@ -57,5 +57,6 @@ public class UserController {
         this.userService.addUser(this.userMapper.userRequestToUser(userRequest));
         return "Added Successfully";
     }
+
 
 }

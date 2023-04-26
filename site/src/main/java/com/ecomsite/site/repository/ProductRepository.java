@@ -1,7 +1,6 @@
 package com.ecomsite.site.repository;
 
-import com.ecomsite.site.dto.ProductDTO;
-import com.ecomsite.site.modal.Product;
+import com.ecomsite.site.model.Product;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

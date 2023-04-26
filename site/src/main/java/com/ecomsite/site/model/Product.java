@@ -1,4 +1,4 @@
-package com.ecomsite.site.modal;
+package com.ecomsite.site.model;
 
 
 import com.ecomsite.site.enums.ProductCategory;

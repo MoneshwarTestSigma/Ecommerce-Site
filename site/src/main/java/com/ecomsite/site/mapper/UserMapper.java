@@ -1,7 +1,7 @@
 package com.ecomsite.site.mapper;
 
 import com.ecomsite.site.dto.UserDTO;
-import com.ecomsite.site.modal.User;
+import com.ecomsite.site.model.User;
 import com.ecomsite.site.request.UserRequest;
 import org.mapstruct.Mapper;
 

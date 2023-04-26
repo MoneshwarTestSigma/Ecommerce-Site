@@ -1,10 +1,8 @@
 package com.ecomsite.site.controller;
 
 import com.ecomsite.site.dto.CartDTO;
-import com.ecomsite.site.dto.ProductDTO;
 import com.ecomsite.site.mapper.ProductMapper;
-import com.ecomsite.site.modal.Cart;
-import com.ecomsite.site.modal.Product;
+import com.ecomsite.site.model.Cart;
 import com.ecomsite.site.mapper.CartMapper;
 import com.ecomsite.site.request.CartRequest;
 import com.ecomsite.site.service.CartService;

@@ -1,7 +1,7 @@
 package com.ecomsite.site.specifications;
 
 import com.ecomsite.site.enums.ProductCategory;
-import com.ecomsite.site.modal.Product;
+import com.ecomsite.site.model.Product;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +12,10 @@ public class ProductSpecification {
             return criteriaBuilder.like(root.get("name"), "%"+name + "%");
         });
     }
-    public static Specification<Product> hasType(ProductCategory type)
+    public static Specification<Product> hasCategory(ProductCategory category)
     {
         return ((root, query, criteriaBuilder) -> {
-            return  criteriaBuilder.equal(root.get("type"),type);
+            return  criteriaBuilder.equal(root.get("category"),category);
         });
     }
 }

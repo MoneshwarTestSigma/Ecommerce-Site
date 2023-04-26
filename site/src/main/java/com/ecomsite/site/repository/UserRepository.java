@@ -1,6 +1,6 @@
 package com.ecomsite.site.repository;
 
-import com.ecomsite.site.modal.User;
+import com.ecomsite.site.model.User;
 import com.ecomsite.site.enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

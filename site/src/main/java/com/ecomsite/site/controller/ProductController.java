@@ -3,7 +3,7 @@ package com.ecomsite.site.controller;
 import com.ecomsite.site.criteria.Criteria;
 import com.ecomsite.site.criteria.CriteriaBuilder;
 import com.ecomsite.site.dto.ProductDTO;
-import com.ecomsite.site.modal.Product;
+import com.ecomsite.site.model.Product;
 import com.ecomsite.site.mapper.ProductMapper;
 import com.ecomsite.site.request.ProductRequest;
 import com.ecomsite.site.service.ProductService;

@@ -1,6 +1,6 @@
 package com.ecomsite.site.service;
 
-import com.ecomsite.site.modal.User;
+import com.ecomsite.site.model.User;
 import com.ecomsite.site.enums.Role;
 import com.ecomsite.site.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
