@@ -19,6 +19,7 @@ public class CartService {
     }
     public void deleteCart(Long cartid){
         this.cartRepository.deleteById(cartid);
+
     }
     public Cart cartAdd(Cart cart) {
            if(this.cartRepository.findByUseridAndProductid(cart.getUserid(),cart.getProductid())== null) {
@@ -26,11 +27,12 @@ public class CartService {
            else{
                cart.setId(this.cartRepository.findByUseridAndProductid(cart.getUserid(),cart.getProductid()).getId());
                Long quantity = this.cartRepository.findByUseridAndProductid(cart.getUserid(),cart.getProductid()).getQuantity();
-               if(cart.getQuantity()+quantity <=0){
-                   this.deleteCart(cart.getId());
-                   return cart;
-               }
-               cart.setQuantity(cart.getQuantity()+quantity);
+//               if(cart.getQuantity()+quantity <=0){
+//                   this.deleteCart(cart.getId());
+//                   return cart;
+//               }
+//               cart.setQuantity(cart.getQuantity()+quantity);
+               cart.setQuantity(cart.getQuantity());
            }
         return this.cartRepository.save(cart);
 
