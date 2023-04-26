@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SignUpModel } from 'src/app/models/SignUpModel';
+import { UserService } from 'src/app/service/UserService/user.service';
 
 
 @Component({
@@ -8,6 +10,7 @@ import { SignUpModel } from 'src/app/models/SignUpModel';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+  constructor(private userService:UserService,private router:Router){}
   form =new SignUpModel();
   isSubmitted=false;
   userData : any[]=[];
@@ -15,12 +18,12 @@ export class SignupComponent {
   i=1;
   submit()
   {
-    localStorage.setItem("0"+this.i,JSON.stringify(this.form));
-    this.i++;
-  }
-  clicked()
-  {
-      this.isSubmitted=true;
+      this.form.type="USER";
+      this.userService.registerUser(this.form).subscribe((res:any)=>{
+        
+      });
+      alert("Registered Successfully");
+        this.router.navigate(['/login'])
   }
 
 }

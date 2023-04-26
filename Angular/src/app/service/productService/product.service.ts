@@ -10,6 +10,10 @@ import { ProductModel } from 'src/app/models/ProductModel';
 export class ProductService {
   constructor(private http: HttpClient) {  }
   getAllProducts():any {
-    return this.http.get<any>("http://localhost:8080/product");
+    return this.http.get<any>("http://localhost:8080/product/all");
+  }
+  getAllProductsLike(searchItem:string)
+  {
+    return this.http.get<any>(`http://localhost:8080/product?query=name:${searchItem}`);
   }
 }

@@ -23,9 +23,6 @@
                   <input [disabled]="(myForm.form.invalid)"  type="submit" class="btn btn-my" value="Login" (click)="change()">
                 </div>
               </form>
-              <div *ngIf="!loginStatus && isClicked">
-                Invalid creditals
-              </div>
               <div class="text-center sign-up">
                 Don`t have an account ? <a [routerLink]="['/signup']">Sign Up</a> here!!.
               </div>

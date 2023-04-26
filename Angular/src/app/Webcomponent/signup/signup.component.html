@@ -24,7 +24,7 @@
                 <div *ngIf="temp!=form.password" style="color: red;">Password didnt match</div>
               </div>
             <div class="text-center">
-              <input [disabled]="(myForm.form.invalid || (temp!=form.password))" type="submit" class="btn btn-my" value="sign up" (click)="clicked()">
+              <input [disabled]="(myForm.form.invalid || (temp!=form.password))" type="submit" class="btn btn-my" value="sign up" >
             </div>
             <div *ngIf="isSubmitted">
                   Signed up Successfully

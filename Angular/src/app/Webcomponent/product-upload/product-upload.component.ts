@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductModel } from 'src/app/models/ProductModel';
-import { ImageService } from 'src/app/service/image.service';
+import { ImageService } from 'src/app/service/imageService/image.service';
 
 @Component({
   selector: 'app-product-upload',

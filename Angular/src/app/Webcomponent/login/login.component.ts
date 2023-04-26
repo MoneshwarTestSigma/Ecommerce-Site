@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/LoginModel';
+import { UserService } from 'src/app/service/UserService/user.service';
 
 
 @Component({
@@ -8,6 +10,7 @@ import { LoginModel } from 'src/app/models/LoginModel';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  constructor(private userService:UserService,private router:Router){}
   loginStatus=false;
   isClicked=false;
    form=new LoginModel();
@@ -17,15 +20,22 @@ export class LoginComponent {
    }
    check()
    {
-    for(var key in localStorage) {
-      let temp =JSON.parse(localStorage.getItem(key)|| "");
-      if(temp.email==this.form.email && temp.password==this.form.password)
-      {
-        alert("Welcome  "+ temp.name);
-        this.loginStatus= true;
-        break;
-      }      
-   }
+      this.userService.checkUser(this.form).subscribe((res:number)=>{
+          if(res==1)
+          {
+            alert("Logged in Successfully");
+            localStorage.setItem("isLoggedIn","true");
+            this.router.navigate(['/']);
+            
+          }
+          else{
+            alert("Wrong Credentials");
+            this.router.navigate(['/login']);
+            
+          }
+      });
+      console.log("Came out of check");
+      
    }
 
 }

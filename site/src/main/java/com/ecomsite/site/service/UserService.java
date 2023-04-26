@@ -28,5 +28,14 @@ public class UserService {
         public void deleteUser(String email) {
              this.userRepository.deleteByEmail(email);
         }
-    }
+
+        public String findPassword(String email) {
+            User user= this.userRepository.findByEmail(email);
+            if(user!=null)
+            {
+                return user.getPassword();
+            }
+            return "";
+        }
+}
 
