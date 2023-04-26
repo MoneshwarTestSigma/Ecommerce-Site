@@ -1,15 +1,18 @@
 import { serializable, serialize } from "serializr";
 export class ProductModel{
+    forEach(arg0: (element: any) => void) {
+      throw new Error('Method not implemented.');
+    }
     @serializable
     public name!:string;
     @serializable
-    public type!:string;
+    public category!:string;
     @serializable
     public description!:string;
     @serializable
     public price!:string;
     @serializable
-    public quantity!:string;
+    public count!:string;
     @serializable
     public image!:File;
     public serialize():JSON

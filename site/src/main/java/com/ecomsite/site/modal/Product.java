@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Product {
     //We implement UserDetails it belongs to serializeable
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @Column(name = "name")
     String name;

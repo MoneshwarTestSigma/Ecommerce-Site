@@ -16,6 +16,7 @@ public class Cart {
     @Id
     @GeneratedValue
     Long id;
+
     @Column(name = "productid")
     Long productid;
     @Column(name = "userid")
