@@ -39,6 +39,7 @@ public class CartController {
         for(Cart cart : carts){
             cartDTO = this.cartMapper.productToCartDTO(this.productService.productByid(cart.getProductid()).get());
             cartDTO.setQuantity(cart.getQuantity());
+            cartDTO.setProductid(this.productService.productByid(cart.getProductid()).get().getId());
             cartDTOS.add(cartDTO);
 //         productDTOS.add(this.productMapper.productToProductDTO(this.productService.productByid(cart.getProductid()).get()));
         }
