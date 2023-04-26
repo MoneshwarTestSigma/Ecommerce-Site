@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ProductType } from '../datatypes/ProductType';
-import { FileHandle } from '../datatypes/FileHandle';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ProductModel } from 'src/app/models/ProductModel';
+import { ImageService } from 'src/app/service/image.service';
 
 @Component({
   selector: 'app-product-upload',
@@ -9,32 +8,34 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./product-upload.component.css']
 })
 export class ProductUploadComponent {
-  constructor(private sanitizer: DomSanitizer){}
-  product:ProductType={
-    productName: '',
-    productPrice: '',
-    productCatagory: '',
-    productImage: [],
-    productQuantity: '',
-    productDescription: ''
-  } 
+  constructor(private imageService: ImageService) { }
+
+  product=new ProductModel();
   addProduct()
   {
+   this.performUpload();
+
     console.log(this.product);
   }
-  imageSelected(event:any)
-  {
-    if(event.target.file)
-    {
-      const currentFile=event.target.file[0];
-      const fileHande:FileHandle={
-        file: currentFile,
-        url: this.sanitizer.bypassSecurityTrustUrl(
-          window.URL.createObjectURL(currentFile)
-        )
-      }
-      this.product.productImage.push(fileHande);
-    }
-    
+  public formData = new FormData();
+  public selectedFile!: File ;
+  ngOnInit() {
+
   }
+
+  onSelectFile(event:any) {
+      this.selectedFile = event.target.files[event.target.files.length - 1] as File;
+  }
+
+  performUpload() {
+      this.formData.set('file', this.selectedFile, this.selectedFile.name);
+      this.imageService.uploadImage(this.formData).subscribe(
+        (res: any) => {
+    }
+  );
+  }
+  canEnableUpload():boolean{
+    return true;
+  }
+  
 }

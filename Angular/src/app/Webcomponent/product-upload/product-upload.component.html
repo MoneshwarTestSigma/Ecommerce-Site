@@ -6,11 +6,11 @@
           <form (ngSubmit)="addProduct()" #myForm="ngForm">  
             <div class="form-group">
               <label>Product Name: </label>
-              <input type="text"  class="form-control" placeholder="Product Name" [(ngModel)]="product.productName" [ngModelOptions]="{standalone: true}" required>
+              <input type="text"  class="form-control" placeholder="Product Name" [(ngModel)]="product.name" [ngModelOptions]="{standalone: true}" required>
             </div>
             <div class="form-group">
                 <label>Product Type: </label>
-                <select name="" id="" [(ngModel)]="product.productCatagory" [ngModelOptions]="{standalone: true}">
+                <select name="" id="" [(ngModel)]="product.type" [ngModelOptions]="{standalone: true}">
                     <option value="Mobile">Mobile</option>
                     <option value="Laptop">Laptop</option>
                     <option value="Bags">Bags</option>
@@ -19,23 +19,23 @@
               </div>
               <div class="form-group">
                 <label>Product description: </label>
-                <input type="text"  class="form-control" placeholder="Product description" [(ngModel)]="product.productDescription" [ngModelOptions]="{standalone: true}" required>
+                <input type="text"  class="form-control" placeholder="Product description" [(ngModel)]="product.description" [ngModelOptions]="{standalone: true}" required>
               </div>
               <div class="form-group">
                 <label>Product Price: </label>
-                <input type="text"  class="form-control" placeholder="Product Price" [(ngModel)]="product.productPrice" [ngModelOptions]="{standalone: true}" required>
+                <input type="text"  class="form-control" placeholder="Product Price" [(ngModel)]="product.price" [ngModelOptions]="{standalone: true}" required>
               </div>
             
             <div class="form-group">
                 <label>Product Quantity: </label>
-                <input type="text"  class="form-control" placeholder="Product Name" [(ngModel)]="product.productQuantity" [ngModelOptions]="{standalone: true}" required>
+                <input type="text"  class="form-control" placeholder="Product Quantity" [(ngModel)]="product.quantity" [ngModelOptions]="{standalone: true}" required>
               </div >
-              <div class="form-group">
-                <input type="file" (change)="imageSelected($event)">
-              </div>
              
+                <input type="file" (change)="onSelectFile($event)">
+                <br>
+                <br>
               <div class="text-center">
-                <input   type="submit" multiple value="select" class="btn btn-my" value="Login">
+                <input   type="submit" multiple value="select" class="btn btn-my" value="Add Product">
               </div>
           </form>
         </div>

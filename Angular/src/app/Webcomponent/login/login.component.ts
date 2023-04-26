@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { LoginType } from '../datatypes/LoginType';
+import { LoginModel } from 'src/app/models/LoginModel';
+
 
 @Component({
   selector: 'app-login',
@@ -9,10 +10,7 @@ import { LoginType } from '../datatypes/LoginType';
 export class LoginComponent {
   loginStatus=false;
   isClicked=false;
-   form: LoginType={
-     email: '',
-     password: ''
-   };
+   form=new LoginModel();
    change()
    {
       this.isClicked=true;

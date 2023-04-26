@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { SignupType } from '../datatypes/SignupType';
+import { SignUpModel } from 'src/app/models/SignUpModel';
+
 
 @Component({
   selector: 'app-signup',
@@ -7,11 +8,7 @@ import { SignupType } from '../datatypes/SignupType';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  form : SignupType={
-    email: '',
-    password: '',
-    name: ''
-  }
+  form =new SignUpModel();
   isSubmitted=false;
   userData : any[]=[];
   temp="";

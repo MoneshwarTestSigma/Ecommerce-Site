@@ -14,6 +14,7 @@ import { DecoratorsComponent } from './Webcomponent/product-components/decorator
 import { OwnerLoginComponent } from './Webcomponent/owner-login/owner-login.component';
 import { OwnerSignupComponent } from './Webcomponent/owner-signup/owner-signup.component';
 import { ProductUploadComponent } from './Webcomponent/product-upload/product-upload.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { ProductUploadComponent } from './Webcomponent/product-upload/product-up
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
