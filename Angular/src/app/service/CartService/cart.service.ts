@@ -18,7 +18,7 @@ export class CartService {
   }
   deleteCartItem(id: number)
   {
-    return this.http.delete<any>(`http://localhost:8080/cart/${id}`);
+    return this.http.delete<any>(`http://localhost:8080/cart/delete/${id}`);
   }
 
 }

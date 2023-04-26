@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CartModel } from 'src/app/models/CartModel';
+
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
 import { CartService } from 'src/app/service/CartService/cart.service';
+
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +12,7 @@ import { CartService } from 'src/app/service/CartService/cart.service';
 })
 export class CartComponent implements OnInit{
   constructor(private cartService:CartService){}
-  total=0;
+   total:number=0;
   temp=0;
   ngOnInit(): void {
       this.first();
@@ -26,7 +28,9 @@ export class CartComponent implements OnInit{
         for(var element of res)
         {
           this.total=this.total+Number(element.price);
+          this.total=Number(this.total.toFixed(3));
             this.cartItems.push(element);
+            console.log(element);
         }
       });
        
@@ -57,7 +61,10 @@ export class CartComponent implements OnInit{
   }
   deteleCartItem(id:number)
   {
+    console.log(id);
+    
       this.cartService.deleteCartItem(id).subscribe((res:any)=>{
       })
+      this.first();
   }
 }
