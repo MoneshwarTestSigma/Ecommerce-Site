@@ -32,6 +32,11 @@ public class ProductController {
         System.out.println("Came here at product");
         return this.productService.productAdd(this.productMapper.productRequestToProduct(productRequest));
     }
+    @GetMapping("/countOfId/{id}")
+    Long getCountOfProductById(@PathVariable("id") Long id)
+    {
+        return (this.productService.productByid(id)).get().getCount();
+    }
     @GetMapping("/all")
     List<ProductDTO> sendListOfProducts(){
 //        System.out.println("Entered here");

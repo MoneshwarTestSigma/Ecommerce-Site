@@ -20,4 +20,8 @@ export class ProductService {
   {
     return this.http.post<any>(`http://localhost:8080/product`,product);
   }
+  getProductById(id:Number)
+  {
+    return this.http.get<any>(`http://localhost:8080/product/countOfId/${id}`);
+  }
 }

@@ -54,11 +54,13 @@ public class ProductService {
     public void productQuantityDelete(Product product) {
             Long count = this.productRepository.findById(product.getId()).get().getCount();
             count -= product.getCount();
+            Product product2=this.productRepository.findById(product.getId()).get();
             if(count <= 0){
                 this.productRepository.deleteById(product.getId());
             }
             else{
-                this.productRepository.findById(product.getId()).get().setCount(count);
+                product2.setCount(count);
+                this.productRepository.save(product2);
             }
     }
 }

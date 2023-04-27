@@ -3,6 +3,7 @@ import { CartModel } from 'src/app/models/CartModel';
 
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
 import { CartService } from 'src/app/service/CartService/cart.service';
+import {ProductService} from "../../service/productService/product.service";
 
 
 @Component({
@@ -11,13 +12,24 @@ import { CartService } from 'src/app/service/CartService/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
-  constructor(private cartService:CartService){}
+  constructor(private cartService:CartService,private productService:ProductService){}
    total:number=0;
   temp=0;
   ngOnInit(): void {
       this.first();
   }
   cartItems:CartModel[]=[];
+  getCountOfProduct(id:Number):Number
+  {
+    console.log(id);
+    let ans!:Number;
+    this.productService.getProductById(id).subscribe((res:Number)=>
+    {
+        ans=res;
+    });
+    console.log("ans"+ans);
+    return ans;
+  }
   first()
   {
       let id=13;// we need to get this one
@@ -41,18 +53,24 @@ export class CartComponent implements OnInit{
       this.cartItems.pop();
     }
   }
-  changeCart(cartModel:CartModel)
-  {
+  changeCart(cartModel:CartModel) {
     console.log("Clicke on button");
+    let totalCount = this.getCountOfProduct(cartModel.id);
+    if (Number(cartModel.quantity) <= totalCount) {
+      let cartModelAdd = new CartModelAdd();
+      cartModelAdd.productid = cartModel.productid;
+      cartModelAdd.quantity = Number(cartModel.quantity);
+      cartModelAdd.userid = 7;
+      this.cartService.addCartItem(cartModelAdd).subscribe((req: any) => {
+        console.log(req);
 
-     let cartModelAdd=new CartModelAdd();
-     cartModelAdd.productid=cartModel.productid;
-     cartModelAdd.quantity=Number(cartModel.quantity);
-     cartModelAdd.userid=7;
-     this.cartService.addCartItem(cartModelAdd).subscribe((req:any)=>{
-      console.log(req);
 
-     })
+      })
+    }
+    else {
+      console.log("cant increase");
+      cartModel.quantity=totalCount;
+    }
   }
   changer()
   {
