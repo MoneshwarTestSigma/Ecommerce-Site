@@ -23,7 +23,6 @@ public class ProductService {
         }
 
 
-
         public List<Product> productBelow(Long price) {
             return this.productRepository.findAllByPriceBefore(price);
         }

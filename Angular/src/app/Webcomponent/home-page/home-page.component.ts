@@ -13,10 +13,10 @@ import { ProductService } from 'src/app/service/productService/product.service';
 export class HomePageComponent implements OnInit {
 
   constructor(private productService:ProductService,private cartSevice:CartService){}
-  laptop: ProductModel[] = []; 
-  bag: ProductModel[] = []; 
-  mobile: ProductModel[] = []; 
-  decorators: ProductModel[] = []; 
+  laptop: ProductModel[] = [];
+  bag: ProductModel[] = [];
+  mobile: ProductModel[] = [];
+  decorators: ProductModel[] = [];
   ngOnInit() {
     this.first();
   }
@@ -32,11 +32,11 @@ export class HomePageComponent implements OnInit {
       {
         this.productService.getAllProductsLike(this.searchItem).subscribe((res:ProductModel[])=>{
           this.fillArray(res);
-          
+
         })
         console.log(this.searchItem);
       }
-   
+
   }
   logout()
   {
@@ -46,16 +46,16 @@ export class HomePageComponent implements OnInit {
   first()
   {
         this.productService.getAllProducts().subscribe((resu: ProductModel[])=>{
-          
+
           this.fillArray(resu);
-            
+
         })
         console.log(this.mobile);
         console.log(this.bag);
         console.log(this.laptop);
-        console.log(this.decorators);   
+        console.log(this.decorators);
   }
- 
+
   clearArray() {
     while(this.mobile.length)
     {
@@ -78,13 +78,13 @@ export class HomePageComponent implements OnInit {
   {
     let cartModelAdd= new CartModelAdd();
     console.log("product id:"+productModel.id);
-    
+
     cartModelAdd.productid=productModel.id;
     cartModelAdd.quantity=1;
-    cartModelAdd.userid=7;
+    cartModelAdd.userid=13;
       this.cartSevice.addCartItem(cartModelAdd).subscribe(res=>{
         console.log(res);
-        
+
       });
   }
 
@@ -92,11 +92,11 @@ fillArray(resu:ProductModel[])
 {
   this.clearArray();
   for(var res of resu)
-          {          
+          {
             if(res.category=="MOBILE")
             {
               this.mobile.push(res);
-            }            
+            }
             else if(res.category=="BAG")
             {
               this.bag.push(res);

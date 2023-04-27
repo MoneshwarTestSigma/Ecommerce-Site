@@ -20,7 +20,7 @@ export class CartComponent implements OnInit{
   cartItems:CartModel[]=[];
   first()
   {
-      let id=7;// we need to get this one 
+      let id=13;// we need to get this one
       this.cartService.getCartItems(id).subscribe((res:CartModel[])=>
       {
         this.total=0;
@@ -33,38 +33,49 @@ export class CartComponent implements OnInit{
             console.log(element);
         }
       });
-       
+
   }
   clearArray() {
     while(this.cartItems.length)
     {
-      this.cartItems.pop();    
+      this.cartItems.pop();
     }
   }
   changeCart(cartModel:CartModel)
   {
     console.log("Clicke on button");
-    
+
      let cartModelAdd=new CartModelAdd();
      cartModelAdd.productid=cartModel.productid;
      cartModelAdd.quantity=Number(cartModel.quantity);
      cartModelAdd.userid=7;
      this.cartService.addCartItem(cartModelAdd).subscribe((req:any)=>{
       console.log(req);
-      
+
      })
   }
   changer()
   {
     console.log("clicked");
-    
+
   }
   deteleCartItem(id:number)
   {
     console.log(id);
-    
+
       this.cartService.deleteCartItem(id).subscribe((res:any)=>{
       })
       this.first();
+  }
+  checkoutSucess(cartItems : CartModel[]){
+     let cartItem:CartModel = new CartModel();
+     console.log("checkout came "+ cartItems);
+     for(cartItem of cartItems){
+       console.log(cartItem);
+     }
+     this.cartService.deleteProduct(cartItems).subscribe((res:any)=>{
+
+     })
+    console.log("product quantity deleted");
   }
 }

@@ -14,6 +14,7 @@ export class CartService {
   }
   addCartItem(cartItem: CartModelAdd)
   {
+      console.log(cartItem.userid);
       return this.http.post<any>(`http://localhost:8080/cart`,cartItem.serialize());
   }
   deleteCartItem(id: number)
@@ -21,4 +22,7 @@ export class CartService {
     return this.http.delete<any>(`http://localhost:8080/cart/delete/${id}`);
   }
 
+  deleteProduct(cartItems: CartModel[]) {
+    return this.http.post<any>(`http://localhost:8080/product/quantity`,cartItems);
+  }
 }
