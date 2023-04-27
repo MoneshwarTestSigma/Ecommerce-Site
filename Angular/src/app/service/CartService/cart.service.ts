@@ -23,6 +23,7 @@ export class CartService {
   }
 
   deleteProduct(cartItems: CartModel[]) {
-    return this.http.post<any>(`http://localhost:8080/product/quantity`,cartItems);
+
+    return this.http.post<CartModel[]>(`http://localhost:8080/product/quantity`,cartItems);
   }
 }

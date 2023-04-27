@@ -74,7 +74,7 @@ export class CartComponent implements OnInit{
        console.log(cartItem);
      }
      this.cartService.deleteProduct(cartItems).subscribe((res:any)=>{
-
+       console.log(res);
      })
     console.log("product quantity deleted");
   }

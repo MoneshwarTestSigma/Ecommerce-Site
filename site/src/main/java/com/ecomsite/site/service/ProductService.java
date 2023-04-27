@@ -50,5 +50,16 @@ public class ProductService {
         Specification spec= productSpecificationBuilder.builder(criteriaList);
         return this.productRepository.findAll(spec);
     }
+
+    public void productQuantityDelete(Product product) {
+            Long count = this.productRepository.findById(product.getId()).get().getCount();
+            count -= product.getCount();
+            if(count <= 0){
+                this.productRepository.deleteById(product.getId());
+            }
+            else{
+                this.productRepository.findById(product.getId()).get().setCount(count);
+            }
+    }
 }
 
