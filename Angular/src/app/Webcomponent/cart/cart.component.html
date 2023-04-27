@@ -39,21 +39,23 @@
                   </td>
                   <td class="align-middle">
                     <div class="d-flex flex-row">
-                      <button  class="btn btn-link px-2"
+                      <!-- <button  class="btn btn-outline-danger" style="font-size: 1.2rem;" (click)="decrease(i)"
                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
-                      </button>
+                      -
+                      </button> -->
+                      
 
-                      <input id="form1" min="1" (input)="changeCart(i)" name="quantity" [(ngModel)]="i.quantity" type="number"
-                        class="form-control form-control-sm" style="width: 50px;" />
+                      <input id="form1" min="1" (input)="changeCart(i)" [(ngModel)]="i.quantity" 
+                        class="form-control form-control-sm" style="width: 50px;"  type="number"/>
 
-                      <button class="btn btn-link px-2"
-
+                      <!-- <button class="btn btn-outline-success" style="font-size: 1.2rem;"
+                        (click)="increase(i)"
                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
-                      </button>
+                       +
+                      </button> -->
+                      {{i.quantity}}
                     </div>
-                    {{i.quantity}}
+                   
 
                   </td>
                   <td class="align-middle">

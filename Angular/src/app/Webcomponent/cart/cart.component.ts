@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartModel } from 'src/app/models/CartModel';
 
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
@@ -12,7 +13,16 @@ import {ProductService} from "../../service/productService/product.service";
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
-  constructor(private cartService:CartService,private productService:ProductService){}
+// increase(cartModel: CartModel) {
+//     cartModel.quantity=Number(cartModel.category)+1;
+//     this.changeCart(cartModel);
+
+// }
+// decrease(cartModel: CartModel) {
+//   cartModel.quantity=Number(cartModel.category)-1;
+//     this.changeCart(cartModel);
+// }
+  constructor(private cartService:CartService,private productService:ProductService,private router:Router){}
    total:number=0;
   temp=0;
   ngOnInit(): void {
@@ -33,8 +43,9 @@ export class CartComponent implements OnInit{
   first()
   {
       let id=13;// we need to get this one
-      this.cartService.getCartItems(id).subscribe((res:CartModel[])=>
+      this.cartService.getCartItems(id).subscribe((res:any)=>
       {
+        console.log(res);
         this.total=0;
         this.clearArray();
         for(var element of res)
@@ -54,23 +65,25 @@ export class CartComponent implements OnInit{
     }
   }
   changeCart(cartModel:CartModel) {
-    console.log("Clicke on button");
-    let totalCount = this.getCountOfProduct(cartModel.id);
-    if (Number(cartModel.quantity) <= totalCount) {
+    // console.log("Clicke on button");
+    // let totalCount = this.getCountOfProduct(cartModel.productid);
+    // if (Number(cartModel.quantity) <= totalCount) {
       let cartModelAdd = new CartModelAdd();
       cartModelAdd.productid = cartModel.productid;
       cartModelAdd.quantity = Number(cartModel.quantity);
-      cartModelAdd.userid = 7;
+      cartModelAdd.userid = 13;
+      console.log(cartModel);
+      
       this.cartService.addCartItem(cartModelAdd).subscribe((req: any) => {
         console.log(req);
 
 
       })
-    }
-    else {
-      console.log("cant increase");
-      cartModel.quantity=totalCount;
-    }
+    // }
+    // else {
+    //   console.log("cant increase");
+    //   cartModel.quantity=totalCount;
+    // }
   }
   changer()
   {
@@ -94,6 +107,7 @@ export class CartComponent implements OnInit{
      this.cartService.deleteProduct(cartItems).subscribe((res:any)=>{
        console.log(res);
      })
+     this.router.navigate(['/delivery']);
     console.log("product quantity deleted");
   }
 }

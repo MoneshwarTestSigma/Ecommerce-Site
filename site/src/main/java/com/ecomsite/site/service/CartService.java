@@ -34,6 +34,7 @@ public class CartService {
 //               cart.setQuantity(cart.getQuantity()+quantity);
                cart.setQuantity(cart.getQuantity());
            }
+        System.out.println(cart);
         return this.cartRepository.save(cart);
 
     }

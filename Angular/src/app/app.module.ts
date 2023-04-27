@@ -16,6 +16,7 @@ import { OwnerSignupComponent } from './Webcomponent/owner-signup/owner-signup.c
 import { ProductUploadComponent } from './Webcomponent/product-upload/product-upload.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     HttpClientModule
-   
   ],
   providers: [],
   bootstrap: [AppComponent]

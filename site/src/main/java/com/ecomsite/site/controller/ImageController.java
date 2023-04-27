@@ -25,6 +25,7 @@ public class ImageController {
             produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_GIF_VALUE,MediaType.IMAGE_PNG_VALUE}
     )
     public @ResponseBody byte[] getImageWithMediaType(@PathVariable(name = "imageName") String fileName) throws IOException {
+        System.out.println("Came here");
         return this.imageService.getImageWithMediaType(fileName);
     }
     public String getUrlFormId(Long id)

@@ -7,6 +7,7 @@ import { OwnerLoginComponent } from './Webcomponent/owner-login/owner-login.comp
 import { OwnerSignupComponent } from './Webcomponent/owner-signup/owner-signup.component';
 import { HomePageComponent } from './Webcomponent/home-page/home-page.component';
 import { ProductUploadComponent } from './Webcomponent/product-upload/product-upload.component';
+import { DeliveryComponent } from './Webcomponent/delivery/delivery.component';
 
 const routes: Routes = [
   {path:"", component:HomePageComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:"owner-login", component:OwnerLoginComponent },
   {path:"owner-signup", component: OwnerSignupComponent},
   {path:"product-upload", component: ProductUploadComponent},
-  {path: "cart", component:CartComponent  }
+  {path: "cart", component:CartComponent  },
+  {path:"delivery",component:DeliveryComponent}
 ];
 
 @NgModule({

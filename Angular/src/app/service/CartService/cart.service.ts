@@ -10,7 +10,7 @@ export class CartService {
   constructor(private http: HttpClient) { }
   getCartItems(id:number)
   {
-    return this.http.get<CartModel[]>(`http://localhost:8080/cart/${id}`);
+    return this.http.get<any>(`http://localhost:8080/cart/${id}`);
   }
   addCartItem(cartItem: CartModelAdd)
   {

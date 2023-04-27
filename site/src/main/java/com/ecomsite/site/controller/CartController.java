@@ -42,6 +42,7 @@ public class CartController {
             cartDTO.setId(cart.getId());
             cartDTO.setProductid(this.productService.productByid(cart.getProductid()).get().getId());
             cartDTOS.add(cartDTO);
+//            System.out.println(cartDTO);
 //         productDTOS.add(this.productMapper.productToProductDTO(this.productService.productByid(cart.getProductid()).get()));
         }
         return cartDTOS;
