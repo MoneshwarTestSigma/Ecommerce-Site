@@ -3,7 +3,10 @@ import { Router } from '@angular/router';
 import { CartModel } from 'src/app/models/CartModel';
 
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
+import { LoggedInUserModel } from 'src/app/models/LoggedInUserModel';
 import { CartService } from 'src/app/service/CartService/cart.service';
+import { JwtServiceService } from 'src/app/service/JwtService/jwt-service.service';
+import { UserService } from 'src/app/service/UserService/user.service';
 import {ProductService} from "../../service/productService/product.service";
 
 
@@ -13,21 +16,15 @@ import {ProductService} from "../../service/productService/product.service";
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
-// increase(cartModel: CartModel) {
-//     cartModel.quantity=Number(cartModel.category)+1;
-//     this.changeCart(cartModel);
 
-// }
-// decrease(cartModel: CartModel) {
-//   cartModel.quantity=Number(cartModel.category)-1;
-//     this.changeCart(cartModel);
-// }
-  constructor(private cartService:CartService,private productService:ProductService,private router:Router){}
-   total:number=0;
+  constructor(private cartService:CartService,private productService:ProductService,private router:Router,private jwtService:JwtServiceService,private userService:UserService){}
+  isLoggedIn:boolean=(localStorage.getItem("isLoggedIn")=="true")||false;
+  total:number=0;
   temp=0;
   ngOnInit(): void {
       this.first();
   }
+  isCartEmpty=false;
   cartItems:CartModel[]=[];
   getCountOfProduct(id:Number):Number
   {
@@ -42,20 +39,33 @@ export class CartComponent implements OnInit{
   }
   first()
   {
-      let id=13;// we need to get this one
+    if(this.isLoggedIn)
+    {
+      let jwt=localStorage.getItem("JWT");
+      let email=this.jwtService.emailFromToken(jwt);
+      this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
+        console.log("Logged in user details:"+res);
+        let id=Number(res.userId);
       this.cartService.getCartItems(id).subscribe((res:any)=>
       {
         console.log(res);
         this.total=0;
         this.clearArray();
+        this.isCartEmpty=false;
         for(var element of res)
         {
+          this.isCartEmpty=true;
           this.total=this.total+Number(element.price);
           this.total=Number(this.total.toFixed(3));
             this.cartItems.push(element);
             console.log(element);
         }
       });
+       
+        
+      })
+    }
+      
 
   }
   clearArray() {

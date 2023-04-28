@@ -40,5 +40,6 @@ export class ProductUploadComponent {
   canEnableUpload():boolean{
     return true;
   }
+ 
   
 }

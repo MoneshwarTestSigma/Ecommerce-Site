@@ -23,6 +23,7 @@ export class HomePageComponent implements OnInit {
   decorators: ProductModel[] = [];
   userName:string="";
   isOwner:boolean=false;
+  userObject!:LoggedInUserModel;
   ngOnInit() {
     this.first();
   }
@@ -57,7 +58,7 @@ export class HomePageComponent implements OnInit {
       let email=this.jwtService.emailFromToken(jwt);
       this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
         console.log("Logged in user details:"+res);
-        
+        this.userObject=res;
        this.userName=res.name;
        if(res.type=="ADMIN")
        {
@@ -98,16 +99,25 @@ export class HomePageComponent implements OnInit {
   }
   addToCart(productModel:ProductModel)
   {
-    let cartModelAdd= new CartModelAdd();
-    console.log("product id:"+productModel.id);
-
-    cartModelAdd.productid=productModel.id;
-    cartModelAdd.quantity=1;
-    cartModelAdd.userid=13;
-      this.cartSevice.addCartItem(cartModelAdd).subscribe(res=>{
-        console.log(res);
-
-      });
+    if(this.isLoggedIn)
+    {
+      let cartModelAdd= new CartModelAdd();
+      console.log("product id:"+productModel.id);
+  
+      cartModelAdd.productid=productModel.id;
+      cartModelAdd.quantity=1;
+      cartModelAdd.userid=Number(this.userObject.userId);
+        this.cartSevice.addCartItem(cartModelAdd).subscribe(res=>{
+          console.log(res);
+  
+        });
+    }
+    else
+    {
+      alert("Login First");
+      this.router.navigate(['login']);
+    }
+   
   }
 
 fillArray(resu:ProductModel[])

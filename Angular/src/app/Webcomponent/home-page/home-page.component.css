@@ -120,3 +120,16 @@ body{
 input[type=search]::-webkit-search-cancel-button {
     -webkit-appearance: searchfield-cancel-button;
 }
+.box-category:hover{
+    text-decoration: none;
+}
+span{
+    font-size: 14px;
+    font-weight: 900;
+    position: absolute;
+    border: solid blue;
+    border-radius: 60%;
+    height: 14px;
+    width: 8px;
+    background:blue;
+}

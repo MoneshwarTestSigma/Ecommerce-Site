@@ -17,7 +17,7 @@
             <button type="button" class="btn btn-primary" [routerLink]="['/signup']">Sign up</button>
         </div>
         <div *ngIf="isLoggedIn" style="color:whitesmoke;font-size: larger;">
-          Welcome {{userName}} 
+          Welcome {{userName}} &nbsp;&nbsp;&nbsp;
           
               <button *ngIf="isOwner" type="button" (click)="addProduct()" class="btn btn-outline-primary">Add Product</button>
          
@@ -38,7 +38,7 @@
         <h1 style="padding-top: 30px;">Top Catagories</h1>
       </div>
       <div class="row" style="display: flex;">
-        <a href="#mobile">
+        <a href="#mobile" class="box-category">
           <div class="nav-card card col-lg-3 col-md-6 col-sm-6 text-center" >
               <img  class="card-img-top " src="..\assets\images\mobile.webp" class="card-img-top" alt="mobile" style="height: 60px;width: 60px; margin-left: 10px;">
               <div>
@@ -46,7 +46,7 @@
               </div>
             </div>
           </a>
-          <a href="#laptop">
+          <a href="#laptop" class="box-category">
             <div class="nav-card card  col-lg-3 col-md-6 col-sm-6" style="max-width: 7rem;max-height: 7rem; border-radius: 15%;">
               <img src="..\assets\images\laptop.jpeg" class="card-img-top " alt="laptop" style="height: 60px;width: 60px; margin-left: 10px;">
               <div>
@@ -54,7 +54,7 @@
               </div>
             </div>
           </a>
-          <a href="#bags">
+          <a href="#bags" class="box-category">
             <div class="nav-card card  col-lg-3 col-md-6 col-sm-6" style="max-width: 7rem;max-height: 7rem; border-radius: 15%;">
               <img src="..\assets\images\bags.webp" class="card-img-top" alt="bags" style="height: 60px;width: 60px; margin-left: 10px;">
               <div>
@@ -62,7 +62,7 @@
               </div>
             </div>
           </a>
-          <a href="#decorators">
+          <a href="#decorators" class="box-category">
             <div class="nav-card card  col-lg-3 col-md-6 col-sm-6" style="max-width: 7rem;max-height: 7rem;border-radius: 15%;">
               <img src="..\assets\images\decorators.jpeg" class="card-img-top" alt="mobile" style="height: 60px;width: 60px;margin-left: 10px;">
               <div>
@@ -77,7 +77,7 @@
    <div class="row" id="mobile" style="margin-left: 30px;margin-right: 30px;">
      
      <div *ngFor="let n of mobile" class="card col-lg-3 col-md-6 col-sm-12" style="width: 18rem; margin-top: 30px;  ">
-      <img src={{n.imageURL}} class="card-img-top" alt="..." onerror="this.src='../assets/images/unnamed.jpg';">
+      <img src={{n.imageURL}} class="card-img-top" alt="..." onerror="this.src='../assets/images/unnamed.jpg';" style="width: 320px;height: 430px;">
       <div class="card-body">
         <h5 class="card-title">{{n.name}}</h5>
         <p class="card-text">{{n.description}}</p>
@@ -86,18 +86,15 @@
         <li class="list-group-item">Price:{{n.price}}</li>
         <li class="list-group-item">Quantity Left:{{n.count}}</li>
       </ul>
-      <div class="card-body">
-        <a href="#" class="buy-button">⚡Buy now</a>
-        <a href="#" (click)="addToCart(n)"  class="add-cart-button">
-      🛒 Add to cart</a>
-      </div>
+     
+      <button (click)="addToCart(n)" class="btn btn-warning" style="margin-bottom: 20px;"> <img src="..\assets\images\cartIcon.ico" alt="" style="width: 30px;height: 30px;margin-right: 30px;"> Add to cart</button>
     </div>
    </div>
    <div *ngIf="laptop.length!=0" class="text-center top-heading"><h1>Laptops</h1></div>
    <div class="row" id="laptop" style="margin-left: 30px;margin-right: 30px;">
      
      <div *ngFor="let n of laptop" class="card col-lg-3 col-md-6 col-sm-12 " style="width: 18rem; margin-top: 30px;  ">
-      <img src={{n.imageURL}} class="card-img-top" alt="..." onerror="this.src='../assets/images/unnamed.jpg';">
+      <img src={{n.imageURL}} class="card-img-top" alt="..." onerror="this.src='../assets/images/unnamed.jpg';" style="width: 320px;height: 430px;">
       <div class="card-body">
         <h5 class="card-title">{{n.name}}</h5>
         <p class="card-text">{{n.description}}</p>
@@ -106,18 +103,14 @@
         <li class="list-group-item">Price:{{n.price}}</li>
         <li class="list-group-item">Quantity Left:{{n.count}}</li>
       </ul>
-      <div class="card-body">
-        <a href="#" class="buy-button">⚡Buy now</a>
-        <a href="#" class="add-cart-button">
-      🛒 Add to cart</a>
-      </div>
+      <button (click)="addToCart(n)" class="btn btn-warning" style="margin-bottom: 20px;"> <img src="..\assets\images\cartIcon.ico" alt="" style="width: 30px;height: 30px;margin-right: 30px;"> Add to cart</button>
     </div>
    </div>
    <div *ngIf="bag.length!=0" class="text-center top-heading"><h1>Bags</h1></div>
    <div class="row" id="bags" style="margin-left: 30px;margin-right: 30px;">
      
      <div *ngFor="let n of bag" class="card col-lg-3 col-md-6 col-sm-12 " style="width: 18rem; margin-top: 30px;  ">
-      <img src={{n.imageURL}} class="card-img-top" alt="..." onerror="this.src='../assets/images/unnamed.jpg'">
+      <img src={{n.imageURL}} class="card-img-top" alt="..." onerror="this.src='../assets/images/unnamed.jpg'" style="width: 320px;height: 430px;">
       <div class="card-body">
         <h5 class="card-title">{{n.name}}</h5>
         <p class="card-text">{{n.description}}</p>
@@ -126,18 +119,14 @@
         <li class="list-group-item">Price:{{n.price}}</li>
         <li class="list-group-item">Quantity Left:{{n.count}}</li>
       </ul>
-      <div class="card-body">
-        <a href="#" class="buy-button">⚡Buy now</a>
-        <a href="#" class="add-cart-button">
-      🛒 Add to cart</a>
-      </div>
+      <button (click)="addToCart(n)" class="btn btn-warning" style="margin-bottom: 20px;"> <img src="..\assets\images\cartIcon.ico" alt="" style="width: 30px;height: 30px;margin-right: 30px;"> Add to cart</button>
     </div>
    </div>
    <div *ngIf="decorators.length!=0" class="text-center top-heading"><h1>Decorators</h1></div>
    <div class="row" id="decorators" style="margin-left: 30px;margin-right: 30px;">
      
      <div *ngFor="let n of decorators" class="card col-lg-3 col-md-6 col-sm-12 " style="width: 18rem; margin-top: 30px;  ">
-      <img src={{n.imageURL}} class="card-img-top" alt="..." onerror="this.src='../assets/images/unnamed.jpg';">
+      <img src={{n.imageURL}} class="card-img-top" alt="..." onerror="this.src='../assets/images/unnamed.jpg';" style="width: 320px;height: 430px;">
       <div class="card-body">
         <h5 class="card-title">{{n.name}}</h5>
         <p class="card-text">{{n.description}}</p>
@@ -146,11 +135,7 @@
         <li class="list-group-item">Price:{{n.price}}</li>
         <li class="list-group-item">Quantity Left:{{n.count}}</li>
       </ul>
-      <div class="card-body">
-        <a href="#" class="buy-button">⚡Buy now</a>
-        <a href="#" class="add-cart-button">
-      🛒 Add to cart</a>
-      </div>
+      <button (click)="addToCart(n)" class="btn btn-warning" style="margin-bottom: 20px;"> <img src="..\assets\images\cartIcon.ico" alt="" style="width: 30px;height: 30px;margin-right: 30px;"> Add to cart</button>
     </div>
    </div>
 

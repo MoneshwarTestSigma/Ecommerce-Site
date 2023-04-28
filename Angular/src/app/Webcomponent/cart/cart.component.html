@@ -7,8 +7,12 @@
     <a href="#" class="previous">&laquo; Back to Shopping</a>
 
 </nav>
-<section class="h-100 h-custom">
-    <div class="container h-100 py-5">
+
+<section  class="h-100 h-custom">
+  <div *ngIf="!isCartEmpty" class="text-center" style="margin-top: 100px;">
+    <h1>Cart is Empty</h1>
+  </div>
+    <div *ngIf="isCartEmpty" class="container h-100 py-5">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
 
@@ -107,3 +111,4 @@
       </div>
     </div>
   </section>
+
