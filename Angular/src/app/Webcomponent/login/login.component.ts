@@ -14,16 +14,14 @@ export class LoginComponent {
   loginStatus=false;
   isClicked=false;
    form=new LoginModel();
+
    change()
    {
       this.isClicked=true;
    }
    check()
-   {
-    
+   {    
       this.userService.checkUser(this.form).subscribe((res:any)=>{
-        
-        
         if(res)
         {
           alert("Logged in Successfully");

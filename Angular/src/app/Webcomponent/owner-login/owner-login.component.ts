@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/LoginModel';
+import { UserService } from 'src/app/service/UserService/user.service';
 @Component({
   selector: 'app-owner-login',
   templateUrl: './owner-login.component.html',
   styleUrls: ['./owner-login.component.css']
 })
 export class OwnerLoginComponent {
+  constructor(private userService:UserService,private router:Router){}
   loginStatus=false;
   isClicked=false;
    form=new LoginModel();
@@ -15,16 +18,21 @@ export class OwnerLoginComponent {
    }
    check()
    {
-    this.form.type="owner";
-    for(var key in localStorage) {
-      let temp =JSON.parse(localStorage.getItem(key)|| "");
-      if(temp.email==this.form.email && temp.password==this.form.password)
+    this.userService.checkUser(this.form).subscribe((res:any)=>{
+        
+        
+      if(res)
       {
-        alert("Welcome  "+ temp.name);
-        this.loginStatus= true;
-        break;
-      }      
-   }
+        alert("Logged in Successfully");
+        localStorage.setItem("JWT",res.token);
+        localStorage.setItem("isLoggedIn","true");
+        this.router.navigate(['/']);
+      }          
+    },(error)=>{
+        alert("Invalid Credentials");
+        this.router.navigate(['/login']);
+    });
+   
    }
 
 }

@@ -56,6 +56,8 @@ export class HomePageComponent implements OnInit {
       let jwt=localStorage.getItem("JWT");
       let email=this.jwtService.emailFromToken(jwt);
       this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
+        console.log("Logged in user details:"+res);
+        
        this.userName=res.name;
        if(res.type=="ADMIN")
        {
