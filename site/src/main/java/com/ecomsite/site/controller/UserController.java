@@ -2,14 +2,13 @@ package com.ecomsite.site.controller;
 
 
 import com.ecomsite.site.dto.UserDTO;
+import com.ecomsite.site.enums.ERole;
 import com.ecomsite.site.model.User;
-import com.ecomsite.site.enums.Role;
 import com.ecomsite.site.mapper.UserMapper;
 import com.ecomsite.site.request.LoginRequest;
 import com.ecomsite.site.request.UserRequest;
 import com.ecomsite.site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/{type}")
-    List<UserDTO> roleUsers(@PathVariable("type") Role type){
+    List<UserDTO> roleUsers(@PathVariable("type") ERole type){
         List<UserDTO> userDTOS = new ArrayList<>();
         for(User user : this.userService.roleUser(type)){
             userDTOS.add(this.userMapper.userToUserDTO(user));

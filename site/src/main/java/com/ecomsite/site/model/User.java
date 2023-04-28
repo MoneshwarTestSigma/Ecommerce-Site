@@ -1,7 +1,7 @@
 package com.ecomsite.site.model;
 
 
-import com.ecomsite.site.enums.Role;
+import com.ecomsite.site.enums.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +26,6 @@ public class User {
     String email;
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    Role type;
+    ERole type;
 
 }

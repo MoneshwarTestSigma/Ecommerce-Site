@@ -1,10 +1,10 @@
 package com.ecomsite.site.dto;
 
-import com.ecomsite.site.enums.Role;
+import com.ecomsite.site.enums.ERole;
 import lombok.Data;
 
 @Data
 public class UserDTO {
     private String name;
-    private Role type;
+    private ERole type;
 }
