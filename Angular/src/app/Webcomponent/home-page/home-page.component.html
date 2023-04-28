@@ -17,7 +17,10 @@
             <button type="button" class="btn btn-primary" [routerLink]="['/signup']">Sign up</button>
         </div>
         <div *ngIf="isLoggedIn" style="color:whitesmoke;font-size: larger;">
-          Welcome Moneshwar 
+          Welcome {{userName}} 
+          
+              <button *ngIf="isOwner" type="button" (click)="addProduct()" class="btn btn-outline-primary">Add Product</button>
+         
           <a [routerLink]="['/cart']">
             <img  src="..\assets\images\cart.png" alt="cart-image" style="width: 40px;height: 40px;margin-right: 70px;margin-left: 30px;">
           </a>

@@ -1,6 +1,7 @@
 package com.ecomsite.site.controller;
 
 
+import com.ecomsite.site.dto.LoggedInUserDto;
 import com.ecomsite.site.dto.UserDTO;
 import com.ecomsite.site.enums.ERole;
 import com.ecomsite.site.model.User;
@@ -27,7 +28,7 @@ public class UserController {
 //    UserMapper userMapper;
 
     @GetMapping("/email/{email}")
-    public Long userReturn(@PathVariable("email") String email){
+    public LoggedInUserDto userReturn(@PathVariable("email") String email){
         return this.userService.idReturn(email);
     }
 

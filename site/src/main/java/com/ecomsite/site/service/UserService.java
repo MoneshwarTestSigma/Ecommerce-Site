@@ -1,5 +1,6 @@
 package com.ecomsite.site.service;
 
+import com.ecomsite.site.dto.LoggedInUserDto;
 import com.ecomsite.site.model.User;
 import com.ecomsite.site.enums.ERole;
 import com.ecomsite.site.repository.UserRepository;
@@ -21,8 +22,18 @@ public class UserService {
         }
 
 
-        public Long idReturn(String email) {
-            return this.userRepository.findByEmail(email).getId();
+        public LoggedInUserDto idReturn(String email) {
+            User user= this.userRepository.findByEmail(email);
+            if(user!=null)
+            {
+                LoggedInUserDto loggedInUserDto=new LoggedInUserDto();
+                loggedInUserDto.setUserId(user.getId());
+                loggedInUserDto.setType(user.getType());
+                loggedInUserDto.setName(user.getName());
+                return loggedInUserDto;
+            }
+            return null;
+
         }
 
         public void deleteUser(String email) {

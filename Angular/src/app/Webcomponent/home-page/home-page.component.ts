@@ -1,9 +1,13 @@
 import { Component ,Input, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
+import { LoggedInUserModel } from 'src/app/models/LoggedInUserModel';
 import { ProductModel } from 'src/app/models/ProductModel';
 import { CartService } from 'src/app/service/CartService/cart.service';
+import { JwtServiceService } from 'src/app/service/JwtService/jwt-service.service';
 import { ProductService } from 'src/app/service/productService/product.service';
+import {UserService} from 'src/app/service/UserService/user.service'
 
 @Component({
   selector: 'app-home-page',
@@ -12,11 +16,13 @@ import { ProductService } from 'src/app/service/productService/product.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private productService:ProductService,private cartSevice:CartService){}
+  constructor(private productService:ProductService,private cartSevice:CartService,private jwtService:JwtServiceService,private userService:UserService,private router:Router){}
   laptop: ProductModel[] = [];
   bag: ProductModel[] = [];
   mobile: ProductModel[] = [];
   decorators: ProductModel[] = [];
+  userName:string="";
+  isOwner:boolean=false;
   ngOnInit() {
     this.first();
   }
@@ -45,6 +51,20 @@ export class HomePageComponent implements OnInit {
   }
   first()
   {
+    if(this.isLoggedIn)
+    {
+      let jwt=localStorage.getItem("JWT");
+      let email=this.jwtService.emailFromToken(jwt);
+      this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
+       this.userName=res.name;
+       if(res.type=="ADMIN")
+       {
+        this.isOwner=true;
+       }
+        
+      })
+      
+    }
         this.productService.getAllProducts().subscribe((resu: ProductModel[])=>{
 
           this.fillArray(resu);
@@ -109,5 +129,9 @@ fillArray(resu:ProductModel[])
               this.decorators.push(res);
             }
           }
+}
+addProduct()
+{
+  this.router.navigate(['product-upload']);
 }
 }

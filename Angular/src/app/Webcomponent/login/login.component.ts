@@ -20,21 +20,23 @@ export class LoginComponent {
    }
    check()
    {
-      this.userService.checkUser(this.form).subscribe((res:number)=>{
-          if(res==1)
-          {
-            alert("Logged in Successfully");
-            localStorage.setItem("isLoggedIn","true");
-            this.router.navigate(['/']);
-            
-          }
-          else{
-            alert("Wrong Credentials");
-            this.router.navigate(['/login']);
-            
-          }
+    
+      this.userService.checkUser(this.form).subscribe((res:any)=>{
+        
+        
+        if(res)
+        {
+          alert("Logged in Successfully");
+          localStorage.setItem("JWT",res.token);
+          localStorage.setItem("isLoggedIn","true");
+          this.router.navigate(['/']);
+        }          
+      },(error)=>{
+          alert("Invalid Credentials");
+          this.router.navigate(['/login']);
       });
-      console.log("Came out of check");
+     
+      
       
    }
 
