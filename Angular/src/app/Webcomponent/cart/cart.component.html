@@ -31,8 +31,8 @@
                 <tr *ngFor="let i of cartItems">
                   <th scope="row">
                     <div class="d-flex align-items-center">
-                      <img src=".." class="img-fluid rounded-3"
-                        style="width: 120px;margin-right:20px;" alt="Book">
+                      <img src={{i.imageUrl}} class="img-fluid rounded-3"
+                        style="width: 120px;margin-right:20px;" alt="image" onerror="this.src='../assets/images/unnamed.jpg';">
                       <div class="flex-column ms-4">
                         <p class="mb-2">{{i.name}}</p>
                       </div>
@@ -43,20 +43,13 @@
                   </td>
                   <td class="align-middle">
                     <div class="d-flex flex-row">
-                      <!-- <button  class="btn btn-outline-danger" style="font-size: 1.2rem;" (click)="decrease(i)"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                      -
-                      </button> -->
+                   
                       
 
                       <input id="form1" min="1" (input)="changeCart(i)" [(ngModel)]="i.quantity" 
                         class="form-control form-control-sm" style="width: 50px;"  type="number"/>
 
-                      <!-- <button class="btn btn-outline-success" style="font-size: 1.2rem;"
-                        (click)="increase(i)"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                       +
-                      </button> -->
+                    
                       {{i.quantity}}
                     </div>
                    

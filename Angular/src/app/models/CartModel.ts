@@ -5,5 +5,5 @@ export class CartModel{
     public quantity!:Number;
     public productid!:number;
     public id!:number;
-
+    public imageUrl!:string;
 }

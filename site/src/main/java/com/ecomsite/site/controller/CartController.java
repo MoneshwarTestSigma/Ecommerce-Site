@@ -22,7 +22,8 @@ public class CartController {
     ProductMapper productMapper;
     @Autowired
     ProductService productService;
-
+    @Autowired
+    ImageController imageController;
     @Autowired
     CartMapper cartMapper;
     @PostMapping()
@@ -41,6 +42,9 @@ public class CartController {
             cartDTO.setQuantity(cart.getQuantity());
             cartDTO.setId(cart.getId());
             cartDTO.setProductid(this.productService.productByid(cart.getProductid()).get().getId());
+
+            cartDTO.setImageUrl(imageController.getUrlFormId(cart.getProductid()));
+            System.out.println(cartDTO.getImageUrl());
             cartDTOS.add(cartDTO);
 //            System.out.println(cartDTO);
 //         productDTOS.add(this.productMapper.productToProductDTO(this.productService.productByid(cart.getProductid()).get()));

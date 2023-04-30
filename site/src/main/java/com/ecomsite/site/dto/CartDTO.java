@@ -11,5 +11,5 @@ public class CartDTO {
     private Long id;
     private ProductCategory category;
     private Long quantity;
-
+    private String imageUrl;
 }
