@@ -1,7 +1,8 @@
 <html>
 <head>
   
-    
+  <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+  
 </head>
 <body>
   
@@ -19,12 +20,14 @@
         <div *ngIf="isLoggedIn" style="color:whitesmoke;font-size: larger;">
           Welcome {{userName}} &nbsp;&nbsp;&nbsp;
           
-              <button *ngIf="isOwner" type="button" (click)="addProduct()" class="btn btn-outline-primary">Add Product</button>
-         
+              <button *ngIf="isOwner" type="button" (click)="addProduct()" style="margin-right: 30px;" class="btn btn-outline-primary">Add Product</button>
+              
           <a [routerLink]="['/cart']">
-            <img  src="..\assets\images\cart.png" alt="cart-image" style="width: 40px;height: 40px;margin-right: 70px;margin-left: 30px;">
+            <i class="fa" style="font-size:24px; color: yellow;">&#xf07a;</i>
+<span class='badge badge-warning' id='lblCartCount'> {{cartCount}} </span>
           </a>
-          <button type="button" (click)="logout()" class="btn btn-outline-danger">⬅️ Log out</button>
+          <button type="button" (click)="logout()" style="margin-left: 30px;" class="btn btn-outline-danger">⬅️ Log out</button>
+          
           
         </div>
         

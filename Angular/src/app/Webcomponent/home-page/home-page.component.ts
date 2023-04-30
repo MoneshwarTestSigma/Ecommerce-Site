@@ -1,6 +1,7 @@
 import { Component ,Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CartModel } from 'src/app/models/CartModel';
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
 import { LoggedInUserModel } from 'src/app/models/LoggedInUserModel';
 import { ProductModel } from 'src/app/models/ProductModel';
@@ -24,8 +25,9 @@ export class HomePageComponent implements OnInit {
   userName:string="";
   isOwner:boolean=false;
   userObject!:LoggedInUserModel;
+  cartCount=0;
   ngOnInit() {
-    this.first();
+    this.first();    
   }
   isLoggedIn:boolean=(localStorage.getItem("isLoggedIn")=="true")||false;
   @Input() searchItem:string="";
@@ -57,14 +59,21 @@ export class HomePageComponent implements OnInit {
       let jwt=localStorage.getItem("JWT");
       let email=this.jwtService.emailFromToken(jwt);
       this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
-        console.log("Logged in user details:"+res);
+      
         this.userObject=res;
        this.userName=res.name;
+      
        if(res.type=="ADMIN")
        {
         this.isOwner=true;
        }
-        
+        this.cartSevice.getCartItems(Number(res.userId)).subscribe(res1=>{
+          this.cartCount=0;
+          for(var temp of res1 )
+          {
+              this.cartCount++;
+          }
+        })
       })
       
     }
@@ -111,6 +120,7 @@ export class HomePageComponent implements OnInit {
           console.log(res);
   
         });
+        this.first();
     }
     else
     {
@@ -146,4 +156,7 @@ addProduct()
 {
   this.router.navigate(['product-upload']);
 }
+
+
+ 
 }

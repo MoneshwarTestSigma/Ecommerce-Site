@@ -67,7 +67,10 @@ public class ProductController {
         List<ProductDTO> productDTOList = new ArrayList<>();
         List<Criteria> criteriaList = criteriaBuilder.builder(data);
          for(Product product: productService.searchProducts(criteriaList)){
-             productDTOList.add(this.productMapper.productToProductDTO(product));
+             ProductDTO productDTO=this.productMapper.productToProductDTO(product);
+
+             productDTO.setImageURL(imageController.getUrlFormId(product.getId()));
+             productDTOList.add(productDTO);
          }
          return productDTOList;
     }
