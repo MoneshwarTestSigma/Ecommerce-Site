@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-//@CrossOrigin
+
 public class AuthController {
 
 	@Autowired

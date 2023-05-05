@@ -27,11 +27,11 @@ public class CartService {
            else{
                cart.setId(this.cartRepository.findByUseridAndProductid(cart.getUserid(),cart.getProductid()).getId());
                Long quantity = this.cartRepository.findByUseridAndProductid(cart.getUserid(),cart.getProductid()).getQuantity();
-//               if(cart.getQuantity()+quantity <=0){
-//                   this.deleteCart(cart.getId());
-//                   return cart;
-//               }
-//               cart.setQuantity(cart.getQuantity()+quantity);
+
+
+
+
+
                cart.setQuantity(cart.getQuantity());
            }
         System.out.println(cart);

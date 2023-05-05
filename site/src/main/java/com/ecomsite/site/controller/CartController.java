@@ -46,8 +46,8 @@ public class CartController {
             cartDTO.setImageUrl(imageController.getUrlFormId(cart.getProductid()));
             System.out.println(cartDTO.getImageUrl());
             cartDTOS.add(cartDTO);
-//            System.out.println(cartDTO);
-//         productDTOS.add(this.productMapper.productToProductDTO(this.productService.productByid(cart.getProductid()).get()));
+
+
         }
         return cartDTOS;
     }

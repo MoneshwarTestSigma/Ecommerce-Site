@@ -22,10 +22,10 @@ public class UserController {
     UserService userService;
     @Autowired
     UserMapper userMapper;
-//    @Autowired
-//    List<UserRoleDtoSend>  userRoleDtoSends= new ArrayList<>();
-//    @Autowired
-//    UserMapper userMapper;
+
+
+
+
 
     @GetMapping("/email/{email}")
     public LoggedInUserDto userReturn(@PathVariable("email") String email){

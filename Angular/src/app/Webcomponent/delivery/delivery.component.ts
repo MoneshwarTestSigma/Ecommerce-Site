@@ -6,19 +6,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./delivery.component.css']
 })
 export class DeliveryComponent {
-  
+
 
   constructor(private router: Router) {}
   time: number = 5;
   ngOnInit() {
-    
-  
+
+
       setTimeout(() => {
           this.router.navigate(['']);
-      }, 5000);  //5s
+      }, 5000);
   }
- 
-  
-  
+
+
+
 
 }

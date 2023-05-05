@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
-    //We implement UserDetails it belongs to serializeable
+
     @Id
     @GeneratedValue
     Long id;

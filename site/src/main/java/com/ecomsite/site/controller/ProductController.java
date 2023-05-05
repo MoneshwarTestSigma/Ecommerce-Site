@@ -32,11 +32,13 @@ public class ProductController {
     ProductService productService;
     @Autowired
     ProductMapper productMapper;
+
     @PostMapping()
     Product addProduct(@RequestBody ProductRequest productRequest){
         System.out.println("Came here at product");
         return this.productService.productAdd(this.productMapper.productRequestToProduct(productRequest));
     }
+
     @GetMapping("/countOfId/{id}")
     Long getCountOfProductById(@PathVariable("id") Long id)
     {
@@ -48,20 +50,22 @@ public class ProductController {
         }
         return 0l;
     }
+
     @GetMapping("/all")
     List<ProductDTO> sendListOfProducts(){
-//        System.out.println("Entered here");
+
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(Product product : this.productService.findAll()){
             ProductDTO productDTO=this.productMapper.productToProductDTO(product);
-//            System.out.println("before:"+ productDTO);
+
             productDTO.setImageURL(imageController.getUrlFormId(product.getId()));
-//            System.out.println("after:"+ productDTO);
+
          productDTOS.add(productDTO);
         }
 
     return productDTOS;
     }
+
     @GetMapping()
     List<ProductDTO> searchProducts(@RequestParam("query") String data){
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -74,6 +78,7 @@ public class ProductController {
          }
          return productDTOList;
     }
+
     @PostMapping("/quantity")
     void deleteProducts(@RequestBody List<ProductQuantityRequest> productQuantityRequestList){
 

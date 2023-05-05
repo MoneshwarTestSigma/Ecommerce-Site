@@ -28,7 +28,7 @@ export class HomePageComponent implements OnInit {
   userObject!:LoggedInUserModel;
   cartCount=0;
   ngOnInit() {
-    this.first();    
+    this.first();
   }
   isLoggedIn:boolean=(this.cookieService.get("isLoggedIn")=="true")||false;
   @Input() searchItem:string="";
@@ -52,7 +52,6 @@ export class HomePageComponent implements OnInit {
   {
     this.isLoggedIn=false;
     this.cookieService.delete("JWT");
-    // this.cookieService.delete("isLoggedIn");
   }
   first()
   {
@@ -61,12 +60,12 @@ export class HomePageComponent implements OnInit {
       let jwt=this.cookieService.get("JWT");
       let email=this.jwtService.emailFromToken(jwt);
       this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
-      
+
         this.userObject=res;
        this.userName=res.name;
        console.log("userObject:"+this.userObject.userId);
-       
-      
+
+
        if(res.type=="ADMIN")
        {
         this.isOwner=true;
@@ -79,7 +78,7 @@ export class HomePageComponent implements OnInit {
           }
         })
       })
-      
+
     }
         this.productService.getAllProducts().subscribe((resu: ProductModel[])=>{
 
@@ -116,13 +115,13 @@ export class HomePageComponent implements OnInit {
     {
       let cartModelAdd= new CartModelAdd();
       console.log("product id:"+productModel.id);
-  
+
       cartModelAdd.productid=productModel.id;
       cartModelAdd.quantity=1;
       cartModelAdd.userid=Number(this.userObject.userId);
         this.cartSevice.addCartItem(cartModelAdd).subscribe(res=>{
           console.log(res);
-  
+
         });
         this.first();
     }
@@ -131,7 +130,7 @@ export class HomePageComponent implements OnInit {
       alert("Login First");
       this.router.navigate(['login']);
     }
-   
+
   }
 
 fillArray(resu:ProductModel[])
@@ -162,5 +161,5 @@ addProduct()
 }
 
 
- 
+
 }

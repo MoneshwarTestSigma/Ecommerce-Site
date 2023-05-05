@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cart")
 public class Cart {
-    //We implement UserDetails it belongs to serializeable
+
     @Id
     @GeneratedValue
     Long id;

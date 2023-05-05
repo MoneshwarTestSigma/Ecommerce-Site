@@ -62,11 +62,11 @@ export class CartComponent implements OnInit{
             console.log(element);
         }
       });
-       
-        
+
+
       })
     }
-      
+
 
   }
   clearArray() {
@@ -76,25 +76,17 @@ export class CartComponent implements OnInit{
     }
   }
   changeCart(cartModel:CartModel) {
-    // console.log("Clicke on button");
-    // let totalCount = this.getCountOfProduct(cartModel.productid);
-    // if (Number(cartModel.quantity) <= totalCount) {
       let cartModelAdd = new CartModelAdd();
       cartModelAdd.productid = cartModel.productid;
       cartModelAdd.quantity = Number(cartModel.quantity);
       cartModelAdd.userid = 13;
       console.log(cartModel);
-      
+
       this.cartService.addCartItem(cartModelAdd).subscribe((req: any) => {
         console.log(req);
 
 
       })
-    // }
-    // else {
-    //   console.log("cant increase");
-    //   cartModel.quantity=totalCount;
-    // }
   }
   changer()
   {

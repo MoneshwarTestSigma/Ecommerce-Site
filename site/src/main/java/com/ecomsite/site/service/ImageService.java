@@ -25,7 +25,7 @@ public class ImageService {
     public ResponseEntity uploadToLocalFileSystem(MultipartFile file,Long id) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Path storageDirectory = Paths.get(storageDirectoryPath);
-        if(!Files.exists(storageDirectory)){ // if the folder does not exist
+        if(!Files.exists(storageDirectory)){
             try {
                 Files.createDirectories(storageDirectory);
             }catch (Exception e){
@@ -57,9 +57,9 @@ public class ImageService {
     }
 
     public String getUrlFromId(Long id) {
-//        System.out.println("before getting");
+
         Optional<Image> img= imageRepository.findById(id);
-//        System.out.println("after getting");
+
         if(img.isPresent())
         {
             return img.get().getImageUrl();
