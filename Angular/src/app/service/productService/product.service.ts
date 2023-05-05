@@ -20,7 +20,7 @@ export class ProductService {
     .set('Authorization',this.token)
   ;
   getAllProducts():any {
-    return this.http.get<any>(Constants.api+"/product/all");
+    return this.http.get<any>(Constants.api+"/product/inventory");
   }
   getAllProductsLike(searchItem:string)
   {
@@ -32,6 +32,6 @@ export class ProductService {
   }
   getProductById(id:Number)
   {
-    return this.http.get<any>(`${Constants.api}/product/countOfId/${id}`);
+    return this.http.get<any>(`${Constants.api}/product/${id}`);
   }
 }

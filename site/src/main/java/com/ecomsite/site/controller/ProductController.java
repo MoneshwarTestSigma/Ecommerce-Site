@@ -39,7 +39,20 @@ public class ProductController {
         return this.productService.productAdd(this.productMapper.productRequestToProduct(productRequest));
     }
 
-    @GetMapping("/countOfId/{id}")
+    @GetMapping()
+    List<ProductDTO> index(@RequestParam("query") String data){
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        List<Criteria> criteriaList = criteriaBuilder.builder(data);
+        for(Product product: productService.searchProducts(criteriaList)){
+            ProductDTO productDTO=this.productMapper.productToProductDTO(product);
+
+            productDTO.setImageURL(imageController.getUrlFormId(product.getId()));
+            productDTOList.add(productDTO);
+        }
+        return productDTOList;
+    }
+
+    @GetMapping("/{id}")
     Long getCountOfProductById(@PathVariable("id") Long id)
     {
 
@@ -51,7 +64,7 @@ public class ProductController {
         return 0l;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/inventory")
     List<ProductDTO> sendListOfProducts(){
 
         List<ProductDTO> productDTOS = new ArrayList<>();
@@ -65,20 +78,4 @@ public class ProductController {
 
     return productDTOS;
     }
-
-    @GetMapping()
-    List<ProductDTO> searchProducts(@RequestParam("query") String data){
-        List<ProductDTO> productDTOList = new ArrayList<>();
-        List<Criteria> criteriaList = criteriaBuilder.builder(data);
-         for(Product product: productService.searchProducts(criteriaList)){
-             ProductDTO productDTO=this.productMapper.productToProductDTO(product);
-
-             productDTO.setImageURL(imageController.getUrlFormId(product.getId()));
-             productDTOList.add(productDTO);
-         }
-         return productDTOList;
-    }
-
-
-
 }
