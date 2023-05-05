@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
 import { CartModel } from 'src/app/models/CartModel';
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
 
@@ -8,8 +9,8 @@ import { CartModelAdd } from 'src/app/models/CartModelAdd';
   providedIn: 'root'
 })
 export class CartService {
-  constructor(private http: HttpClient) { }
-  private token:string = "Bearer "+ localStorage.getItem("JWT");
+  constructor(private http: HttpClient,private cookieService:CookieService) { }
+  private token:string = "Bearer "+ this.cookieService.get("JWT");
 
   private headers = new HttpHeaders()
     .set('Access-Control-Allow-Origin', '*')

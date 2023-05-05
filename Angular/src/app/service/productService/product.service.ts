@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { LoginModel } from 'src/app/models/LoginModel';
 import { ProductModel } from 'src/app/models/ProductModel';
@@ -8,8 +9,8 @@ import { ProductModel } from 'src/app/models/ProductModel';
   providedIn: 'root'
 })
 export class ProductService {
-  constructor(private http: HttpClient) {  }
-  private token:string = "Bearer "+ localStorage.getItem("JWT");
+  constructor(private http: HttpClient,private cookieService:CookieService) {  }
+  private token:string = "Bearer "+ this.cookieService.get("JWT");
 
   private headers = new HttpHeaders()
     .set('Access-Control-Allow-Origin', '*')

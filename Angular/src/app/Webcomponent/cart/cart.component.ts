@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { CartModel } from 'src/app/models/CartModel';
 
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
@@ -17,8 +18,8 @@ import {ProductService} from "../../service/productService/product.service";
 })
 export class CartComponent implements OnInit{
 
-  constructor(private cartService:CartService,private productService:ProductService,private router:Router,private jwtService:JwtServiceService,private userService:UserService){}
-  isLoggedIn:boolean=(localStorage.getItem("isLoggedIn")=="true")||false;
+  constructor(private cartService:CartService,private productService:ProductService,private router:Router,private jwtService:JwtServiceService,private userService:UserService,private cookieService:CookieService){}
+  isLoggedIn:boolean=(this.cookieService.get("isLoggedIn")=="true")||false;
   total:number=0;
   temp=0;
   ngOnInit(): void {
@@ -41,7 +42,7 @@ export class CartComponent implements OnInit{
   {
     if(this.isLoggedIn)
     {
-      let jwt=localStorage.getItem("JWT");
+      let jwt=this.cookieService.get("JWT");
       let email=this.jwtService.emailFromToken(jwt);
       this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
         console.log("Logged in user details:"+res);

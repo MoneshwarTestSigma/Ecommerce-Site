@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { LoginModel } from 'src/app/models/LoginModel';
 import { UserService } from 'src/app/service/UserService/user.service';
 @Component({
@@ -8,7 +9,7 @@ import { UserService } from 'src/app/service/UserService/user.service';
   styleUrls: ['./owner-login.component.css']
 })
 export class OwnerLoginComponent {
-  constructor(private userService:UserService,private router:Router){}
+  constructor(private userService:UserService,private router:Router,private cookieService:CookieService){}
   loginStatus=false;
   isClicked=false;
    form=new LoginModel();
@@ -24,8 +25,8 @@ export class OwnerLoginComponent {
       if(res)
       {
         alert("Logged in Successfully");
-        localStorage.setItem("JWT",res.token);
-        localStorage.setItem("isLoggedIn","true");
+        // this.cookieService.set("JWT",res.token);
+        // this.cookieService.set("isLoggedIn","true");
         this.router.navigate(['/']);
       }          
     },(error)=>{

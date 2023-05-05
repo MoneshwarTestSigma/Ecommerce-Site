@@ -1,5 +1,6 @@
 import { Component ,Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { CartModel } from 'src/app/models/CartModel';
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
@@ -17,7 +18,7 @@ import {UserService} from 'src/app/service/UserService/user.service'
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private productService:ProductService,private cartSevice:CartService,private jwtService:JwtServiceService,private userService:UserService,private router:Router){}
+  constructor(private productService:ProductService,private cartSevice:CartService,private jwtService:JwtServiceService,private userService:UserService,private router:Router,private cookieService:CookieService){}
   laptop: ProductModel[] = [];
   bag: ProductModel[] = [];
   mobile: ProductModel[] = [];
@@ -29,7 +30,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this.first();    
   }
-  isLoggedIn:boolean=(localStorage.getItem("isLoggedIn")=="true")||false;
+  isLoggedIn:boolean=(this.cookieService.get("isLoggedIn")=="true")||false;
   @Input() searchItem:string="";
   searcher()
   {
@@ -50,18 +51,21 @@ export class HomePageComponent implements OnInit {
   logout()
   {
     this.isLoggedIn=false;
-    localStorage.clear();
+    this.cookieService.delete("JWT");
+    // this.cookieService.delete("isLoggedIn");
   }
   first()
   {
     if(this.isLoggedIn)
     {
-      let jwt=localStorage.getItem("JWT");
+      let jwt=this.cookieService.get("JWT");
       let email=this.jwtService.emailFromToken(jwt);
       this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
       
         this.userObject=res;
        this.userName=res.name;
+       console.log("userObject:"+this.userObject.userId);
+       
       
        if(res.type=="ADMIN")
        {

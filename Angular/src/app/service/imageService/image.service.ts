@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient,HttpHeaders} from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
-  constructor(private httpClient: HttpClient) { }
-  private token:string = "Bearer "+ localStorage.getItem("JWT");
+  constructor(private httpClient: HttpClient,private cookieService:CookieService) { }
+  private token:string = "Bearer "+this.cookieService.get("JWT");
 
   private headers = new HttpHeaders()
     .set('Access-Control-Allow-Origin', '*')

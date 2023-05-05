@@ -15,6 +15,7 @@ import { OwnerLoginComponent } from './Webcomponent/owner-login/owner-login.comp
 import { OwnerSignupComponent } from './Webcomponent/owner-signup/owner-signup.component';
 import { ProductUploadComponent } from './Webcomponent/product-upload/product-upload.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
