@@ -41,7 +41,7 @@ public class ImageService {
             e.printStackTrace();
         }
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/images")
+                .path("images/")
                 .path(fileName)
                 .toUriString();
         System.out.println(fileDownloadUri);
