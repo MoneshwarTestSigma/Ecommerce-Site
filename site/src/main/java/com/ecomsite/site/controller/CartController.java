@@ -4,7 +4,9 @@ import com.ecomsite.site.dto.CartDTO;
 import com.ecomsite.site.mapper.ProductMapper;
 import com.ecomsite.site.model.Cart;
 import com.ecomsite.site.mapper.CartMapper;
+import com.ecomsite.site.model.Product;
 import com.ecomsite.site.request.CartRequest;
+import com.ecomsite.site.request.ProductQuantityRequest;
 import com.ecomsite.site.service.CartService;
 import com.ecomsite.site.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ public class CartController {
         System.out.println("here at cart");
         return this.cartService.cartAdd(this.cartMapper.cartRequestToCart(cartRequest));
     }
+
     @GetMapping("/{userid}")
     List<CartDTO> cartProductSend(@PathVariable("userid") Long userid){
         List<CartDTO> cartDTOS = new ArrayList<>();
@@ -51,8 +54,21 @@ public class CartController {
         }
         return cartDTOS;
     }
-    @DeleteMapping("/delete/{id}")
+
+    @DeleteMapping("/{id}")
     void cartDelete(@PathVariable("id") Long id){
         this.cartService.deleteCart(id);
+    }
+
+    @PostMapping("/checkout")
+    void deleteProducts(@RequestBody List<ProductQuantityRequest> productQuantityRequestList){
+
+        for(ProductQuantityRequest productQuantityRequest:productQuantityRequestList){
+            Product product = this.productMapper.productQuantityRequestToProduct(productQuantityRequest);
+            product.setCount(productQuantityRequest.getQuantity());
+            product.setId(productQuantityRequest.getProductid());
+            this.productService.productQuantityDelete(product);
+            cartService.deleteCart(productQuantityRequest.getId());
+        }
     }
 }

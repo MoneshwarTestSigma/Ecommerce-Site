@@ -79,16 +79,6 @@ public class ProductController {
          return productDTOList;
     }
 
-    @PostMapping("/quantity")
-    void deleteProducts(@RequestBody List<ProductQuantityRequest> productQuantityRequestList){
 
-        for(ProductQuantityRequest productQuantityRequest:productQuantityRequestList){
-            Product product = this.productMapper.productQuantityRequestToProduct(productQuantityRequest);
-            product.setCount(productQuantityRequest.getQuantity());
-            product.setId(productQuantityRequest.getProductid());
-            this.productService.productQuantityDelete(product);
-            cartService.deleteCart(productQuantityRequest.getId());
-        }
-    }
 
 }
