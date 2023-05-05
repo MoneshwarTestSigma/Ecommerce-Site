@@ -32,11 +32,11 @@ export class CartService {
   }
   deleteCartItem(id: number)
   {
-    return this.http.delete<any>(`${Constants.api}/cart/delete/${id}`,{headers:this.headers});
+    return this.http.delete<any>(`${Constants.api}/cart/${id}`,{headers:this.headers});
   }
 
   deleteProduct(cartItems: CartModel[]) {
 
-    return this.http.post<CartModel[]>(`${Constants.api}/product/quantity`,cartItems,{headers:this.headers});
+    return this.http.post<CartModel[]>(`${Constants.api}/cart/checkout`,cartItems,{headers:this.headers});
   }
 }

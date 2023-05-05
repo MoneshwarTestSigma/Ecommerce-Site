@@ -16,9 +16,10 @@ export class ImageService {
     .set('Access-Control-Allow-Headers','*')
     .set('Authorization',this.token)
   ;
+  public baseUrl = `${Constants.api}/images`;
   public uploadImage(formData: FormData,id:Number): Observable<any> {
   const file = formData.get('file') as File;
-  const url = Constants.api + `/upload?file=${file.name}&id=${id}`;
+  const url = this.baseUrl + `?file=${file.name}&id=${id}`;
   return this.httpClient.post(url, formData , {headers:this.headers});
   }
 }
