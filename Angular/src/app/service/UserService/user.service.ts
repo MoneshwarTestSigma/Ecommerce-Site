@@ -12,13 +12,13 @@ export class UserService {
     return this.http.get<LoggedInUserModel>(Constants.api+"/user/email/"+email);
   }
   checkUser(form: any) {
-    return  this.http.post(Constants.api+"/authenticate",form.serialize);
+    return  this.http.post(Constants.api+"/authenticate",form);
   }
 
   constructor(private http: HttpClient) { }
   registerUser(form: SignUpModel)
   {
-      return this.http.post(Constants.api+"/register",form.serialize);   
+      return this.http.post(Constants.api+"/register",form);   
   }
 }
 
