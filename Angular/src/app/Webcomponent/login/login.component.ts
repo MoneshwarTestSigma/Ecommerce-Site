@@ -14,8 +14,7 @@ export class LoginComponent {
   constructor(private userService:UserService,private router:Router,private cookieService:CookieService){}
   loginStatus=false;
   isClicked=false;
-   form=new LoginModel();
-
+  form=new LoginModel();
    change()
    {
       this.isClicked=true;

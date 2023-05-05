@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { LoginModel } from 'src/app/models/LoginModel';
 import { ProductModel } from 'src/app/models/ProductModel';
+import {Constants} from 'src/app/constants/Constants'
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +20,18 @@ export class ProductService {
     .set('Authorization',this.token)
   ;
   getAllProducts():any {
-    return this.http.get<any>("http://localhost:8080/product/all");
+    return this.http.get<any>(Constants.api+"/product/all");
   }
   getAllProductsLike(searchItem:string)
   {
-    return this.http.get<any>(`http://localhost:8080/product?query=name:${searchItem}`);
+    return this.http.get<any>(`${Constants.api}/product?query=name:${searchItem}`);
   }
   addProduct(product: ProductModel)
   {
-    return this.http.post<any>(`http://localhost:8080/product`,product,{headers:this.headers});
+    return this.http.post<any>(`${Constants.api}/product`,product,{headers:this.headers});
   }
   getProductById(id:Number)
   {
-    return this.http.get<any>(`http://localhost:8080/product/countOfId/${id}`);
+    return this.http.get<any>(`${Constants.api}/product/countOfId/${id}`);
   }
 }

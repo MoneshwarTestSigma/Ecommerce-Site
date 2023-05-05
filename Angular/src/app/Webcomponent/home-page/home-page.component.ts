@@ -1,8 +1,6 @@
 import { Component ,Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
-import { CartModel } from 'src/app/models/CartModel';
 import { CartModelAdd } from 'src/app/models/CartModelAdd';
 import { LoggedInUserModel } from 'src/app/models/LoggedInUserModel';
 import { ProductModel } from 'src/app/models/ProductModel';
@@ -85,10 +83,6 @@ export class HomePageComponent implements OnInit {
           this.fillArray(resu);
 
         })
-        console.log(this.mobile);
-        console.log(this.bag);
-        console.log(this.laptop);
-        console.log(this.decorators);
   }
 
   clearArray() {
