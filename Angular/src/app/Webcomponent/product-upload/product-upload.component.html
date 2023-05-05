@@ -5,7 +5,7 @@
         <div style="text-align: center;"><h2>Add Product Form</h2><div>
           <form (ngSubmit)="addProduct()" #myForm="ngForm">  
             <div class="form-group">
-              <label>Product Name: </label>
+              <!-- <label>Product Name: </label> -->
               <input type="text"  class="form-control" placeholder="Product Name" [(ngModel)]="product.name" [ngModelOptions]="{standalone: true}" required>
             </div>
             <div class="form-group">
@@ -18,19 +18,19 @@
                 </select>
               </div>
               <div class="form-group">
-                <label>Product description: </label>
+                <!-- <label>Product description: </label> -->
                 <input type="text"  class="form-control" placeholder="Product description" [(ngModel)]="product.description" [ngModelOptions]="{standalone: true}" required>
               </div>
               <div class="form-group">
-                <label>Product Price: </label>
+                <!-- <label>Product Price: </label> -->
                 <input type="text"  class="form-control" placeholder="Product Price" [(ngModel)]="product.price" [ngModelOptions]="{standalone: true}" required>
               </div>
             
             <div class="form-group">
-                <label>Product Quantity: </label>
-                <input type="text"  class="form-control" placeholder="Product Quantity" [(ngModel)]="product.count" [ngModelOptions]="{standalone: true}" required>
+                <!-- <label>Product Quantity: </label> -->
+                <input type="number"  class="form-control" placeholder="Product Quantity" [(ngModel)]="product.count" [ngModelOptions]="{standalone: true}" required>
               </div >
-             
+             <label for="Image:">Image:</label>
                 <input type="file" (change)="onSelectFile($event)">
                 <br>
                 <br>

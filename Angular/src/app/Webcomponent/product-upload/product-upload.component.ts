@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/ProductModel';
 import { ImageService } from 'src/app/service/imageService/image.service';
 import { ProductService } from 'src/app/service/productService/product.service';
@@ -9,7 +10,7 @@ import { ProductService } from 'src/app/service/productService/product.service';
   styleUrls: ['./product-upload.component.css']
 })
 export class ProductUploadComponent {
-  constructor(private imageService: ImageService,private productService:ProductService) { }
+  constructor(private imageService: ImageService,private productService:ProductService,private router:Router) { }
 
   product=new ProductModel();
   addProduct()
@@ -19,6 +20,8 @@ export class ProductUploadComponent {
        
         this.performUpload(res.id);     
       })
+      this.router.navigate(['/']);
+
   }
   public formData = new FormData();
   public selectedFile!: File ;
