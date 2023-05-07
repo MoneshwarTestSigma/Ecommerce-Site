@@ -1,4 +1,4 @@
-import { serializable,serialize } from "serializr";
+import { deserialize, serializable,serialize } from "serializr";
 
 export class CartModelAdd{
     @serializable
@@ -7,8 +7,10 @@ export class CartModelAdd{
     public productid!:Number;
     @serializable
     public quantity!:Number;
-    public serialize():JSON
-    {
+    public serialize():JSON{
         return serialize(this);
     }
+    deserialize(input: any): this {
+        return Object.assign(this, deserialize(CartModelAdd, input));
+      }
 }

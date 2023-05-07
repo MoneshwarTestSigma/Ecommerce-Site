@@ -12,7 +12,7 @@ export class OwnerSignupComponent {
   form =new SignUpModel();
   isSubmitted=false;
   userData : any[]=[];  
-  temp=""
+  password1=""
   submit()
   {
     this.form.type="ADMIN";

@@ -9,13 +9,11 @@ import { Constants } from 'src/app/constants/Constants';
 export class ImageService {
   constructor(private httpClient: HttpClient,private cookieService:CookieService) { }
   private token:string = "Bearer "+this.cookieService.get("JWT");
-
   private headers = new HttpHeaders()
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods','*')
     .set('Access-Control-Allow-Headers','*')
-    .set('Authorization',this.token)
-  ;
+    .set('Authorization',this.token);
   public baseUrl = `${Constants.api}/images`;
   public uploadImage(formData: FormData,id:Number): Observable<any> {
   const file = formData.get('file') as File;

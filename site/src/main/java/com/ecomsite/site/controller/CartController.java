@@ -30,7 +30,6 @@ public class CartController {
     CartMapper cartMapper;
     @PostMapping()
     Cart addCart(@RequestBody CartRequest cartRequest) {
-        System.out.println("here at cart");
         return this.cartService.cartAdd(this.cartMapper.cartRequestToCart(cartRequest));
     }
 
@@ -45,12 +44,8 @@ public class CartController {
             cartDTO.setQuantity(cart.getQuantity());
             cartDTO.setId(cart.getId());
             cartDTO.setProductid(this.productService.productByid(cart.getProductid()).get().getId());
-
             cartDTO.setImageUrl(imageController.getUrlFormId(cart.getProductid()));
-            System.out.println(cartDTO.getImageUrl());
             cartDTOS.add(cartDTO);
-
-
         }
         return cartDTOS;
     }

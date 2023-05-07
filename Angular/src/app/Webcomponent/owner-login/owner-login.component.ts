@@ -13,17 +13,12 @@ export class OwnerLoginComponent {
   loginStatus=false;
   isClicked=false;
    form=new LoginModel();
-   change()
-   {
+   change(){
       this.isClicked=true;
    }
-   check()
-   {
+   check(){
     this.userService.checkUser(this.form).subscribe((res:any)=>{
-
-
-      if(res)
-      {
+      if(res){
         alert("Logged in Successfully");
         this.router.navigate(['/']);
       }
@@ -31,7 +26,5 @@ export class OwnerLoginComponent {
         alert("Invalid Credentials");
         this.router.navigate(['/login']);
     });
-
    }
-
 }

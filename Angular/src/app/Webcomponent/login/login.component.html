@@ -10,12 +10,10 @@
             <div style="text-align: center;"><h2>Login</h2><div>
               <form (ngSubmit)="check()" #myForm="ngForm">  
                 <div class="form-group">
-                  <!-- <label for="email">Email : </label> -->
                   <input type="email" email="true" required name="email" class="form-control" placeholder="Email" [(ngModel)]="form.email" #email="ngModel" >
                 </div>
                 <div *ngIf="email.invalid && (email.dirty || email.touched)" style="color: red;">Email Must be Valid</div>
                 <div class="form-group">
-                  <!-- <label for="password">Password : </label> -->
                   <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="form.password" #password="ngModel" required>
                   <div *ngIf="password.invalid && (password.dirty || password.touched)" style="color: red;">Password can't be empty</div>
                   </div>
@@ -26,9 +24,6 @@
               <div class="text-center sign-up">
                 Don`t have an account ? <a [routerLink]="['/signup']">Sign Up</a> here!!.
               </div>
-              <!-- <div class="text-center sign-up">
-                Shop owner ?  <a [routerLink]="['/owner-login']">login here.</a>
-              </div> -->
             </div>
           </div>
         </div>

@@ -24,17 +24,11 @@ public class CartService {
     public Cart cartAdd(Cart cart) {
            if(this.cartRepository.findByUseridAndProductid(cart.getUserid(),cart.getProductid())== null) {
            }
-           else{
-               cart.setId(this.cartRepository.findByUseridAndProductid(cart.getUserid(),cart.getProductid()).getId());
-               Long quantity = this.cartRepository.findByUseridAndProductid(cart.getUserid(),cart.getProductid()).getQuantity();
-
-
-
-
-
+           else {
+               cart.setId(this.cartRepository.findByUseridAndProductid(cart.getUserid(), cart.getProductid()).getId());
+               Long quantity = this.cartRepository.findByUseridAndProductid(cart.getUserid(), cart.getProductid()).getQuantity();
                cart.setQuantity(cart.getQuantity());
            }
-        System.out.println(cart);
         return this.cartRepository.save(cart);
 
     }

@@ -14,13 +14,11 @@ export class SignupComponent {
   form =new SignUpModel();
   isSubmitted=false;
   userData : any[]=[];
-  temp="";
+  password1="";
   i=1;
-  submit()
-  {
+  submit(){
       this.form.type="USER";
       this.userService.registerUser(this.form).subscribe((res:any)=>{
-        
       });
       alert("Registered Successfully");
         this.router.navigate(['/login'])

@@ -35,7 +35,6 @@ public class ProductController {
 
     @PostMapping()
     Product addProduct(@RequestBody ProductRequest productRequest){
-        System.out.println("Came here at product");
         return this.productService.productAdd(this.productMapper.productRequestToProduct(productRequest));
     }
 

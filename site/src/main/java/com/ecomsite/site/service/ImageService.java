@@ -44,7 +44,6 @@ public class ImageService {
                 .path("images/")
                 .path(fileName)
                 .toUriString();
-        System.out.println(fileDownloadUri);
         Image image=new Image(id,fileDownloadUri);
         imageRepository.save(image);
         return ResponseEntity.ok("File added successfully");
@@ -52,7 +51,6 @@ public class ImageService {
 
     public  byte[] getImageWithMediaType(String imageName) throws IOException {
         Path destination =   Paths.get(storageDirectoryPath+"\\"+imageName);
-        System.out.println(storageDirectoryPath+"\\"+imageName);
         return IOUtils.toByteArray(destination.toUri());
     }
 

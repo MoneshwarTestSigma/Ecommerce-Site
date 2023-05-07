@@ -4,15 +4,11 @@ import {JwtHelperService} from "@auth0/angular-jwt";
   providedIn: 'root'
 })
 export class JwtServiceService {
-
   jwthelper = new JwtHelperService();
-  constructor() {
-  }
-
+  constructor() { }
   emailFromToken(item:any) {
     if(item!=null)
      return this.jwthelper.decodeToken(item).sub;
-     return 0;
-
+    return 0;
   }
 }

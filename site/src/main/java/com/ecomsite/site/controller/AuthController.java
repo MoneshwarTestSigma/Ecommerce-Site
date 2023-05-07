@@ -45,16 +45,11 @@ public class AuthController {
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest loginRequest, HttpServletResponse response) throws Exception {
 		JwtRequest authenticationRequest=jwtMapper.loginRequestToJwtRequest(loginRequest);
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
 		final UserDetails userDetails = userDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
-		System.out.println(userDetails.toString());
-
 		final String token = jwtTokenUtil.generateToken(userDetails);
 		Cookie cookie=new Cookie("JWT",token);
-		System.out.println(cookie);
 		response.addCookie(cookie);
-		response.addCookie(new Cookie("isLoggedIn","true"));
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 	

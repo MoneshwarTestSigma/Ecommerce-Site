@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { LoginModel } from 'src/app/models/LoginModel';
 import { ProductModel } from 'src/app/models/ProductModel';
 import {Constants} from 'src/app/constants/Constants'
@@ -17,21 +17,23 @@ export class ProductService {
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods','*')
     .set('Access-Control-Allow-Headers','*')
-    .set('Authorization',this.token)
-  ;
-  getAllProducts():any {
-    return this.http.get<any>(Constants.api+"/product/inventory");
+    .set('Authorization',this.token);
+  getAllProducts():Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(Constants.api+"/product/inventory").pipe(
+      map(data=> data.map(data1=> new ProductModel().deserialize(data1))),
+      catchError(() => throwError('Problem while fetching ElementFilter'))  
+    )
   }
-  getAllProductsLike(searchItem:string)
-  {
-    return this.http.get<any>(`${Constants.api}/product?query=name:${searchItem}`);
+  getAllProductsLike(searchItem:string):Observable<ProductModel[]>{
+    return this.http.get<ProductModel[]>(`${Constants.api}/product?query=name:${searchItem}`).pipe(
+      map(data=> data.map(data1=> new ProductModel().deserialize(data1))),
+      catchError(() => throwError('Problem while fetching ElementFilter'))
+    );
   }
-  addProduct(product: ProductModel)
-  {
-    return this.http.post<any>(`${Constants.api}/product`,product,{headers:this.headers});
+  addProduct(product: ProductModel){
+    return this.http.post<any>(`${Constants.api}/product`,product.serialize(),{headers:this.headers});
   }
-  getProductById(id:Number)
-  {
-    return this.http.get<any>(`${Constants.api}/product/${id}`);
+  getProductCountById(id:Number):Observable<Number>{
+    return this.http.get<Number>(`${Constants.api}/product/${id}`);
   }
 }

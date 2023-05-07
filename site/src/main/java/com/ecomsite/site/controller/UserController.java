@@ -44,7 +44,6 @@ public class UserController {
     int checkUser(@RequestBody LoginRequest loginRequest)
     {
         String password=this.userService.findPassword(loginRequest.getEmail());
-        System.out.println(password);
             if(loginRequest.getPassword().equals(password))
             {
                 return 1;
