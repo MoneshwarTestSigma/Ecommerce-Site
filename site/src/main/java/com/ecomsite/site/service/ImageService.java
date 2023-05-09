@@ -21,7 +21,7 @@ import java.util.Optional;
 public class ImageService {
     @Autowired
     ImageRepository imageRepository;
-    public final String storageDirectoryPath = "C:\\Users\\moneshwar\\Desktop\\images";
+    public final String storageDirectoryPath = "C:\\Users\\naveen\\Desktop\\images";
     public ResponseEntity uploadToLocalFileSystem(MultipartFile file,Long id) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Path storageDirectory = Paths.get(storageDirectoryPath);

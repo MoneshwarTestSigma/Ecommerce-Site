@@ -1,8 +1,6 @@
 package com.ecomsite.site.service;
 
 
-
-import com.ecomsite.site.dto.UserDTO;
 import com.ecomsite.site.dto.UserJwtDTO;
 import com.ecomsite.site.model.UserAuth;
 import com.ecomsite.site.repository.UserDaoRepository;

@@ -1,4 +1,4 @@
-package com.ecomsite.site.criteria;
+package com.ecomsite.site.specifications;
 
 import org.springframework.stereotype.Component;
 
@@ -8,6 +8,7 @@ import java.util.List;
 @Component
 public class CriteriaBuilder {
     public List<Criteria> builder(String data){
+        System.out.println(data);
         String[] splittedData=data.split(",") ;
         List<Criteria> criteriaList = new ArrayList<>();
         for(String s: splittedData)

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-@CrossOrigin
 @RestController
 @RequestMapping("/cart")
 public class CartController {
@@ -30,7 +29,7 @@ public class CartController {
     CartMapper cartMapper;
     @PostMapping()
     Cart addCart(@RequestBody CartRequest cartRequest) {
-        return this.cartService.cartAdd(this.cartMapper.cartRequestToCart(cartRequest));
+        return this.cartService.cartAdd(cartMapper.map(cartRequest));
     }
 
     @GetMapping("/{userid}")
@@ -38,13 +37,13 @@ public class CartController {
         List<CartDTO> cartDTOS = new ArrayList<>();
         List<Cart> carts = new ArrayList<>();
         CartDTO cartDTO = new CartDTO();
-        carts.addAll(this.cartService.cartFind(userid));
+        carts.addAll(cartService.cartFind(userid));
         for(Cart cart : carts){
-            cartDTO = this.cartMapper.productToCartDTO(this.productService.productByid(cart.getProductid()).get());
+            cartDTO = cartMapper.map(productService.productByid(cart.getProductId()).get());
             cartDTO.setQuantity(cart.getQuantity());
             cartDTO.setId(cart.getId());
-            cartDTO.setProductid(this.productService.productByid(cart.getProductid()).get().getId());
-            cartDTO.setImageUrl(imageController.getUrlFormId(cart.getProductid()));
+            cartDTO.setProductid(productService.productByid(cart.getProductId()).get().getId());
+            cartDTO.setImageUrl(imageController.getUrlFormId(cart.getProductId()));
             cartDTOS.add(cartDTO);
         }
         return cartDTOS;
@@ -52,17 +51,17 @@ public class CartController {
 
     @DeleteMapping("/{id}")
     void cartDelete(@PathVariable("id") Long id){
-        this.cartService.deleteCart(id);
+        cartService.deleteCart(id);
     }
 
     @PostMapping("/checkout")
     void deleteProducts(@RequestBody List<ProductQuantityRequest> productQuantityRequestList){
 
         for(ProductQuantityRequest productQuantityRequest:productQuantityRequestList){
-            Product product = this.productMapper.productQuantityRequestToProduct(productQuantityRequest);
+            Product product = productMapper.map(productQuantityRequest);
             product.setCount(productQuantityRequest.getQuantity());
             product.setId(productQuantityRequest.getProductid());
-            this.productService.productQuantityDelete(product);
+            productService.productQuantityDelete(product);
             cartService.deleteCart(productQuantityRequest.getId());
         }
     }

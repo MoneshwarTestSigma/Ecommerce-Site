@@ -24,8 +24,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
-
 public class AuthController {
 
 	@Autowired
@@ -36,14 +34,15 @@ public class AuthController {
 
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
-
-	private JwtMapper jwtMapper=new JwtMapper();
+    @Autowired
+	private JwtMapper jwtMapper;
 	@Autowired
 	private UserService userService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest loginRequest, HttpServletResponse response) throws Exception {
-		JwtRequest authenticationRequest=jwtMapper.loginRequestToJwtRequest(loginRequest);
+
+		JwtRequest authenticationRequest=jwtMapper.map(loginRequest);
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		final UserDetails userDetails = userDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
@@ -56,7 +55,7 @@ public class AuthController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
 		userService.addUser(user);
-		UserJwtDTO userDto=jwtMapper.userToUserJwtDTO(user);
+		UserJwtDTO userDto=jwtMapper.map(user);
 		return ResponseEntity.ok(userDetailsService.save(userDto));
 	}
 

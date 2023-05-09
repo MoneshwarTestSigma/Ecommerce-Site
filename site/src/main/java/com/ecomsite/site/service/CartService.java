@@ -14,7 +14,7 @@ public class CartService {
     @Autowired
     CartRepository cartRepository;
     public  List<Cart> cartFind(Long id){
-            return this.cartRepository.findAllByUserid(id);
+            return this.cartRepository.findByUserId(id);
 
     }
     public void deleteCart(Long cartid){
@@ -22,11 +22,11 @@ public class CartService {
 
     }
     public Cart cartAdd(Cart cart) {
-           if(this.cartRepository.findByUseridAndProductid(cart.getUserid(),cart.getProductid())== null) {
+           if(this.cartRepository.findByUserIdAndProductId(cart.getUserId(),cart.getProductId())== null) {
            }
            else {
-               cart.setId(this.cartRepository.findByUseridAndProductid(cart.getUserid(), cart.getProductid()).getId());
-               Long quantity = this.cartRepository.findByUseridAndProductid(cart.getUserid(), cart.getProductid()).getQuantity();
+               cart.setId(this.cartRepository.findByUserIdAndProductId(cart.getUserId(), cart.getProductId()).getId());
+               Long quantity = this.cartRepository.findByUserIdAndProductId(cart.getUserId(), cart.getProductId()).getQuantity();
                cart.setQuantity(cart.getQuantity());
            }
         return this.cartRepository.save(cart);

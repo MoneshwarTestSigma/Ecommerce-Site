@@ -1,7 +1,7 @@
 package com.ecomsite.site.model;
 
 
-import com.ecomsite.site.enums.ERole;
+import com.ecomsite.site.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,14 +9,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Column(name = "password")
     String password;
@@ -26,6 +24,6 @@ public class User {
     String email;
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    ERole type;
+    UserRole type;
 
 }

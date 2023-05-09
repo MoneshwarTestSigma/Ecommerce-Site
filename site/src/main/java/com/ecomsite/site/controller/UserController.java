@@ -3,10 +3,9 @@ package com.ecomsite.site.controller;
 
 import com.ecomsite.site.dto.LoggedInUserDto;
 import com.ecomsite.site.dto.UserDTO;
-import com.ecomsite.site.enums.ERole;
+import com.ecomsite.site.enums.UserRole;
 import com.ecomsite.site.model.User;
 import com.ecomsite.site.mapper.UserMapper;
-import com.ecomsite.site.request.LoginRequest;
 import com.ecomsite.site.request.UserRequest;
 import com.ecomsite.site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -29,31 +27,21 @@ public class UserController {
 
     @GetMapping("/email/{email}")
     public LoggedInUserDto userReturn(@PathVariable("email") String email){
-        return this.userService.idReturn(email);
+        return userService.idReturn(email);
     }
 
     @GetMapping("/{type}")
-    List<UserDTO> roleUsers(@PathVariable("type") ERole type){
+    List<UserDTO> roleUsers(@PathVariable("type") UserRole type){
         List<UserDTO> userDTOS = new ArrayList<>();
-        for(User user : this.userService.roleUser(type)){
-            userDTOS.add(this.userMapper.userToUserDTO(user));
+        for(User user : userService.roleUser(type)){
+            userDTOS.add(userMapper.map(user));
         }
         return userDTOS;
     }
-    @PostMapping("/login")
-    int checkUser(@RequestBody LoginRequest loginRequest)
-    {
-        String password=this.userService.findPassword(loginRequest.getEmail());
-            if(loginRequest.getPassword().equals(password))
-            {
-                return 1;
-            }
-            return 0;
 
-    }
     @PostMapping()
     String postUser(@RequestBody UserRequest userRequest){
-        this.userService.addUser(this.userMapper.userRequestToUser(userRequest));
+        userService.addUser(userMapper.map(userRequest));
         return "Added Successfully";
     }
 

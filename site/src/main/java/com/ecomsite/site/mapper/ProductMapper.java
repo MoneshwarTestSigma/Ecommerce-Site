@@ -5,11 +5,13 @@ import com.ecomsite.site.model.Product;
 import com.ecomsite.site.request.ProductQuantityRequest;
 import com.ecomsite.site.request.ProductRequest;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
-    Product productRequestToProduct(ProductRequest productRequest);
-    ProductDTO productToProductDTO(Product product);
 
-    Product productQuantityRequestToProduct(ProductQuantityRequest productQuantityRequest);
+    Product map(ProductRequest productRequest);
+
+    ProductDTO map(Product product);
+    Product map(ProductQuantityRequest productQuantityRequest);
 }

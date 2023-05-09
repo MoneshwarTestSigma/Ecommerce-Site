@@ -41,7 +41,7 @@ export class CartComponent implements OnInit{
     {
       let jwt=this.cookieService.get("JWT");
       let email=this.jwtService.emailFromToken(jwt);
-      this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{  
+      this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
         let id=Number(res.userId);
       this.cartService.getCartItems(id).subscribe((res:any)=>{
         this.total=0;

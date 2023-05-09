@@ -18,6 +18,7 @@ export class ImageService {
   public uploadImage(formData: FormData,id:Number): Observable<any> {
   const file = formData.get('file') as File;
   const url = this.baseUrl + `?file=${file.name}&id=${id}`;
+    console.log("file",file);
   return this.httpClient.post(url, formData , {headers:this.headers});
   }
 }
