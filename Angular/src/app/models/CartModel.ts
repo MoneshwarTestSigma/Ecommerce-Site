@@ -4,11 +4,11 @@ export class CartModel{
     @serializable
     public name!:string;
     @serializable
-    public price!:Number;
+    public price!:number;
     @serializable
     public category!:string;
     @serializable
-    public quantity!:Number;
+    public quantity!:number;
     @serializable
     public productid!:number;
     @serializable

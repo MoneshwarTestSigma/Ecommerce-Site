@@ -14,7 +14,6 @@ import javax.persistence.*;
 @Table(name = "image")
 public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String imageUrl;
 

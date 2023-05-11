@@ -22,11 +22,9 @@ public class CartService {
 
     }
     public Cart cartAdd(Cart cart) {
-           if(this.cartRepository.findByUserIdAndProductId(cart.getUserId(),cart.getProductId())== null) {
-           }
-           else {
+           if(this.cartRepository.findByUserIdAndProductId(cart.getUserId(),cart.getProductId())!= null) {
                cart.setId(this.cartRepository.findByUserIdAndProductId(cart.getUserId(), cart.getProductId()).getId());
-               Long quantity = this.cartRepository.findByUserIdAndProductId(cart.getUserId(), cart.getProductId()).getQuantity();
+               //Long quantity = this.cartRepository.findByUserIdAndProductId(cart.getUserId(), cart.getProductId()).getQuantity();
                cart.setQuantity(cart.getQuantity());
            }
         return this.cartRepository.save(cart);

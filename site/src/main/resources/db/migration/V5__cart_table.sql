@@ -6,8 +6,10 @@ CREATE TABLE `cart` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`product_id`)
       REFERENCES products (`id`)
-      ON DELETE CASCADE ,
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
   FOREIGN KEY (`user_id`)
       REFERENCES user (`id`)
       ON DELETE CASCADE
+       ON UPDATE CASCADE
 );
