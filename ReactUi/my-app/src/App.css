@@ -1,0 +1,33 @@
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+
+.auth-card{
+  background: #f1f3f3;  /* Chrome 10-25, Safari 5.1-6 */
+
+  border-radius: 5px;
+  box-shadow: 0px 0px 30px #f7f7f7;
+}
+label{
+  color: black;
+  font-weight: 700;
+}
+.user-image{
+  height: 70px;
+}
+.auth-avatar{
+  text-align: center;
+  margin-top: -50px;
+}
+.auth{
+  margin-top: 35px;
+  border: none;
+  border-radius: 6px;
+}
+.btn-my{
+  background-color: #d39e00;
+  border-color: #d39e00;
+  color: black;
+}
+.simple-keyboard {
+  max-width: 850px;
+}
+
