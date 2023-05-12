@@ -1,20 +1,37 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useNavigate } from "react-router-dom";
+import Homepage from "../../pages/home-page";
+import { useState } from "react";
 
 interface NavbarProps{
   isLoggedin:boolean,
-  isAdmin:boolean
+  isAdmin:boolean,
+  onSearch:(search:string)=>void
 }
-const Navbar:React.FC<NavbarProps>=({isLoggedin=false,isAdmin=false})=>{
+const Navbar:React.FC<NavbarProps>=({isLoggedin=false,isAdmin=false,onSearch})=>{
+
   const navigate = useNavigate();
+  const [search,setSearch]=useState("");
+  const handleChangeSearech=(event:any)=>{
+    
+    setSearch(event.target.value);
+    if(event.target.value.length===0)
+    {
+      onSearch("");
+    }
+  }
+  const click=(event:any)=>{
+    event.preventDefault();
+    onSearch(search);
+  }
     return (
     <>
     <nav className="navbar navbar-light fixed-top bg-dark ">
 
     <a className="navbar-brand text-light">Ecommerce Site</a>
     <form className="form-inline">
-      <input  className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style={{width: '425.6px'}}  />
-      <button className="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+      <input  className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={search} onChange={handleChangeSearech} style={{width: '425.6px'}}  />
+      <button className="btn btn-outline-success my-2 my-sm-0"  onClick={click}>Search</button>
     </form>
     {(!isLoggedin &&
       <div >
