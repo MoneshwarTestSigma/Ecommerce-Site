@@ -1,17 +1,43 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useNavigate } from "react-router-dom";
-import Homepage from "../../pages/home-page";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import Cookies from 'js-cookie';
+import jwt_decode, { JwtPayload } from "jwt-decode";
+import axios from "axios";
 interface NavbarProps{
-  isLoggedin:boolean,
-  isAdmin:boolean,
   onSearch:(search:string)=>void
+  setUserId:(id:Number)=>any
 }
-const Navbar:React.FC<NavbarProps>=({isLoggedin=false,isAdmin=false,onSearch})=>{
+const Navbar:React.FC<NavbarProps>=({onSearch,setUserId})=>{
 
   const navigate = useNavigate();
   const [search,setSearch]=useState("");
+  const [name,setName]=useState("");
+  const [isLoggedin,setIsLoggedIn]=useState(false);
+  const [isAdmin,setIsAdmin]=useState(false);
+  useEffect(()=>{
+    const JWT = Cookies.get('JWT');
+    if(JWT)
+    {
+      setIsLoggedIn(true);
+      let email=jwt_decode<JwtPayload>(JWT);
+      axios.get("http://localhost:8080/user/email/"+email.sub).then((res:any)=>{
+        setName(res.data.name);
+        if(res.data.type==="ADMIN")
+        {
+          setIsAdmin(true);
+        }
+        setUserId(Number(res.data.userId))
+          
+      })
+     
+    }
+  },[]);
+  const logout=()=>{
+    setIsLoggedIn(false);
+    Cookies.remove('JWT');
+  }
+  
   const handleChangeSearech=(event:any)=>{
     
     setSearch(event.target.value);
@@ -40,7 +66,7 @@ const Navbar:React.FC<NavbarProps>=({isLoggedin=false,isAdmin=false,onSearch})=>
 </div>)}
 {(isLoggedin &&
   <div  style={{color:'whitesmoke',fontSize: 'larger'}}>
-  Welcome Moneshwar &nbsp;&nbsp;&nbsp;
+  Welcome {name} &nbsp;&nbsp;&nbsp;
 
    {(isAdmin && <button  type="button" style={{marginRight: '30px'}} className="btn btn-outline-primary" onClick={()=>navigate("/product-upload")}>Add Product</button>) } 
 
@@ -48,7 +74,7 @@ const Navbar:React.FC<NavbarProps>=({isLoggedin=false,isAdmin=false,onSearch})=>
     <i className="fa" style={{fontSize:'24px', color: 'yellow'}}>&#xf07a;</i>
 <span className='badge badge-warning' id='lblCartCount'> 2 </span>
   </a>
-  <button type="button"  style={{marginLeft: '30px' }} className="btn btn-outline-danger">⬅️ Log out</button>
+  <button type="button"  style={{marginLeft: '30px' }} className="btn btn-outline-danger" onClick={logout}>⬅️ Log out</button>
 
 
 </div>

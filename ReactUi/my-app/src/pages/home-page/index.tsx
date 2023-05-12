@@ -9,6 +9,7 @@ const Homepage=()=>{
   const [postLaptop,setPostLaptop]=useState([] as any[]);
   const [postBags,setPostBags]=useState([] as any[]);
   const [postDecorator,setPostDecorator]=useState([] as any[]);
+  const [userId,setUserId]=useState(null);
   useEffect(() => {
 
     getProducts();
@@ -56,11 +57,15 @@ const Homepage=()=>{
         }
       )
     }
+    const setUserIdFun=(id:any)=>{
+      setUserId(id);
+    }
+    
     return (
         <>
         
                 
-       <Navbar isAdmin={false} isLoggedin={false} onSearch={Search}/>
+       <Navbar  onSearch={Search} setUserId={setUserIdFun}/>
        <div className="row" style={{ borderStyle: 'outset', borderColor: '#f3f6f9', marginTop: '3.5rem', backgroundColor: '#f1f6f9' }}>
   <div className="col-lg-4 col-md-4 col-sm-4">
     <h1 style={{ paddingTop: '30px' }}>Top Categories</h1>
@@ -106,9 +111,6 @@ const Homepage=()=>{
     </a>
   </div>
 </div>
-
-
-
 {postMobile.length>0 &&  <div className="text-center top-heading" id="mobile"><h1>Mobile Phones</h1></div>}
  
    <div className="row"  style={{marginLeft: "30px", marginRight: "30px"}}>
