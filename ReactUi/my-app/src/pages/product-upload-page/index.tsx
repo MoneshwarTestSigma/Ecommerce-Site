@@ -1,4 +1,12 @@
+import { useState } from "react";
+
 const AddProduct=()=>{
+  const [name,setName]=useState(null);
+  const [type,setType]=useState(null);
+  const [description,setDescription]=useState(null);
+  const [price,setPrice]=useState(null);
+  const [quantity,setQuantity]=useState(null);
+  const [file,setFile]=useState(null);
     return (
         <div className="row">
     <div className="col-md-4 offset-md-4 col-sm-6 offset-sm-3">

@@ -1,4 +1,14 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Delivery=()=>{
+	const navigate=useNavigate();
+	useEffect(()=>{
+		setTimeout(() => {
+			navigate("/");
+		  }, 5000)
+	},[])
+
     return (
         <html lang="en">
 <head>

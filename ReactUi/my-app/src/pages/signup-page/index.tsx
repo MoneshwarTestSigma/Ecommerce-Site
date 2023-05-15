@@ -42,7 +42,9 @@ const Signup=()=>{
       email:email,
       type:"USER",
       password:password,
-    })
+    }).then(res=>
+      alert("Signed Up successfully")
+    ).catch(res=> alert("Something went wrong try again"))
   }
 
   const navigate = useNavigate();

@@ -15,6 +15,7 @@ const Navbar:React.FC<NavbarProps>=({onSearch,setUserId})=>{
   const [name,setName]=useState("");
   const [isLoggedin,setIsLoggedIn]=useState(false);
   const [isAdmin,setIsAdmin]=useState(false);
+  const [cartCount,setCartCount]=useState(0);
   useEffect(()=>{
     const JWT = Cookies.get('JWT');
     if(JWT)
@@ -28,6 +29,9 @@ const Navbar:React.FC<NavbarProps>=({onSearch,setUserId})=>{
           setIsAdmin(true);
         }
         setUserId(Number(res.data.userId))
+        axios.get("http://localhost:8080/cart/"+res.data.userId,{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res:any)=>{
+          setCartCount(res.data.length);
+        })
           
       })
      
@@ -72,7 +76,7 @@ const Navbar:React.FC<NavbarProps>=({onSearch,setUserId})=>{
 
   <a href="" onClick={()=>navigate("/cart")}>
     <i className="fa" style={{fontSize:'24px', color: 'yellow'}}>&#xf07a;</i>
-<span className='badge badge-warning' id='lblCartCount'> 2 </span>
+<span className='badge badge-warning' id='lblCartCount'> {cartCount} </span>
   </a>
   <button type="button"  style={{marginLeft: '30px' }} className="btn btn-outline-danger" onClick={logout}>⬅️ Log out</button>
 

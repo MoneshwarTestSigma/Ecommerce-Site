@@ -29,18 +29,14 @@ const LoginPage=()=>{
       email:email,
       password:password
     }).then((res)=>{
-      if(res.status===200)
-        {
-          alert("LoggedIn Successfully");
+          alert("Login Successfull");
           navigate("/");
-        }
-        else
-        {
-          alert("Invalid credentials");
-        }
+    
     }
     
-    );
+    ).catch(res=>{
+      alert("Invalid Credentials");
+    });
   }
 
   const navigate = useNavigate();

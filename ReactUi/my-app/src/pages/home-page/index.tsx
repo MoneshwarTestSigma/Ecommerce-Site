@@ -9,13 +9,16 @@ const Homepage=()=>{
   const [postLaptop,setPostLaptop]=useState([] as any[]);
   const [postBags,setPostBags]=useState([] as any[]);
   const [postDecorator,setPostDecorator]=useState([] as any[]);
-  const [userId,setUserId]=useState(null);
+  const [userId,setUserId]=useState(1);
   useEffect(() => {
 
     getProducts();
   }, []);
+  const getUserId=()=>{
+    return userId;
+  }
   const Search=(search:string)=>{
-   if(search.length==0)
+   if(search.length===0)
    {
     getProducts();
     return ;
@@ -115,14 +118,14 @@ const Homepage=()=>{
  
    <div className="row"  style={{marginLeft: "30px", marginRight: "30px"}}>
    {postMobile.map((data, index) => (
-      <Card image="images/mobile.jpg" cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count}/> 
+      <Card key={index} image="images/mobile.jpg" cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId}/> 
     ))}
    </div>  
    {postLaptop.length>0 && <div className="text-center top-heading" id="laptop"><h1>Laptops</h1></div>}
  
    <div className="row"  style={{marginLeft: "30px", marginRight: "30px"}}>
    {postLaptop.map((data, index) => (
-     <Card image="images/laptop.jpg" cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count}/> 
+     <Card key={index} image="images/laptop.jpg" cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId}/> 
      ))}
    </div>
 
@@ -131,7 +134,7 @@ const Homepage=()=>{
  
    <div className="row"  style={{marginLeft: "30px", marginRight: "30px"}}>
    {postBags.map((data, index) => (
-    <Card image="images/bags.jpg"cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count}/> 
+    <Card key={index} image="images/bags.jpg"cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId}/> 
     ))}
    </div>
 
@@ -140,7 +143,7 @@ const Homepage=()=>{
  
    <div className="row"  style={{marginLeft: "30px", marginRight: "30px"}}>
    {postDecorator.map((data, index) => (
-     <Card image="images/decorators.jpg" cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count}/>  
+     <Card key={index} image="images/decorators.jpg" cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId}/>  
      ))}
    </div>
         </>
