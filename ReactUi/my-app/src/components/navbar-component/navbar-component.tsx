@@ -7,8 +7,11 @@ import axios from "axios";
 interface NavbarProps{
   onSearch:(search:string)=>void
   setUserId:(id:Number)=>any
+  refresh:any
 }
-const Navbar:React.FC<NavbarProps>=({onSearch,setUserId})=>{
+
+// const[]=useState<any>()
+const Navbar:React.FC<NavbarProps>=({onSearch,setUserId,refresh})=>{
 
   const navigate = useNavigate();
   const [search,setSearch]=useState("");
@@ -36,7 +39,11 @@ const Navbar:React.FC<NavbarProps>=({onSearch,setUserId})=>{
       })
      
     }
-  },[]);
+  },[refresh]);
+  function setdata(value:boolean){
+         
+  }
+ 
   const logout=()=>{
     setIsLoggedIn(false);
     Cookies.remove('JWT');

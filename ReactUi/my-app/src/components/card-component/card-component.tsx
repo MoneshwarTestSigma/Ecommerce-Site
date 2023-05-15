@@ -10,8 +10,9 @@ interface CardProps {
     quantity: string;
     id:number;
     getUserId:()=>any;
+    refresh:()=>any;
   }
-const Card:React.FC<CardProps>= ({ image, cardTitle, cardDescription, price, quantity,id,getUserId }) => {
+const Card:React.FC<CardProps>= ({ image, cardTitle, cardDescription, price, quantity,id,getUserId ,refresh}) => {
   const navigate = useNavigate();
   const addToCart=()=>{
     const JWT = Cookies.get('JWT');
@@ -21,7 +22,9 @@ const Card:React.FC<CardProps>= ({ image, cardTitle, cardDescription, price, qua
           userid:getUserId(),
           productid:id,
           quantity:1
-        },{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res)=>window.location.reload())
+        },{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res)=>{
+             refresh();
+        })
     }
     else
     {

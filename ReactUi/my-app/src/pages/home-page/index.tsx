@@ -1,15 +1,26 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import Card from "../../components/card-component/card-component";
 import Navbar from "../../components/navbar-component/navbar-component";
 import Axios from 'axios';
 import "./homepage.css"
 import { useEffect, useState } from "react";
 
-const Homepage=()=>{
+const Homepage=(props:any)=>{
   const [postMobile,setPostMobile]=useState([] as any[]);
   const [postLaptop,setPostLaptop]=useState([] as any[]);
   const [postBags,setPostBags]=useState([] as any[]);
   const [postDecorator,setPostDecorator]=useState([] as any[]);
   const [userId,setUserId]=useState(1);
+  const [startVariable,setStateVariable]=useState(5);
+  let temp=0;
+  const refresh=()=>{
+    if(temp===1)
+      temp=0;
+    else
+      temp=1;
+    setStateVariable(temp);
+  }
   useEffect(() => {
 
     getProducts();
@@ -68,7 +79,7 @@ const Homepage=()=>{
         <>
         
                 
-       <Navbar  onSearch={Search} setUserId={setUserIdFun}/>
+       <Navbar  onSearch={Search} setUserId={setUserIdFun} refresh={startVariable}/>
        <div className="row" style={{ borderStyle: 'outset', borderColor: '#f3f6f9', marginTop: '3.5rem', backgroundColor: '#f1f6f9' }}>
   <div className="col-lg-4 col-md-4 col-sm-4">
     <h1 style={{ paddingTop: '30px' }}>Top Categories</h1>
@@ -118,14 +129,14 @@ const Homepage=()=>{
  
    <div className="row"  style={{marginLeft: "30px", marginRight: "30px"}}>
    {postMobile.map((data, index) => (
-      <Card key={index} image="images/mobile.jpg" cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId}/> 
+      <Card key={index} image={(data.imageURL==="noImage")?"images/mobile.jpg":data.imageURL} cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId} refresh={refresh}/> 
     ))}
    </div>  
    {postLaptop.length>0 && <div className="text-center top-heading" id="laptop"><h1>Laptops</h1></div>}
  
    <div className="row"  style={{marginLeft: "30px", marginRight: "30px"}}>
    {postLaptop.map((data, index) => (
-     <Card key={index} image="images/laptop.jpg" cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId}/> 
+     <Card key={index} image={(data.imageURL==="noImage")?"images/laptop.jpg":data.imageURL} cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId} refresh={refresh}/> 
      ))}
    </div>
 
@@ -134,7 +145,7 @@ const Homepage=()=>{
  
    <div className="row"  style={{marginLeft: "30px", marginRight: "30px"}}>
    {postBags.map((data, index) => (
-    <Card key={index} image="images/bags.jpg"cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId}/> 
+    <Card key={index} image={(data.imageURL==="noImage")?"images/bags.jpg":data.imageURL} cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId} refresh={refresh}/> 
     ))}
    </div>
 
@@ -143,7 +154,7 @@ const Homepage=()=>{
  
    <div className="row"  style={{marginLeft: "30px", marginRight: "30px"}}>
    {postDecorator.map((data, index) => (
-     <Card key={index} image="images/decorators.jpg" cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId}/>  
+     <Card key={index} image={(data.imageURL==="noImage")?"images/decorators.jpg":data.imageURL} cardTitle={data.name} cardDescription={data.description} price={data.price} quantity={data.count} id={data.id} getUserId={getUserId} refresh={refresh}/>  
      ))}
    </div>
         </>

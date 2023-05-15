@@ -11,6 +11,7 @@ const Cart=()=>{
   const [userId,setUserId]=useState(-1);
   const [total,setTotal]=useState(0);
   let total1=0;
+  
   const pluseOne=(data:any)=>{
     const JWT = Cookies.get('JWT');
     if(JWT)
@@ -74,6 +75,8 @@ const Cart=()=>{
   },[])
   const setTotalfun=(price:number)=>{
         total1+=price;
+        total1=Number(total1.toFixed(2));
+        console.log(total1);
         setTotal(total1);
   }
   function deleteCartItem(data: any): void {
@@ -119,7 +122,7 @@ const Cart=()=>{
               <tr >
               <th scope="row">
                 <div className="d-flex align-items-center">
-                  <img src={data.imageUrl} className="img-fluid rounded-3"
+                  <img src={(data.imageUrl==="noImage")?"images/unnamed.jpg":data.imageUrl} className="img-fluid rounded-3"
                     style={{width: '120px',marginRight:'20px'}} alt="image"/>
                   <div className="flex-column ms-4">
                     <p className="mb-2">{data.name}</p>
@@ -127,7 +130,7 @@ const Cart=()=>{
                 </div>
               </th>
               <td className="align-middle">
-                <p className="mb-0" style={{fontWeight: 500}}>{data.catagory}</p>
+                <p className="mb-0" style={{fontWeight: 500}}>{data.category}</p>
               </td>
               <td className="align-middle">
                 <div className="d-flex flex-row">
@@ -142,10 +145,10 @@ const Cart=()=>{
 
               </td>
               <td className="align-middle">
-                <p className="mb-0" style={{fontWeight: 500}}>{data.quantity * data.price}</p>
+                <p className="mb-0" style={{fontWeight: 500}}>{(data.quantity * data.price).toFixed(2)}</p>
               </td>
               <td>
-                <button type="button" className="btn btn-outline-danger" onClick={()=>deleteCartItem(data)}>Delete</button>
+                <button type="button" style={{marginTop:'50px'}} className="btn btn-outline-danger" onClick={()=>deleteCartItem(data)}>Delete</button>
               </td>
             </tr>
 
