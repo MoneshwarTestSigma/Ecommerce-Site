@@ -13,4 +13,18 @@ export class CartService {
         .then((res) => window.location.reload());
     }
   }
+  deleteCartItem(id: number) {
+    const JWT = Cookies.get("JWT");
+    axios
+      .delete("http://localhost:8080/cart/" + id, {
+        headers: { Authorization: `Bearer ${JWT}` },
+      })
+      .then((res) => window.location.reload());
+  }
+  checkout(cartItems: any) {
+    const JWT = Cookies.get("JWT");
+    return axios.post("http://localhost:8080/cart/checkout", cartItems, {
+      headers: { Authorization: `Bearer ${JWT}` },
+    });
+  }
 }

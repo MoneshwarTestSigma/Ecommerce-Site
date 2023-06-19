@@ -17,13 +17,14 @@ const Cart=()=>{
   const [userId,setUserId]=useState(-1);
   const [total,setTotal]=useState(0);
   let total1=0;
+  let cartService=new CartService();
   
   const pluseOne=(data:any)=>{
     let cartModelAdd=new CartModelAdd();
     cartModelAdd.userid= userId;
     cartModelAdd.productid= data.productid;
     cartModelAdd.quantity= data.quantity + 1;
-    let cartService=new CartService();
+    
     cartService.changeCartCount(cartModelAdd);
   }
   const minusOne=(data:any)=>{
@@ -34,17 +35,16 @@ const Cart=()=>{
     const JWT = Cookies.get('JWT');
     if(data.quantity-1>0)
     {
-        axios.post("http://localhost:8080/cart",cartModelAdd.serialize(),{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res)=>window.location.reload())
+      cartService.changeCartCount(cartModelAdd);
     }
     else
     {
-      axios.delete("http://localhost:8080/cart/"+data.id ,{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res)=>window.location.reload())
+      cartService.deleteCartItem(data.id);
     }
 }
  
   const handleCheckout=()=>{
-    const JWT = Cookies.get('JWT');
-    axios.post("http://localhost:8080/cart/checkout",cartItems ,{ headers: {"Authorization" : `Bearer ${JWT}`} }).then(res=>{
+    cartService.checkout(cartItems).then(res=>{
       navigate("/checkout");
     })
   }
@@ -83,8 +83,7 @@ const Cart=()=>{
         setTotal(total1);
   }
   function deleteCartItem(data: any): void {
-    const JWT = Cookies.get('JWT');
-    axios.delete("http://localhost:8080/cart/"+data.id ,{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res)=>window.location.reload())
+    cartService.deleteCartItem(data.id);
   }
  
     return (
