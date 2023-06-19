@@ -12,6 +12,7 @@ import com.ecomsite.site.request.LoginRequest;
 import com.ecomsite.site.service.JwtUserDetailsService;
 import com.ecomsite.site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -39,6 +40,7 @@ public class AuthController {
 	@Autowired
 	private UserService userService;
 
+	@ResponseStatus(HttpStatus.ACCEPTED)
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest loginRequest, HttpServletResponse response) throws Exception {
 
@@ -51,7 +53,7 @@ public class AuthController {
 		response.addCookie(cookie);
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
-	
+	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
 		userService.addUser(user);

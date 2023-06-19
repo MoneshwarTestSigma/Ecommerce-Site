@@ -10,6 +10,7 @@ import com.ecomsite.site.request.ProductQuantityRequest;
 import com.ecomsite.site.service.CartService;
 import com.ecomsite.site.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,14 +25,15 @@ public class CartController {
     @Autowired
     ProductService productService;
     @Autowired
-    ImageController imageController;
+    ProductController.ImageController imageController;
     @Autowired
     CartMapper cartMapper;
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping()
     Cart addCart(@RequestBody CartRequest cartRequest) {
         return this.cartService.cartAdd(cartMapper.map(cartRequest));
     }
-
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{userid}")
     List<CartDTO> cartProductSend(@PathVariable("userid") Long userid){
         List<CartDTO> cartDTOS = new ArrayList<>();
@@ -48,12 +50,12 @@ public class CartController {
         }
         return cartDTOS;
     }
-
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     void cartDelete(@PathVariable("id") Long id){
         cartService.deleteCart(id);
     }
-
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping("/checkout")
     void deleteProducts(@RequestBody List<ProductQuantityRequest> productQuantityRequestList){
 
