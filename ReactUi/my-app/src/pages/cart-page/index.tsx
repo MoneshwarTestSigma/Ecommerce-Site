@@ -1,8 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import jwt_decode, { JwtPayload } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {CartModelAdd} from "../../models/CartModelAdd"
+import { CartService } from "../../services/cart-services/CartServices";
 
 
 const Cart=()=>{
@@ -13,25 +19,22 @@ const Cart=()=>{
   let total1=0;
   
   const pluseOne=(data:any)=>{
-    const JWT = Cookies.get('JWT');
-    if(JWT)
-    {
-        axios.post("http://localhost:8080/cart",{
-          userid:userId,
-          productid:data.productid,
-          quantity:data.quantity+1,
-        },{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res)=>window.location.reload())
-    }
+    let cartModelAdd=new CartModelAdd();
+    cartModelAdd.userid= userId;
+    cartModelAdd.productid= data.productid;
+    cartModelAdd.quantity= data.quantity + 1;
+    let cartService=new CartService();
+    cartService.changeCartCount(cartModelAdd);
   }
   const minusOne=(data:any)=>{
+    let cartModelAdd=new CartModelAdd();
+    cartModelAdd.userid= userId;
+    cartModelAdd.productid= data.productid;
+    cartModelAdd.quantity= data.quantity - 1;
     const JWT = Cookies.get('JWT');
     if(data.quantity-1>0)
     {
-        axios.post("http://localhost:8080/cart",{
-          userid:userId,
-          productid:data.productid,
-          quantity:data.quantity-1,
-        },{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res)=>window.location.reload())
+        axios.post("http://localhost:8080/cart",cartModelAdd.serialize(),{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res)=>window.location.reload())
     }
     else
     {
@@ -58,7 +61,7 @@ const Cart=()=>{
         res1.data.map((data:any)=>{
           setCartItems(element=>[...element,data]);  
            setTotalfun(data.price*data.quantity);
-          
+          return null;
         })   
         
         })

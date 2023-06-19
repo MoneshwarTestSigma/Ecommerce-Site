@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./signuppage.css"
 import { useState } from "react";
 import axios from "axios";
+import { SignUpModel } from "../../models/SignUpModel";
 const Signup=()=>{
   const [emailValid,setEmailValid]=useState(true);
   const [email,setEmail]=useState("");
@@ -37,14 +38,15 @@ const Signup=()=>{
     setName(event.target.value);
   }
   const submit=()=>{
-    axios.post("http://localhost:8080/register",{
-      name:name,
-      email:email,
-      type:"USER",
-      password:password,
-    }).then(res=>
-      alert("Signed Up successfully")
-    ).catch(res=> alert("Something went wrong try again"))
+    let signUpModel=new SignUpModel();
+    signUpModel.name=name;
+    signUpModel.email=email;
+    signUpModel.type="USER";
+    signUpModel.password=password;
+  axios.post("http://localhost:8080/register",signUpModel.serialize()).then(res=>
+  alert("Signed Up successfully")
+).catch(res=> alert("Something went wrong try again"))
+    
   }
 
   const navigate = useNavigate();

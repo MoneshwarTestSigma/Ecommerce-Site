@@ -2,6 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ProductModel } from "../../models/ProductModel";
 
 const AddProduct=()=>{
   const JWT = Cookies.get('JWT');
@@ -32,14 +33,14 @@ const AddProduct=()=>{
     setFile(event.target.files[0]);
   }
   const submitProduct=(event:any)=>{
+    let productModel=new ProductModel();
+    productModel.name=name;
+    productModel.price=price;
+    productModel.description=description;
+    productModel.count=quantity;
+    productModel.category=type;
     event.preventDefault();
-    axios.post("http://localhost:8080/product",{
-      name:name,
-      price:price,
-      description:description,
-      count:quantity,
-      category:type
-    },{ headers: {"Authorization" : `Bearer ${JWT}`} }).then(res=>{
+    axios.post("http://localhost:8080/product",productModel.serialize(),{ headers: {"Authorization" : `Bearer ${JWT}`} }).then(res=>{
         uploadImage(res.data.id);
     })
   }

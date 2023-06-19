@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SignUpModel } from "../../models/SignUpModel";
 
 const SignupAdmin=()=>{
   const [emailValid,setEmailValid]=useState(true);
@@ -24,12 +25,12 @@ const SignupAdmin=()=>{
     setName(event.target.value);
   }
   const submit=()=>{
-    axios.post("http://localhost:8080/register",{
-      name:name,
-      email:email,
-      type:"ADMIN",
-      password:password,
-    })
+    let signUpModel=new SignUpModel();
+      signUpModel.name=name;
+      signUpModel.email=email;
+      signUpModel.type="ADMIN";
+      signUpModel.password=password;
+    axios.post("http://localhost:8080/register",signUpModel.serialize())
   }
 
   const handleChangeEmail = (event:any) => {
@@ -68,7 +69,7 @@ const SignupAdmin=()=>{
               {!passwordConformValid &&  <div  style={{color: 'red'}}>Password didnt match</div>}
           </div>
           <div className="text-center">
-            <input type="submit" className="btn btn-my" value="Sign Up" />
+            <input type="submit" className="btn btn-my" value="Sign Up" onClick={submit} />
           </div>
           <div className="text-center sign-up">Customer Signup? <a href="" onClick={()=>navigate("/signup")}>Click Here</a></div>
         </form>

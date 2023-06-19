@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./loginpage.css";
 import { useState } from "react";
 import axios from "axios";
+import { LoginModel } from "../../models/LoginModel";
 const LoginPage=()=>{
   const [emailValid,setEmailValid]=useState(true);
   const [email,setEmail]=useState("");
@@ -24,11 +25,11 @@ const LoginPage=()=>{
         setPasswordValid(isPasswordValid(event.target.value));
   }
   const submit=(event:any)=>{
+    let loginModel=new LoginModel();
     event.preventDefault();
-    axios.post("http://localhost:8080/authenticate",{
-      email:email,
-      password:password
-    }).then((res)=>{
+    loginModel.email=email;
+    loginModel.password=password;
+    axios.post("http://localhost:8080/authenticate",loginModel.serialize()).then((res)=>{
           alert("Login Successfull");
           navigate("/");
     
