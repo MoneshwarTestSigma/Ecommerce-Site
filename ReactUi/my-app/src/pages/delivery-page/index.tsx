@@ -1,14 +1,24 @@
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
-const Delivery=()=>{
-	const navigate=useNavigate();
-	useEffect(()=>{
-		setTimeout(() => {
-			navigate("/");
-		  }, 5000)
-	},[])
 
+const Delivery=()=>{
+	const [countdown,setCountdown] = useState(5);
+	const navigate=useNavigate();
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setCountdown((prevCountdown) => prevCountdown - 1);
+		}, 1000);
+
+		return () => clearTimeout(timer);
+	}, [countdown]);
+
+	useEffect(() => {
+		if (countdown === 0) {
+			navigate("/");
+		}
+	}, [countdown, navigate]);
+	
     return (
         <html lang="en">
 <head>
@@ -32,7 +42,7 @@ const Delivery=()=>{
 		<p className="main-content__body" data-lead-id="main-content-body">Thanks for Shopping with us.Your product will be delivered soon .</p>
 	</div>
 	<div>
-		<h1> Redirecting in 5 seconds</h1>
+		<h1> Redirecting in {countdown} seconds</h1>
 	</div>
 
 	<footer className="site-footer" id="footer">
