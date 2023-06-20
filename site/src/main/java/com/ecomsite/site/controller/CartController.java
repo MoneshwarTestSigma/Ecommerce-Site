@@ -9,8 +9,8 @@ import com.ecomsite.site.request.CartRequest;
 import com.ecomsite.site.request.ProductQuantityRequest;
 import com.ecomsite.site.service.CartService;
 import com.ecomsite.site.service.ProductService;
-import com.ecomsite.site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -27,21 +27,16 @@ public class CartController {
     @Autowired
     ProductService productService;
     @Autowired
-    ImageController imageController;
     @Autowired
     CartMapper cartMapper;
-    @Autowired
-    UserService userService;
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping()
     Cart addCart(@RequestBody CartRequest cartRequest) {
         return this.cartService.cartAdd(cartMapper.map(cartRequest));
     }
-
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping()
-    List<CartDTO> cartProductSend(){
-        String userName=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-
-        Long userid=userService.idReturn(userName).getUserId() ;
+    List<CartDTO> cartProductSend(@PathVariable("userid") Long userid){
         List<CartDTO> cartDTOS = new ArrayList<>();
         List<Cart> carts = new ArrayList<>();
         CartDTO cartDTO = new CartDTO();
@@ -56,12 +51,10 @@ public class CartController {
         }
         return cartDTOS;
     }
-
     @DeleteMapping("/{id}")
     void cartDelete(@PathVariable("id") Long id){
         cartService.deleteCart(id);
     }
-
     @PostMapping("/checkout")
     void deleteProducts(@RequestBody List<ProductQuantityRequest> productQuantityRequestList){
 

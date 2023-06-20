@@ -27,7 +27,7 @@ const LoginPage=()=>{
   const submit=(event:any)=>{
     let loginModel=new LoginModel();
     event.preventDefault();
-    loginModel.email=email;
+    loginModel.username=email;
     loginModel.password=password;
     axios.post("http://localhost:8080/authenticate",loginModel.serialize()).then((res)=>{
           alert("Login Successfull");

@@ -71,7 +71,8 @@ export class CartComponent implements OnInit{
       cartModelAdd.productid = cartModel.productid;
       cartModelAdd.quantity = Number(cartModel.quantity);
       cartModelAdd.userid = this.userId;
-      this.cartService.addCartItem(cartModelAdd).subscribe((req: any) => {})
+      this.cartService.addCartItem(cartModelAdd).subscribe((req: any) => {
+        console.log(req + "  " + req.data + " " + req.sub)})
       this.first();
   }
   deteleCartItem(id:number){

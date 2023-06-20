@@ -12,6 +12,7 @@ import com.ecomsite.site.request.LoginRequest;
 import com.ecomsite.site.service.JwtUserDetailsService;
 import com.ecomsite.site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -39,19 +40,8 @@ public class AuthController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest loginRequest, HttpServletResponse response) throws Exception {
 
-		JwtRequest authenticationRequest=jwtMapper.map(loginRequest);
-		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-		final UserDetails userDetails = userDetailsService
-				.loadUserByUsername(authenticationRequest.getUsername());
-		final String token = jwtTokenUtil.generateToken(userDetails);
-		Cookie cookie=new Cookie("JWT",token);
-		response.addCookie(cookie);
-		return ResponseEntity.ok(new JwtResponse(token));
-	}
-	
+	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
 		//userService.addUser(user);
@@ -59,13 +49,13 @@ public class AuthController {
 		return ResponseEntity.ok(userDetailsService.save(user));
 	}
 
-	private void authenticate(String username, String password) throws Exception {
-		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-		} catch (DisabledException e) {
-			throw new Exception("USER_DISABLED", e);
-		} catch (BadCredentialsException e) {
-			throw new Exception("INVALID_CREDENTIALS", e);
-		}
-	}
+//	private void authenticate(String username, String password) throws Exception {
+//		try {
+//			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+//		} catch (DisabledException e) {
+//			throw new Exception("USER_DISABLED", e);
+//		} catch (BadCredentialsException e) {
+//			throw new Exception("INVALID_CREDENTIALS", e);
+//		}
+//	}
 }

@@ -9,6 +9,7 @@ import com.ecomsite.site.mapper.UserMapper;
 import com.ecomsite.site.request.UserRequest;
 import com.ecomsite.site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,12 +25,12 @@ public class UserController {
 
 
 
-
+@ResponseStatus(HttpStatus.OK)
     @GetMapping("/email/{email}")
     public LoggedInUserDto userReturn(@PathVariable("email") String email){
         return userService.idReturn(email);
     }
-
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{type}")
     List<UserDTO> roleUsers(@PathVariable("type") UserRole type){
         List<UserDTO> userDTOS = new ArrayList<>();
@@ -38,7 +39,7 @@ public class UserController {
         }
         return userDTOS;
     }
-
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping()
     String postUser(@RequestBody UserRequest userRequest){
         userService.addUser(userMapper.map(userRequest));
