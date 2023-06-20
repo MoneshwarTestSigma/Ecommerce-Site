@@ -5,6 +5,7 @@ import Navbar from "../../components/navbar-component/navbar-component";
 import Axios from 'axios';
 import "./homepage.css"
 import { useEffect, useState } from "react";
+import React from "react";
 
 const Homepage=(props:any)=>{
   const [postMobile,setPostMobile]=useState([] as any[]);
@@ -34,7 +35,7 @@ const Homepage=(props:any)=>{
     getProducts();
     return ;
    }
-    Axios.get("http://localhost:8080/product?query=name:"+search).then(
+    Axios.get("http://localhost:8080/product?query=name:"+search+",").then(
       (res)=>{
         fill(res);
       }

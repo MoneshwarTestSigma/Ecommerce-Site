@@ -1,13 +1,14 @@
 package com.ecomsite.site.controller;
 
 import com.ecomsite.site.specifications.Criteria;
-import com.ecomsite.site.specifications.CriteriaBuilder;
+import com.ecomsite.site.specifications.BaseSpecificationBuilder;
 import com.ecomsite.site.dto.ProductDTO;
 import com.ecomsite.site.model.Product;
 import com.ecomsite.site.mapper.ProductMapper;
 import com.ecomsite.site.request.ProductRequest;
 import com.ecomsite.site.service.CartService;
 import com.ecomsite.site.service.ProductService;
+import com.ecomsite.site.specifications.ProductSpecificationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class ProductController {
     @Autowired
     ImageController imageController;
     @Autowired
-    CriteriaBuilder criteriaBuilder;
+    ProductSpecificationBuilder criteriaBuilder;
     @Autowired
     ProductService productService;
     @Autowired
@@ -40,7 +41,6 @@ public class ProductController {
         List<Criteria> criteriaList = criteriaBuilder.builder(data);
         for(Product product: productService.searchProducts(criteriaList)){
             ProductDTO productDTO=productMapper.map(product);
-
             productDTO.setImageURL(imageController.getUrlFormId(product.getId()));
             productDTOList.add(productDTO);
         }

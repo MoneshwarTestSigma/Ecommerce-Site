@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ProductSpecificationBuilder {
+public class ProductSpecificationBuilder extends BaseSpecificationBuilder {
 
     @Autowired
     private ProductSpecification productSpecification;

@@ -1,15 +1,16 @@
 package com.ecomsite.site.specifications;
 
-import lombok.AllArgsConstructor;
+import com.ecomsite.site.constant.Operators;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class Criteria {
     String key;
+    Operators operators;
     String value;
-    Criteria (String key,String value){
+    Criteria (String key, Operators colon, String value){
         this.key = key;
+        this.operators=colon;
         this.value = value;
     }
 }
