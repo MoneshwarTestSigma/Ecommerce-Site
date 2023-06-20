@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import jwt_decode, { JwtPayload } from "jwt-decode";
 import axios from "axios";
+import React from "react";
 interface NavbarProps{
   onSearch:(search:string)=>void
   setUserId:(id:Number)=>any
@@ -32,7 +33,7 @@ const Navbar:React.FC<NavbarProps>=({onSearch,setUserId,refresh})=>{
           setIsAdmin(true);
         }
         setUserId(Number(res.data.userId))
-        axios.get("http://localhost:8080/cart/"+res.data.userId,{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res:any)=>{
+        axios.get("http://localhost:8080/cart",{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res:any)=>{
           setCartCount(res.data.length);
         })
           

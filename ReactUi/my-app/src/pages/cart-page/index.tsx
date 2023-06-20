@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {CartModelAdd} from "../../models/CartModelAdd"
 import { CartService } from "../../services/CartServices";
+import React from "react";
 
 
 const Cart=()=>{
@@ -55,7 +56,7 @@ const Cart=()=>{
             let email=jwt_decode<JwtPayload>(JWT);
       axios.get("http://localhost:8080/user/email/"+email.sub).then((res:any)=>{
         setUserId(res.data.userId);
-        axios.get("http://localhost:8080/cart/"+res.data.userId,{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res1:any)=>{
+        axios.get("http://localhost:8080/cart",{ headers: {"Authorization" : `Bearer ${JWT}`} }).then((res1:any)=>{
           setCartItems([]);
           total1=0;
         res1.data.map((data:any)=>{
