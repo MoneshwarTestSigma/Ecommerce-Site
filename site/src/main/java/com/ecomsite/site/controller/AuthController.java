@@ -54,9 +54,9 @@ public class AuthController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
-		userService.addUser(user);
-		UserJwtDTO userDto=jwtMapper.map(user);
-		return ResponseEntity.ok(userDetailsService.save(userDto));
+		//userService.addUser(user);
+		//UserJwtDTO userDto=jwtMapper.map(user);
+		return ResponseEntity.ok(userDetailsService.save(user));
 	}
 
 	private void authenticate(String username, String password) throws Exception {

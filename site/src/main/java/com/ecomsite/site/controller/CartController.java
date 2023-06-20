@@ -9,7 +9,10 @@ import com.ecomsite.site.request.CartRequest;
 import com.ecomsite.site.request.ProductQuantityRequest;
 import com.ecomsite.site.service.CartService;
 import com.ecomsite.site.service.ProductService;
+import com.ecomsite.site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,13 +30,18 @@ public class CartController {
     ImageController imageController;
     @Autowired
     CartMapper cartMapper;
+    @Autowired
+    UserService userService;
     @PostMapping()
     Cart addCart(@RequestBody CartRequest cartRequest) {
         return this.cartService.cartAdd(cartMapper.map(cartRequest));
     }
 
-    @GetMapping("/{userid}")
-    List<CartDTO> cartProductSend(@PathVariable("userid") Long userid){
+    @GetMapping()
+    List<CartDTO> cartProductSend(){
+        String userName=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+
+        Long userid=userService.idReturn(userName).getUserId() ;
         List<CartDTO> cartDTOS = new ArrayList<>();
         List<Cart> carts = new ArrayList<>();
         CartDTO cartDTO = new CartDTO();

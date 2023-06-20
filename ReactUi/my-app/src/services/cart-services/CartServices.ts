@@ -16,7 +16,7 @@ export class CartService {
   deleteCartItem(id: number) {
     const JWT = Cookies.get("JWT");
     axios
-      .delete("http://localhost:8080/cart/" + id, {
+      .delete("http://localhost:8080/cart", {
         headers: { Authorization: `Bearer ${JWT}` },
       })
       .then((res) => window.location.reload());

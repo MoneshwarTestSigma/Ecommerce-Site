@@ -2,7 +2,7 @@ package com.ecomsite.site.service;
 
 
 import com.ecomsite.site.dto.UserJwtDTO;
-import com.ecomsite.site.model.UserAuth;
+import com.ecomsite.site.model.User;
 import com.ecomsite.site.repository.UserDaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,19 +24,20 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserAuth user = userDao.findByUsername(username);
+		User user = userDao.findByEmail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
 				new ArrayList<>());
 	}
 	
-	public UserAuth save(UserJwtDTO user) {
-
-		UserAuth newUser = new UserAuth();
-		newUser.setUsername(user.getUsername());
+	public User save(User user) {
+		User newUser = new User();
+		newUser.setEmail(user.getEmail());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+		newUser.setName(user.getName());
+		newUser.setType(user.getType());
 		return userDao.save(newUser);
 	}
 }
