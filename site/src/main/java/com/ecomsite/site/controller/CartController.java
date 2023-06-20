@@ -27,6 +27,7 @@ public class CartController {
     @Autowired
     ProductService productService;
     @Autowired
+    ProductController.ImageController imageController;
     @Autowired
     CartMapper cartMapper;
     @ResponseStatus(HttpStatus.ACCEPTED)
