@@ -76,6 +76,7 @@ public class ProductController {
 
          productDTOS.add(productDTO);
         }
+    System.out.println("Came here at inventory");
 
     return productDTOS;
     }

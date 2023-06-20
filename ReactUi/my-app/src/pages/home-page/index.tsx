@@ -5,6 +5,7 @@ import Navbar from "../../components/navbar-component/navbar-component";
 import Axios from 'axios';
 import "./homepage.css"
 import { useEffect, useState } from "react";
+import React from "react";
 
 const Homepage=(props:any)=>{
   const [postMobile,setPostMobile]=useState([] as any[]);

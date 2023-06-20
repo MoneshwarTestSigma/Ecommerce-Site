@@ -5,6 +5,9 @@ import com.ecomsite.site.dto.UserJwtDTO;
 import com.ecomsite.site.model.UserAuth;
 import com.ecomsite.site.repository.UserDaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -38,5 +41,19 @@ public class JwtUserDetailsService implements UserDetailsService {
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 		return userDao.save(newUser);
+	}
+	public Authentication authenticate(String username, String password) {
+		UserDetails userDetails;
+		try {
+			userDetails = loadUserByUsername(username);
+		} catch (UsernameNotFoundException e) {
+			throw new BadCredentialsException("Invalid username");
+		}
+
+		if (!bcryptEncoder.matches(password, userDetails.getPassword())) {
+			throw new BadCredentialsException("Invalid password");
+		}
+
+		return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 	}
 }
