@@ -12,7 +12,7 @@ const Delivery=()=>{
     return (
         <html lang="en">
 <head>
-	
+
 	<link href='https://fonts.googleapis.com/css?family=Lato:300,400|Montserrat:700' rel='stylesheet' type='text/css'/>
 	<style>
 		@import url(//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css);

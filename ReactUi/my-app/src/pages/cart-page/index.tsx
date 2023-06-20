@@ -8,7 +8,7 @@ import jwt_decode, { JwtPayload } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {CartModelAdd} from "../../models/CartModelAdd"
-import { CartService } from "../../services/cart-services/CartServices";
+import { CartService } from "../../services/CartServices";
 
 
 const Cart=()=>{
