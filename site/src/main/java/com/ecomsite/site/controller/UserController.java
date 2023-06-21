@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/user")
+
 public class UserController {
     @Autowired
     UserService userService;
@@ -22,7 +22,7 @@ public class UserController {
 
 
 @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/email/{email}")
+    @GetMapping("/user/email/{email}")
     public LoggedInUserDto userReturn(@PathVariable("email") String email){
         return userService.idReturn(email);
     }
