@@ -7,20 +7,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "cart")
 public class Cart {
 
     @Id
-    @GeneratedValue
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "productid")
-    Long productid;
-    @Column(name = "userid")
-    Long userid;
+    @Column(name = "product_id")
+    Long productId;
+    @Column(name = "user_id")
+    Long userId;
     @Column(name = "quantity")
     Long quantity;
 }

@@ -21,7 +21,7 @@ export class ProductService {
   getAllProducts():Observable<ProductModel[]> {
     return this.http.get<ProductModel[]>(Constants.api+"/product/inventory").pipe(
       map(data=> data.map(data1=> new ProductModel().deserialize(data1))),
-      catchError(() => throwError('Problem while fetching ElementFilter'))  
+      catchError(() => throwError('Problem while fetching ElementFilter'))
     )
   }
   getAllProductsLike(searchItem:string):Observable<ProductModel[]>{
@@ -31,6 +31,8 @@ export class ProductService {
     );
   }
   addProduct(product: ProductModel){
+    console.log(ProductModel);
+    console.log(this.headers);
     return this.http.post<any>(`${Constants.api}/product`,product.serialize(),{headers:this.headers});
   }
   getProductCountById(id:Number):Observable<Number>{

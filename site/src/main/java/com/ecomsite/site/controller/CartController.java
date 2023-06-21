@@ -9,12 +9,15 @@ import com.ecomsite.site.request.CartRequest;
 import com.ecomsite.site.request.ProductQuantityRequest;
 import com.ecomsite.site.service.CartService;
 import com.ecomsite.site.service.ProductService;
+import com.ecomsite.site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-@CrossOrigin
 @RestController
 @RequestMapping("/cart")
 public class CartController {
@@ -25,44 +28,48 @@ public class CartController {
     @Autowired
     ProductService productService;
     @Autowired
-    ImageController imageController;
+    ProductController.ImageController imageController;
     @Autowired
     CartMapper cartMapper;
+    @Autowired
+    UserService userService;
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping()
     Cart addCart(@RequestBody CartRequest cartRequest) {
-        return this.cartService.cartAdd(this.cartMapper.cartRequestToCart(cartRequest));
+        return this.cartService.cartAdd(cartMapper.map(cartRequest));
     }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping()
+    List<CartDTO> cartProductSend(){
+        String userName=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 
-    @GetMapping("/{userid}")
-    List<CartDTO> cartProductSend(@PathVariable("userid") Long userid){
+        Long userid=userService.idReturn(userName).getUserId() ;
         List<CartDTO> cartDTOS = new ArrayList<>();
         List<Cart> carts = new ArrayList<>();
         CartDTO cartDTO = new CartDTO();
-        carts.addAll(this.cartService.cartFind(userid));
+        carts.addAll(cartService.cartFind(userid));
         for(Cart cart : carts){
-            cartDTO = this.cartMapper.productToCartDTO(this.productService.productByid(cart.getProductid()).get());
+            cartDTO = cartMapper.map(productService.productByid(cart.getProductId()).get());
             cartDTO.setQuantity(cart.getQuantity());
             cartDTO.setId(cart.getId());
-            cartDTO.setProductid(this.productService.productByid(cart.getProductid()).get().getId());
-            cartDTO.setImageUrl(imageController.getUrlFormId(cart.getProductid()));
+            cartDTO.setProductid(productService.productByid(cart.getProductId()).get().getId());
+            cartDTO.setImageUrl(imageController.getUrlFormId(cart.getProductId()));
             cartDTOS.add(cartDTO);
         }
         return cartDTOS;
     }
-
     @DeleteMapping("/{id}")
     void cartDelete(@PathVariable("id") Long id){
-        this.cartService.deleteCart(id);
+        cartService.deleteCart(id);
     }
-
     @PostMapping("/checkout")
     void deleteProducts(@RequestBody List<ProductQuantityRequest> productQuantityRequestList){
 
         for(ProductQuantityRequest productQuantityRequest:productQuantityRequestList){
-            Product product = this.productMapper.productQuantityRequestToProduct(productQuantityRequest);
+            Product product = productMapper.map(productQuantityRequest);
             product.setCount(productQuantityRequest.getQuantity());
             product.setId(productQuantityRequest.getProductid());
-            this.productService.productQuantityDelete(product);
+            productService.productQuantityDelete(product);
             cartService.deleteCart(productQuantityRequest.getId());
         }
     }

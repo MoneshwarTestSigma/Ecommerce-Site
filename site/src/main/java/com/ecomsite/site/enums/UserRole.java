@@ -1,5 +1,5 @@
 package com.ecomsite.site.enums;
 
-public enum ERole {
+public enum UserRole {
 ADMIN,USER
 }

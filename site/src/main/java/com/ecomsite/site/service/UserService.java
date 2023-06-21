@@ -2,7 +2,7 @@ package com.ecomsite.site.service;
 
 import com.ecomsite.site.dto.LoggedInUserDto;
 import com.ecomsite.site.model.User;
-import com.ecomsite.site.enums.ERole;
+import com.ecomsite.site.enums.UserRole;
 import com.ecomsite.site.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class UserService {
         public User addUser(User user) {
             return this.userRepository.save(user);
         }
-        public List<User> roleUser(ERole type) {
+        public List<User> roleUser(UserRole type) {
             return this.userRepository.findAllByType(type);
         }
 

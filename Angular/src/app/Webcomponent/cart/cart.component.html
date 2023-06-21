@@ -43,20 +43,20 @@
                   </td>
                   <td class="align-middle">
                     <div class="d-flex flex-row">
-                   
-                      
 
-                      <input id="form1" min="1" (input)="changeCart(i)" [(ngModel)]="i.quantity" 
+
+
+                      <input id="form1" min="1" (input)="changeCart(i)" [(ngModel)]="i.quantity"
                         class="form-control form-control-sm" style="width: 50px;"  type="number"/>
 
-                    
-                      {{i.quantity}}
+
+                      <!-- {{i.quantity}} -->
                     </div>
-                   
+
 
                   </td>
                   <td class="align-middle">
-                    <p class="mb-0" style="font-weight: 500;">{{i.price}}</p>
+                    <p class="mb-0" style="font-weight: 500;">{{i.quantity * i.price}}</p>
                   </td>
                   <td>
                     <button type="button" (click)="deteleCartItem(i.id)" class="btn btn-outline-danger">Delete</button>

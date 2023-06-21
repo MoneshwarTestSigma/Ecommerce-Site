@@ -2,6 +2,8 @@ package com.ecomsite.site.config;
 
 
 
+
+import com.ecomsite.site.jwt.JwtAuthenticateFilter;
 import com.ecomsite.site.jwt.JwtAuthenticationEntryPoint;
 import com.ecomsite.site.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
+	@Autowired
+	private JwtAuthenticateFilter jwtAuthendicateFilter;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -47,6 +51,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	@Bean
+	public JwtAuthenticateFilter jwtAuthendicateFilter() throws Exception {
+		JwtAuthenticateFilter filter = new JwtAuthenticateFilter("/authenticate");
+		filter.setAuthenticationManager(super.authenticationManagerBean());
+		return filter;
 	}
 
 	@Bean
@@ -61,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		httpSecurity.csrf().disable()
 
-				.authorizeRequests().antMatchers("/authenticate", "/register","/product/**","/images/**","/user/**").permitAll().
+				.authorizeRequests().antMatchers( "/register","/product/**","/images","/images/**","/user/**").permitAll().
 
 						anyRequest().authenticated().and().
 
@@ -71,5 +81,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.addFilterAfter(jwtAuthendicateFilter(),jwtRequestFilter.getClass());
 	}
 }

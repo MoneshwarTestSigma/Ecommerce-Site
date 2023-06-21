@@ -25,6 +25,7 @@ export class CartComponent implements OnInit{
       this.first();
   }
   isCartEmpty=false;
+  userId!:number;
   cartItems:CartModel[]=[];
   getCountOfProduct(id:Number):Number{
     console.log(id);
@@ -41,15 +42,16 @@ export class CartComponent implements OnInit{
     {
       let jwt=this.cookieService.get("JWT");
       let email=this.jwtService.emailFromToken(jwt);
-      this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{  
+      this.userService.getUserDetails(email).subscribe((res:LoggedInUserModel)=>{
         let id=Number(res.userId);
+        this.userId=Number(res.userId);
       this.cartService.getCartItems(id).subscribe((res:any)=>{
         this.total=0;
         this.clearArray();
         this.isCartEmpty=false;
         for(var element of res){
           this.isCartEmpty=true;
-          this.total=this.total+Number(element.price);
+          this.total=this.total+Number(element.price*element.quantity);
           this.total=Number(this.total.toFixed(3));
           this.cartItems.push(element);
         }
@@ -68,8 +70,10 @@ export class CartComponent implements OnInit{
       let cartModelAdd = new CartModelAdd();
       cartModelAdd.productid = cartModel.productid;
       cartModelAdd.quantity = Number(cartModel.quantity);
-      cartModelAdd.userid = 13;
-      this.cartService.addCartItem(cartModelAdd).subscribe((req: any) => {})
+      cartModelAdd.userid = this.userId;
+      this.cartService.addCartItem(cartModelAdd).subscribe((req: any) => {
+        console.log(req + "  " + req.data + " " + req.sub)})
+      this.first();
   }
   deteleCartItem(id:number){
       this.cartService.deleteCartItem(id).subscribe((res:any)=>{})
