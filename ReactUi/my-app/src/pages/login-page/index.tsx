@@ -41,6 +41,11 @@ const LoginPage=()=>{
   }
 
   const navigate = useNavigate();
+  function isFormValid(): boolean | undefined {
+    if(email.length >0 && password.length>0)
+      return emailValid&&passwordValid;
+  }
+
     return (
 <div >
 <div className="row">
@@ -58,7 +63,7 @@ const LoginPage=()=>{
               {!passwordValid && <div style={{color: 'red'}}>Password can't be empty</div>}
               </div>
             <div className="text-center">
-              <input type="submit" className="btn btn-my" value="Login" onClick={submit}/>
+              <input type="submit" className="btn btn-my" value="Login" disabled={!isFormValid()} onClick={submit}/>
             </div>
           </form>
           <div className="text-center sign-up">

@@ -24,6 +24,10 @@ const SignupAdmin=()=>{
   const handleChangeName=(event:any)=>{
     setName(event.target.value);
   }
+  function isFormValid(): boolean | undefined {
+    if(name.length>0 && email.length >0 && password.length>0)
+      return emailValid&&passwordValid&&passwordConformValid;
+  }
   const navigate = useNavigate();
   const submit=(e:any)=>{
     e.preventDefault();
@@ -74,7 +78,7 @@ const SignupAdmin=()=>{
               {!passwordConformValid &&  <div  style={{color: 'red'}}>Password didnt match</div>}
           </div>
           <div className="text-center">
-            <input type="submit" className="btn btn-my" value="Sign Up" onClick={submit} />
+            <input type="submit" className="btn btn-my" value="Sign Up" disabled={!isFormValid()} onClick={submit} />
           </div>
           <div className="text-center sign-up">Customer Signup? <a href="" onClick={()=>navigate("/signup")}>Click Here</a></div>
         </form>

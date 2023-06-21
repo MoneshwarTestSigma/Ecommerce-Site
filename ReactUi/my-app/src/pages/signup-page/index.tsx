@@ -21,7 +21,10 @@ const Signup=()=>{
   function isPasswordConformValid(passwordConform:string){
     return (passwordConform===password);
   }
-
+  function isFormValid(): boolean | undefined {
+    if(name.length>0 && email.length >0 && password.length>0)
+      return emailValid&&passwordValid&&passwordConformValid;
+  }
   const handleChangeEmail = (event:any) => {
         setEmail(event.target.value);
         setEmailValid(isValidEmail(event.target.value));
@@ -79,7 +82,7 @@ const Signup=()=>{
               {!passwordConformValid &&  <div  style={{color: 'red'}}>Password didnt match</div>}
               </div>
             <div className="text-center">
-              <input  type="submit" className="btn btn-my" value="sign up" onClick={submit} />
+              <input  type="submit" className="btn btn-my" value="sign up" disabled={!isFormValid()} onClick={submit} />
             </div>
             <div className="text-center sign-up">Owner Signup? <a href="" onClick={()=>navigate("/signup-admin")} >Click Here</a></div>
           </form>          
