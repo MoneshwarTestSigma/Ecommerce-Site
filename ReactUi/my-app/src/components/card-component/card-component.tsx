@@ -15,7 +15,7 @@ interface CardProps {
 const Card:React.FC<CardProps>= ({ image, cardTitle, cardDescription, price, quantity,id,getUserId ,refresh}) => {
   const navigate = useNavigate();
   const addToCart=()=>{
-    const JWT = Cookies.get('JWT');
+    const JWT = Cookies.get('user');
     if(JWT)
     {
         axios.post("http://localhost:8080/cart",{

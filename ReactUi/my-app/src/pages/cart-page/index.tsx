@@ -10,6 +10,8 @@ import axios from "axios";
 import {CartModelAdd} from "../../models/CartModelAdd"
 import { CartService } from "../../services/CartServices";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 
 const Cart=()=>{
@@ -33,7 +35,7 @@ const Cart=()=>{
     cartModelAdd.userid= userId;
     cartModelAdd.productid= data.productid;
     cartModelAdd.quantity= data.quantity - 1;
-    const JWT = Cookies.get('JWT');
+    const JWT = Cookies.get('user');
     if(data.quantity-1>0)
     {
       cartService.changeCartCount(cartModelAdd);
@@ -50,7 +52,7 @@ const Cart=()=>{
     })
   }
   useEffect(()=>{
-    const JWT = Cookies.get('JWT');
+    const JWT = Cookies.get('user');
     if(JWT)
     {
             let email=jwt_decode<JwtPayload>(JWT);
@@ -141,8 +143,11 @@ const Cart=()=>{
 
 
                   <input id="form1" min="1"
-                    className="form-control form-control-sm" style={{width: '50px'}}   value={data.quantity} /> <img src="images/pluse.png" style={{width:'25px',height:'25px',marginRight:'5px'}} alt="" onClick={()=>pluseOne(data)} />
-                    <img src="images/minus.png" style={{width:'25px',height:'25px'}} alt="" onClick={()=>minusOne(data)}/>
+                    className="form-control form-control-sm" style={{width: '50px'}}   value={data.quantity} /> 
+                    <FontAwesomeIcon icon={faPlus} size="xl" style={{color: "#39c63c",margin:'7px'}}  onClick={()=>pluseOne(data)} />
+                    <FontAwesomeIcon icon={faMinus} size="2xl" style={{color: "#e60a0a",margin:'7px'}} onClick={()=>minusOne(data)}/>
+                    {/* <img src="images/pluse.png" style={{width:'25px',height:'25px',marginRight:'5px'}} alt="" onClick={()=>pluseOne(data)} /> */}
+                    {/* <img src="images/minus.png" style={{width:'25px',height:'25px'}} alt="" onClick={()=>minusOne(data)}/> */}
                 </div>
 
 
@@ -151,7 +156,8 @@ const Cart=()=>{
                 <p className="mb-0" style={{fontWeight: 500}}>{(data.quantity * data.price).toFixed(2)}</p>
               </td>
               <td>
-                <button type="button" style={{marginTop:'50px'}} className="btn btn-outline-danger" onClick={()=>deleteCartItem(data)}>Delete</button>
+              <FontAwesomeIcon size="2x" icon={faTrash} style={{color: "#f22121",marginTop:"50px"}} onClick={()=>deleteCartItem(data)}/>
+                {/* <button type="button"  style={{marginTop:'50px'}} className="btn btn-outline-danger" onClick={()=>deleteCartItem(data)}>Delete</button> */}
               </td>
             </tr>
 

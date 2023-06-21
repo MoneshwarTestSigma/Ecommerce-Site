@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ProductModel } from "../../models/ProductModel";
 
 const AddProduct=()=>{
-  const JWT = Cookies.get('JWT');
+  const JWT = Cookies.get('user');
   const navigate =useNavigate();
   const [name,setName]=useState("");
   const [type,setType]=useState("MOBILE");

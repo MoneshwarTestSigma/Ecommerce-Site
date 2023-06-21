@@ -6,8 +6,8 @@ const getBaseUrl = async () => {
 };
 function getToken() {
   const cookie = new Cookies();
-  if (cookie.get("JWT")) {
-    return cookie.get("JWT");
+  if (cookie.get("user")) {
+    return cookie.get("user");
   }
 }
 const get = <T>(endpoint: string, params?: Record<string, any>): Promise<T> =>

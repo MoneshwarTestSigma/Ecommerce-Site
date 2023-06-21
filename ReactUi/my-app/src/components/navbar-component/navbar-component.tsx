@@ -44,7 +44,7 @@ const Navbar:React.FC<NavbarProps>=({onSearch,setUserId,refresh})=>{
  
   const logout=()=>{
     setIsLoggedIn(false);
-    Cookies.remove('JWT');
+    Cookies.remove('user');
   }
   
   const handleChangeSearech=(event:any)=>{

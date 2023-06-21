@@ -37,7 +37,9 @@ const Signup=()=>{
   const handleChangeName=(event:any)=>{
     setName(event.target.value);
   }
-  const submit=()=>{
+  const navigate = useNavigate();
+  const submit=(e:any)=>{
+    e.preventDefault();
     let signUpModel=new SignUpModel();
     signUpModel.name=name;
     signUpModel.email=email;
@@ -53,7 +55,7 @@ const Signup=()=>{
     
   }
 
-  const navigate = useNavigate();
+  
     return (
         <div className="row">
     <div className="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
