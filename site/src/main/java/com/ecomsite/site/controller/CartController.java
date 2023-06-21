@@ -9,6 +9,7 @@ import com.ecomsite.site.request.CartRequest;
 import com.ecomsite.site.request.ProductQuantityRequest;
 import com.ecomsite.site.service.CartService;
 import com.ecomsite.site.service.ProductService;
+import com.ecomsite.site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +31,8 @@ public class CartController {
     ProductController.ImageController imageController;
     @Autowired
     CartMapper cartMapper;
+    @Autowired
+    UserService userService;
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping()
     Cart addCart(@RequestBody CartRequest cartRequest) {
@@ -37,7 +40,10 @@ public class CartController {
     }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping()
-    List<CartDTO> cartProductSend(@PathVariable("userid") Long userid){
+    List<CartDTO> cartProductSend(){
+        String userName=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+
+        Long userid=userService.idReturn(userName).getUserId() ;
         List<CartDTO> cartDTOS = new ArrayList<>();
         List<Cart> carts = new ArrayList<>();
         CartDTO cartDTO = new CartDTO();

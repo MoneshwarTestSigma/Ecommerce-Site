@@ -3,7 +3,7 @@ package com.ecomsite.site.config;
 
 
 
-import com.ecomsite.site.jwt.JwtAuthendicateFilter;
+import com.ecomsite.site.jwt.JwtAuthenticateFilter;
 import com.ecomsite.site.jwt.JwtAuthenticationEntryPoint;
 import com.ecomsite.site.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 	@Autowired
-	private JwtAuthendicateFilter jwtAuthendicateFilter;
+	private JwtAuthenticateFilter jwtAuthendicateFilter;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,8 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	@Bean
-	public JwtAuthendicateFilter jwtAuthendicateFilter() throws Exception {
-		JwtAuthendicateFilter filter = new JwtAuthendicateFilter("/authenticate");
+	public JwtAuthenticateFilter jwtAuthendicateFilter() throws Exception {
+		JwtAuthenticateFilter filter = new JwtAuthenticateFilter("/authenticate");
 		filter.setAuthenticationManager(super.authenticationManagerBean());
 		return filter;
 	}

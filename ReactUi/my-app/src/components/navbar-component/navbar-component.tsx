@@ -11,7 +11,6 @@ interface NavbarProps{
   refresh:any
 }
 
-// const[]=useState<any>()
 const Navbar:React.FC<NavbarProps>=({onSearch,setUserId,refresh})=>{
 
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ const Navbar:React.FC<NavbarProps>=({onSearch,setUserId,refresh})=>{
   const [isAdmin,setIsAdmin]=useState(false);
   const [cartCount,setCartCount]=useState(0);
   useEffect(()=>{
-    const JWT = Cookies.get('JWT');
+    const JWT = Cookies.get('user');
     if(JWT)
     {
       setIsLoggedIn(true);
@@ -41,9 +40,7 @@ const Navbar:React.FC<NavbarProps>=({onSearch,setUserId,refresh})=>{
      
     }
   },[refresh]);
-  function setdata(value:boolean){
-         
-  }
+ 
  
   const logout=()=>{
     setIsLoggedIn(false);

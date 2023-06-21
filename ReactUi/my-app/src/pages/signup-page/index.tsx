@@ -44,7 +44,11 @@ const Signup=()=>{
     signUpModel.type="USER";
     signUpModel.password=password;
   axios.post("http://localhost:8080/register",signUpModel.serialize()).then(res=>
-  alert("Signed Up successfully")
+  {
+    alert("Signed Up successfully");
+    navigate("/login");
+  }
+ 
 ).catch(res=> alert("Something went wrong try again"))
     
   }

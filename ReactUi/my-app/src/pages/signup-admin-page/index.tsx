@@ -30,7 +30,10 @@ const SignupAdmin=()=>{
       signUpModel.email=email;
       signUpModel.type="ADMIN";
       signUpModel.password=password;
-    axios.post("http://localhost:8080/register",signUpModel.serialize())
+    axios.post("http://localhost:8080/register",signUpModel.serialize()).then(res=>{
+      alert("Signed Up successfully");
+      navigate("/login");
+    })
   }
 
   const handleChangeEmail = (event:any) => {
@@ -54,7 +57,7 @@ const SignupAdmin=()=>{
         <div style={{textAlign: 'center'}}><h2>Owner SignUp</h2></div>
         <form>
           <div className="form-group">
-            <input type="text" name="name" className="form-control" placeholder="UserName" value={name} onClick={handleChangeName}/>
+            <input type="text" name="name" className="form-control" placeholder="UserName" value={name} onChange={handleChangeName}/>
           </div>
           <div className="form-group">
             <input type="text" name="email" className="form-control" placeholder="Email" value={email} onChange={handleChangeEmail}/>

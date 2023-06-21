@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAuthendicateFilter extends AbstractAuthenticationProcessingFilter {
+public class JwtAuthenticateFilter extends AbstractAuthenticationProcessingFilter {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -34,7 +34,7 @@ public class JwtAuthendicateFilter extends AbstractAuthenticationProcessingFilte
 
     private final RequestMatcher usersAuthRequestMatcher = new AntPathRequestMatcher("/authenticate");
 
-    public JwtAuthendicateFilter(String string) {
+    public JwtAuthenticateFilter(String string) {
         super(string);
     }
 
