@@ -25,7 +25,7 @@ const SignupAdmin=()=>{
     setName(event.target.value);
   }
   function isFormValid(): boolean | undefined {
-    if(name.length>0 && email.length >0 && password.length>0)
+    if(name.length>0 && email.length >0 && password.length>0 &&passwordConform.length>0)
       return emailValid&&passwordValid&&passwordConformValid;
   }
   const navigate = useNavigate();

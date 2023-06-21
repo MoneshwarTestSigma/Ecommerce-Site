@@ -156,7 +156,7 @@ const Cart=()=>{
                 <p className="mb-0" style={{fontWeight: 500}}>{(data.quantity * data.price).toFixed(2)}</p>
               </td>
               <td>
-              <FontAwesomeIcon size="2x" icon={faTrash} style={{color: "#f22121",marginTop:"50px"}} onClick={()=>deleteCartItem(data)}/>
+              <FontAwesomeIcon size="xl" icon={faTrash} style={{color: "#f22121",marginTop:"70px"}} onClick={()=>deleteCartItem(data)}/>
                 {/* <button type="button"  style={{marginTop:'50px'}} className="btn btn-outline-danger" onClick={()=>deleteCartItem(data)}>Delete</button> */}
               </td>
             </tr>

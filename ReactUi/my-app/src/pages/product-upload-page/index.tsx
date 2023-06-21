@@ -32,6 +32,7 @@ const AddProduct=()=>{
   const handleChangeImage=(event:any)=>{
     setFile(event.target.files[0]);
   }
+
   const submitProduct=(event:any)=>{
     let productModel=new ProductModel();
     productModel.name=name;
@@ -51,6 +52,12 @@ const AddProduct=()=>{
         navigate("/");
       }).catch(res=>alert("Something Went Wrong"));
   }
+  function isFormValid(): boolean | undefined {
+    if(name.length>0 && price.length>0  && description.length>0 && quantity.length>0 && file!=null)
+      return true;
+    return false;
+  }
+
     return (
         <div className="row">
     <div className="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
@@ -85,7 +92,7 @@ const AddProduct=()=>{
                 <br/>
                 <br/>
               <div className="text-center">
-                <input type="submit" className="btn btn-my" value="Add Product" onClick={submitProduct}/>
+                <input type="submit" className="btn btn-my" value="Add Product" disabled={!isFormValid()} onClick={submitProduct}/>
               </div>
           </form>
         </div>
